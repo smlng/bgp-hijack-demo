@@ -18,12 +18,13 @@ Debian stable to testing. To do so, proceed as follows:
 ## install packages and software
 
 On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
+ - libxml2-dev
+ - openvpn
  - python-dev
  - python-pip
  - python-virtualenv
  - quagga
  - snmp
- - libxml2-dev
 
 On other Linux Distros search for equivalents in its package-management.
 
