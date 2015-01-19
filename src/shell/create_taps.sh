@@ -1,5 +1,6 @@
+#!/bin/sh
 
-
+## network interfaces for quagga bgpd
 openvpn --mktun --dev tap1
 openvpn --mktun --dev tap2
 openvpn --mktun --dev tap3
@@ -16,3 +17,6 @@ ifconfig tap5 up 192.168.1.5 netmask 255.255.255.255
 ifconfig tap6 up 192.168.1.6 netmask 255.255.255.255
 ifconfig tap7 up 192.168.1.7 netmask 255.255.255.255
 
+## network interface for bgpmon
+openvpn --mktun --dev tap100
+ifconfig tap100 up 192.168.1.100 netmask 255.255.255.255
