@@ -25,6 +25,7 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
  - python-virtualenv
  - quagga
  - snmp
+ - snmpd
 
 On other Linux Distros search for equivalents in its package-management.
 
