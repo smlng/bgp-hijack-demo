@@ -3,16 +3,10 @@
 from __future__ import print_function
 import sys
 import socket
-import subprocess
-import os
 import re
 import argparse
-import radix
 import calendar
 from datetime import datetime
-from time import sleep
-from netaddr import IPSet, IPAddress
-from collections import deque, OrderedDict
 
 verbose = False
 warning = False
