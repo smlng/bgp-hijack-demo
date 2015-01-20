@@ -77,7 +77,7 @@ def main():
         else:
             stream += data
             stream = string.replace(stream, "<xml>", "")
-        if (re.search('</BGP_MONITOR_MESSAGE>', stream)):
+        while (re.search('</BGP_MONITOR_MESSAGE>', stream)):
             messages = stream.split('</BGP_MONITOR_MESSAGE>')
             msg = messages[0] + '</BGP_MONITOR_MESSAGE>'
             stream = '</BGP_MONITOR_MESSAGE>'.join(messages[1:])
