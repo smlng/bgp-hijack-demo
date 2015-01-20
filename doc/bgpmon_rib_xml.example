@@ -1,0 +1,573 @@
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763613</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:13Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497486</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+                <bgp:ASN2>65006</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.166.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033020000001740010100400304C0A80102500200080203FDEAFDEDFDEE1AA02DA600</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763622</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:22Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497487</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65003</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.133.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80102500200060202FDEAFDEB1AA02D8500</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763622</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:22Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497488</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.155.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80102500200060202FDEAFDED1AA02D9B00</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763625</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:25Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497489</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65003</bgp:ASN2>
+                <bgp:ASN2>65004</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.144.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033020000001740010100400304C0A80102500200080203FDEAFDEBFDEC1AA02D9000</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763625</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:25Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497490</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+                <bgp:ASN2>65006</bgp:ASN2>
+                <bgp:ASN2>65007</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.177.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0035020000001940010100400304C0A801025002000A0204FDEAFDEDFDEEFDEF1AA02DB100</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763631</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:31Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497491</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65001</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.211.0/25</bgp:NLRI>
+        <bgp:NLRI afi="1">160.45.111.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0036020000001540010100400304C0A80102500200060202FDEAFDE919A02DD3001AA02D6F00</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763640</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:40Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497492</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <STATUS Author_Xpath="/BGP_MONITOR_MESSAGE/MONITOR">
+        <TYPE>TABLE_STOP </TYPE>
+    </STATUS>
+</BGP_MONITOR_MESSAGE>
+
+-----
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.7</ADDRESS>
+        <PORT>17179</PORT>
+        <ASN2>65007</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763640</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:40Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497493</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <STATUS Author_Xpath="/BGP_MONITOR_MESSAGE/MONITOR">
+        <TYPE>TABLE_START</TYPE>
+    </STATUS>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.7</ADDRESS>
+        <PORT>17179</PORT>
+        <ASN2>65007</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763643</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:43Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497495</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65007</bgp:ASN2>
+                <bgp:ASN2>65006</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.7</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.166.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80107500200060202FDEFFDEE1AA02DA600</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763613</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:13Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497486</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+                <bgp:ASN2>65006</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.166.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033020000001740010100400304C0A80102500200080203FDEAFDEDFDEE1AA02DA600</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763622</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:22Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497487</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65003</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.133.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80102500200060202FDEAFDEB1AA02D8500</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763622</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:22Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497488</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.155.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80102500200060202FDEAFDED1AA02D9B00</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763625</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:25Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497489</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65003</bgp:ASN2>
+                <bgp:ASN2>65004</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.144.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033020000001740010100400304C0A80102500200080203FDEAFDEBFDEC1AA02D9000</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763625</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:25Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497490</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65005</bgp:ASN2>
+                <bgp:ASN2>65006</bgp:ASN2>
+                <bgp:ASN2>65007</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.177.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0035020000001940010100400304C0A801025002000A0204FDEAFDEDFDEEFDEF1AA02DB100</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763631</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:31Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497491</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:ORIGIN attribute_type="1" extended="false" optional="false" partial="false" transitive="true">IGP</bgp:ORIGIN>
+        <bgp:AS_PATH attribute_type="2" extended="true" optional="false" partial="false" transitive="true">
+            <bgp:AS_SEQUENCE>
+                <bgp:ASN2>65002</bgp:ASN2>
+                <bgp:ASN2>65001</bgp:ASN2>
+            </bgp:AS_SEQUENCE>
+        </bgp:AS_PATH>
+        <bgp:NEXT_HOP afi="1" attribute_type="3" extended="false" optional="false" partial="false" transitive="true">192.168.1.2</bgp:NEXT_HOP>
+        <bgp:NLRI afi="1">160.45.211.0/25</bgp:NLRI>
+        <bgp:NLRI afi="1">160.45.111.0/26</bgp:NLRI>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0036020000001540010100400304C0A80102500200060202FDEAFDE919A02DD3001AA02D6F00</OCTET_MESSAGE>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>10179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.100</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421763640</TIMESTAMP>
+        <DATETIME>2015-01-20T14:20:40Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1076497492</SEQUENCE_NUMBER>
+    <COLLECTION>TABLE_DUMP</COLLECTION>
+    <STATUS Author_Xpath="/BGP_MONITOR_MESSAGE/MONITOR">
+        <TYPE>TABLE_STOP </TYPE>
+    </STATUS>
+</BGP_MONITOR_MESSAGE>
+
+------
+
+<BGP_MONITOR_MESSAGE
+xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
+xmlns:ne="urn:ietf:params:xml:ns:network_elements"><SOURCE><ADDRESS
+afi="1">192.168.1.7</ADDRESS><PORT>17179</PORT><ASN2>65007</ASN2></SOURCE><DEST><ADDRESS
+afi="1">192.168.1.100</ADDRESS><PORT>10179</PORT><ASN2>65000</ASN2></DEST><MONITOR><ADDRESS
+afi="1">192.168.1.100</ADDRESS><PORT>0</PORT><ASN4>0</ASN4></MONITOR><OBSERVED_TIME
+precision="false"><TIMESTAMP>1421763640</TIMESTAMP><DATETIME>2015-01-20T14:20:40Z</DATETIME></OBSERVED_TIME><SEQUENCE_NUMBER>1076497493</SEQUENCE_NUMBER><COLLECTION>TABLE_DUMP</COLLECTION><STATUS
+Author_Xpath="/BGP_MONITOR_MESSAGE/MONITOR"><TYPE>TABLE_START</TYPE></STATUS></BGP_MONITOR_MESSAGE>^[[A<BGP_MONITOR_MESSAGE
+xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
+xmlns:ne="urn:ietf:params:xml:ns:network_elements"><SOURCE><ADDRESS
+afi="1">192.168.1.7</ADDRESS><PORT>17179</PORT><ASN2>65007</ASN2></SOURCE><DEST><ADDRESS
+afi="1">192.168.1.100</ADDRESS><PORT>10179</PORT><ASN2>65000</ASN2></DEST><MONITOR><ADDRESS
+afi="1">192.168.1.100</ADDRESS><PORT>0</PORT><ASN4>0</ASN4></MONITOR><OBSERVED_TIME
+precision="false"><TIMESTAMP>1421763643</TIMESTAMP><DATETIME>2015-01-20T14:20:43Z</DATETIME></OBSERVED_TIME><SEQUENCE_NUMBER>1076497495</SEQUENCE_NUMBER><COLLECTION>TABLE_DUMP</COLLECTION><bgp:UPDATE
+bgp_message_type="2"><bgp:ORIGIN optional="false" transitive="true" partial="false" extended="false" attribute_type="1">IGP</bgp:ORIGIN><bgp:AS_PATH
+optional="false" transitive="true" partial="false" extended="true"
+attribute_type="2"><bgp:AS_SEQUENCE><bgp:ASN2>65007</bgp:ASN2><bgp:ASN2>65006</bgp:ASN2></bgp:AS_SEQUENCE></bgp:AS_PATH><bgp:NEXT_HOP optional="false"
+transitive="true" partial="false" extended="false" attribute_type="3" afi="1">192.168.1.7</bgp:NEXT_HOP><bgp:NLRI
+afi="1">160.45.166.0/26</bgp:NLRI></bgp:UPDATE><OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0031020000001540010100400304C0A80107500200060202FDEFFDEE1AA02DA600</OCTET_MESSAGE></BGP_MONITOR_MESSAGE>

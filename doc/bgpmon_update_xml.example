@@ -1,5 +1,4 @@
-<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
-xmlns:ne="urn:ietf:params:xml:ns:network_elements">
+<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     <SOURCE>
         <ADDRESS afi="1">192.168.1.2</ADDRESS>
         <PORT>12179</PORT>
@@ -29,8 +28,7 @@ xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     </METADATA>
 </BGP_MONITOR_MESSAGE>
 
-<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
-xmlns:ne="urn:ietf:params:xml:ns:network_elements">
+<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     <SOURCE>
         <ADDRESS afi="1">192.168.1.2</ADDRESS>
         <PORT>12179</PORT>#
@@ -72,8 +70,7 @@ xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     </METADATA>
 </BGP_MONITOR_MESSAGE>
 
-<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
-xmlns:ne="urn:ietf:params:xml:ns:network_elements">
+<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     <SOURCE>
         <ADDRESS afi="1">192.168.1.7</ADDRESS>
         <PORT>17179</PORT>
@@ -103,8 +100,7 @@ xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     </METADATA>
 </BGP_MONITOR_MESSAGE>
 
-<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
-xmlns:ne="urn:ietf:params:xml:ns:network_elements">
+<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     <SOURCE>
         <ADDRESS afi="1">192.168.1.7</ADDRESS>
         <PORT>17179</PORT>
@@ -149,8 +145,7 @@ xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     </METADATA>
 </BGP_MONITOR_MESSAGE>
 
-<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb"
-xmlns:ne="urn:ietf:params:xml:ns:network_elements">
+<BGP_MONITOR_MESSAGE xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements">
     <SOURCE>
         <ADDRESS afi="1">192.168.1.2</ADDRESS>
         <PORT>12179</PORT>
