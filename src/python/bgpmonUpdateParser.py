@@ -3,6 +3,7 @@
 from __future__ import print_function
 import sys
 import socket
+import string
 import re
 import argparse
 import calendar
@@ -61,7 +62,7 @@ def main():
 
     sock =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        sock.connect(addr,port)
+        sock.connect((addr,port))
     except:
         print_error("Failed to connect to BGPmon!")
         sys.exit(1)
@@ -75,6 +76,7 @@ def main():
             print_error("Failed to receive data!")
         else:
             stream += data
+            stream = string.replace(stream, "<xml>", "")
         if (re.search('</BGP_MONITOR_MESSAGE>', stream)):
             messages = stream.split('</BGP_MONITOR_MESSAGE>')
             msg = messages[0] + '</BGP_MONITOR_MESSAGE>'
