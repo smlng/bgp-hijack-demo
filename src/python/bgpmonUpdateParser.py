@@ -35,12 +35,12 @@ def parse2JSON(xml):
     try:
         tree = ET.fromstring(xml)
     except:
-        print_error("Cannot parse XML: %s", xml)
+        print_error("Cannot parse XML: %s!" % xml)
         return None
     src = tree.find('SOURCE')
     # check if source exists, otherwise return
     if src is None:
-        print_warn("Invalid data.")
+        print_warn("Invalid XML: %s." % xml)
         return None
     
     src_addr = src.find('ADDRESS').text
