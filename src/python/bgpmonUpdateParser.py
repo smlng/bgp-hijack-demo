@@ -9,6 +9,7 @@ import xml
 import argparse
 import calendar
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 from datetime import datetime
 
 verbose = False
@@ -88,11 +89,11 @@ def parse2JSON(xml):
     
 def parse2XML(xml):
     try:
-        tree = ET.fromstring(xml)
+        tree = minidom.parseString(xml)
     except:
         print_error("Cannot parse XML: %s", xml)
         return None
-    return tree.tostring()
+    return tree.toprettyxml()
 
 def main():
     parser = argparse.ArgumentParser(description='', epilog='')
