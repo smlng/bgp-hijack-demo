@@ -37,23 +37,26 @@ def parse2JSON(xml):
     except:
         print_error("Cannot parse XML: %s!" % xml)
         return None
-    src = tree.find('SOURCE')
+    print_log("root: %s" % tree.tag)
+    for child in tree:
+	print_log(child.tag)
+    src = tree.find('{urn:ietf:params:xml:ns:bgp_monitor}SOURCE')
     # check if source exists, otherwise return
     if src is None:
         print_warn("Invalid XML: %s." % xml)
         return None
     
-    src_addr = src.find('ADDRESS').text
-    src_asn = src.find('ASN2').text
+    src_addr = src.find('{urn:ietf:params:xml:ns:bgp_monitor}ADDRESS').text
+    src_asn = src.find('{urn:ietf:params:xml:ns:bgp_monitor}ASN2').text
 
     # check wether it is a keep alive message
-    keep_alive = tree.find('bgp:KEEP_ALIVE')
+    keep_alive = tree.find('{urn:ietf:params:xml:ns:xfb}KEEP_ALIVE')
     if keep_alive is not None:
         print_log("BGP KEEP ALIVE %s (AS %s)" % (src_addr, src_asn))
         return None
 
     # check if its a bgp withdraw message
-    withdraw = tree.find('bgp:WITHDRAW')
+    withdraw = tree.find('.//{urn:ietf:params:xml:ns:xfb}WITHDRAW')
     if withdraw is not None:
         prefix = withdraw.text
         print_log ("BGP WITHDRAW %s by AS %s" % (prefix, src_asn))
@@ -61,15 +64,15 @@ def parse2JSON(xml):
         return json
 
     # got here? proceed with bgp update parsing
-    update = tree.find('bgp:UPDATE')
+    update = tree.find('{urn:ietf:params:xml:ns:xfb}UPDATE')
     if update is None:
         return None
 
 
     as_path = []
-    asp = update.find('bgp:AS_PATH')
+    asp = update.find('{urn:ietf:params:xml:ns:xfb}AS_PATH')
     if asp is not None:
-        for asn in as_path.findall('bgp:ASN2'):
+        for asn in asp.findall('.//{urn:ietf:params:xml:ns:xfb}ASN2'):
             as_path.append(asn.text)
 
     counter = 0
@@ -80,8 +83,8 @@ def parse2JSON(xml):
             json_as_path += ", "
             counter += 1
 
-    next_hop = update.find('bgp:NEXT_HOP').text
-    prefix = update.find('bgp:NLRI').text
+    next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
+    prefix = update.find('{urn:ietf:params:xml:ns:xfb}NLRI').text
 
     ## JSON: output = "{ \"nodes\": [ { \"asn\": \""+self.asn+"\", \"prefix\": [\""+prefixA+"\"], \"type\": \"announcement\", \"path\": [ "+pathA+" ] } ] }\r\n"
     json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\r\n"
@@ -131,13 +134,9 @@ def main():
     data = ""
     stream = ""
     while(True):
-        try:
-            data = sock.recv(1024)
-        except:
-            print_error("Failed to receive data!")
-        else:
-            stream += data
-            stream = string.replace(stream, "<xml>", "")
+        data = sock.recv(1024)
+        stream += data
+        stream = string.replace(stream, "<xml>", "")
         while (re.search('</BGP_MONITOR_MESSAGE>', stream)):
             messages = stream.split('</BGP_MONITOR_MESSAGE>')
             msg = messages[0] + '</BGP_MONITOR_MESSAGE>'
@@ -146,7 +145,8 @@ def main():
                 output = parse2JSON(msg)
             else:
                 output = parse2XML(msg)
-            print(output)
+            if output:
+            	print(output)
 
     print_log(datetime.now().strftime('%Y-%m-%d %H:%M:%S') +  " done ...")
     # END
