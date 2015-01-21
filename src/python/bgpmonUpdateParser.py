@@ -5,8 +5,10 @@ import sys
 import socket
 import string
 import re
+import xml
 import argparse
 import calendar
+import xml.etree.ElementTree as ET
 from datetime import datetime
 
 verbose = False
@@ -28,11 +30,51 @@ def print_warn(*objs):
 def print_error(*objs):
     print("[ERROR] ", *objs, file=sys.stderr)
 
-def outputJSON(msg):
-    pass
+def parse2JSON(xml):
+    try:
+        tree = ET.fromstring(xml)
+    except:
+        print_error("Cannot parse XML: %s", xml)
+        return None
+    src = tree.find('SOURCE')
+    if src is None:
+        return None
+    
+    src_addr = src.find('ADDRESS').text
+    src_asn = src.find('ASN2').text
 
-def outputXML(msg):
-    print(msg)
+    update = tree.find('bgp:UPDATE')
+    if update is None:
+        return None
+
+    as_path = []
+    asp = update.find('bgp:AS_PATH')
+    if asp is not None:
+        for asn in as_path.findall('bgp:ASN2'):
+            as_path.append(asn.text)
+
+    counter = 0
+    json_as_path = ""
+    for asn in as_path:
+        json_as_path += "\""+asn+"\""
+        if counter != (len(as_path)-1):
+            json_as_path += ", "
+            counter += 1
+
+    next_hop = update.find('bgp:NEXT_HOP').text
+    prefix = update.find('bgp:NLRI').text
+
+    ## JSON: output = "{ \"nodes\": [ { \"asn\": \""+self.asn+"\", \"prefix\": [\""+prefixA+"\"], \"type\": \"announcement\", \"path\": [ "+pathA+" ] } ] }\r\n"
+    json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\r\n"
+    return json
+    
+def parse2XML(xml):
+    try:
+        tree = ET.fromstring(xml)
+    except:
+        print_error("Cannot parse XML: %s", xml)
+        return None
+    return tree.tostring()
 
 def main():
     parser = argparse.ArgumentParser(description='', epilog='')
@@ -82,9 +124,10 @@ def main():
             msg = messages[0] + '</BGP_MONITOR_MESSAGE>'
             stream = '</BGP_MONITOR_MESSAGE>'.join(messages[1:])
             if json:
-                outputJSON(msg)
+                output = parse2JSON(msg)
             else:
-                outputXML(msg)
+                output = parse2XML(msg)
+            print(output)
 
     print_log(datetime.now().strftime('%Y-%m-%d %H:%M:%S') +  " done ...")
     # END
