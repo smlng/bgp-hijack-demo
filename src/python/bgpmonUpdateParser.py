@@ -37,15 +37,33 @@ def parse2JSON(xml):
         print_error("Cannot parse XML: %s", xml)
         return None
     src = tree.find('SOURCE')
+    # check if source exists, otherwise return
     if src is None:
+        print_warn("Invalid data.")
         return None
     
     src_addr = src.find('ADDRESS').text
     src_asn = src.find('ASN2').text
 
+    # check wether it is a keep alive message
+    keep_alive = tree.find('bgp:KEEP_ALIVE')
+    if keep_alive is not None:
+        print_log("BGP KEEP ALIVE %s (AS %s)" % (src_addr, src_asn))
+        return None
+
+    # check if its a bgp withdraw message
+    withdraw = tree.find('bgp:WITHDRAW')
+    if withdraw is not None:
+        prefix = withdraw.text
+        print_log ("BGP WITHDRAW %s by AS %s" % (prefix, src_asn))
+        json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"withdraw\", \"path\": [  ] } ] }\r\n"
+        return json
+
+    # got here? proceed with bgp update parsing
     update = tree.find('bgp:UPDATE')
     if update is None:
         return None
+
 
     as_path = []
     asp = update.find('bgp:AS_PATH')
