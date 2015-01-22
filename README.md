@@ -1,4 +1,4 @@
-# BGP Hijack Demonstrator -- README
+# BGP Hijack Demonstrator - README
 
 ## system requirements
 
@@ -31,7 +31,7 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
 
 On other Linux Distros search for equivalents in its package-management.
 
-If 'bgpmon' is required, its source code can be downloaded 
+If `bgpmon` is required, its source code can be downloaded 
 [here](http://bgpmon.netsec.colostate.edu/index.php/download).
 
 Compile with `./configure && make`, optional `sudo make install`.
