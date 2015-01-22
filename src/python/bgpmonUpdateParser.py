@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import sys
+import os
 import socket
 import string
 import re
@@ -60,7 +61,7 @@ def parse2JSON(xml):
     if withdraw is not None:
         prefix = withdraw.text
         print_log ("BGP WITHDRAW %s by AS %s" % (prefix, src_asn))
-        json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"withdraw\", \"path\": [  ] } ] }\r\n"
+        json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"withdraw\", \"path\": [  ] } ] }"
         return json
 
     # got here? proceed with bgp update parsing
@@ -74,6 +75,8 @@ def parse2JSON(xml):
     if asp is not None:
         for asn in asp.findall('.//{urn:ietf:params:xml:ns:xfb}ASN2'):
             as_path.append(asn.text)
+    if len(as_path) == 0:
+        as_path.append(src_asn)
 
     counter = 0
     json_as_path = ""
@@ -86,8 +89,7 @@ def parse2JSON(xml):
     next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
     prefix = update.find('{urn:ietf:params:xml:ns:xfb}NLRI').text
 
-    ## JSON: output = "{ \"nodes\": [ { \"asn\": \""+self.asn+"\", \"prefix\": [\""+prefixA+"\"], \"type\": \"announcement\", \"path\": [ "+pathA+" ] } ] }\r\n"
-    json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\r\n"
+    json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }"
     return json
     
 def parse2XML(xml):
@@ -146,7 +148,8 @@ def main():
             else:
                 output = parse2XML(msg)
             if output:
-            	print(output)
+            	print(output, file=sys.stdout)
+                sys.stdout.flush()
 
     print_log(datetime.now().strftime('%Y-%m-%d %H:%M:%S') +  " done ...")
     # END
