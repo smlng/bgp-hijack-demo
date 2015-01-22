@@ -52,3 +52,12 @@ For ease of deployment we provide a 'requirements.txt' under 'src/python', run
 
 Using Debian quagga daemons are installed to '/usr/lib/quagga'; this directory
 is not in PATH environment, so 'bgpd' is not found automatically.
+
+## start up
+
+First create separate (TAP) interfaces with distinct IP addresses for BGPd and BGPmon:
+    $ cd src/shell
+    $ sudo ./create_taps.sh
+
+Afterwards start BGP daemons:
+    $ sudo ./start_bgpd.sh
