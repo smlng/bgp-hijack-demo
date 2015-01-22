@@ -174,3 +174,206 @@
         <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
     </METADATA>
 </BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.2</ADDRESS>
+        <PORT>12179</PORT>
+        <ASN2>65002</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.101</ADDRESS>
+        <PORT>22179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.101</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1113789899</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.1</ADDRESS>
+        <PORT>11179</PORT>
+        <ASN2>65001</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.101</ADDRESS>
+        <PORT>21179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.101</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1113789900</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.6</ADDRESS>
+        <PORT>16179</PORT>
+        <ASN2>65006</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>26179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1472453552</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.5</ADDRESS>
+        <PORT>15179</PORT>
+        <ASN2>65005</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>25179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1472453553</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.4</ADDRESS>
+        <PORT>14179</PORT>
+        <ASN2>65004</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>24179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.102</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1472453554</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+
+<BGP_MONITOR_MESSAGE xmlns="urn:ietf:params:xml:ns:bgp_monitor" xmlns:bgp="urn:ietf:params:xml:ns:xfb" xmlns:ne="urn:ietf:params:xml:ns:network_elements" xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <SOURCE>
+        <ADDRESS afi="1">192.168.1.7</ADDRESS>
+        <PORT>17179</PORT>
+        <ASN2>65007</ASN2>
+    </SOURCE>
+    <DEST>
+        <ADDRESS afi="1">192.168.1.103</ADDRESS>
+        <PORT>27179</PORT>
+        <ASN2>65000</ASN2>
+    </DEST>
+    <MONITOR>
+        <ADDRESS afi="1">192.168.1.103</ADDRESS>
+        <PORT>0</PORT>
+        <ASN4>0</ASN4>
+    </MONITOR>
+    <OBSERVED_TIME precision="false">
+        <TIMESTAMP>1421931578</TIMESTAMP>
+        <DATETIME>2015-01-22T12:59:38Z</DATETIME>
+    </OBSERVED_TIME>
+    <SEQUENCE_NUMBER>1837988483</SEQUENCE_NUMBER>
+    <COLLECTION>LIVE</COLLECTION>
+    <bgp:UPDATE bgp_message_type="2">
+        <bgp:WITHDRAW afi="1">160.45.207.0/26</bgp:WITHDRAW>
+    </bgp:UPDATE>
+    <OCTET_MESSAGE>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001C0200051AA02DCF000000</OCTET_MESSAGE>
+    <METADATA>
+        <NODE_PATH>//bgp:UPDATE[&quot;160.45.207.0/26&quot;]/bgp:WITHDRAW</NODE_PATH>
+        <ANNOTATION>WITH</ANNOTATION>
+        <DESTINATION_GEOLOCATION>UNKNOWN LOCATION</DESTINATION_GEOLOCATION>
+        <SOURCE_GEOLOCATION>UNKNOWN LOCATION</SOURCE_GEOLOCATION>
+    </METADATA>
+</BGP_MONITOR_MESSAGE>
+
