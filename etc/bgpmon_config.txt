@@ -8,6 +8,7 @@
             <PEER_IP_ADDR>192.168.1.1</PEER_IP_ADDR>
             <PEER_PORT>11179</PEER_PORT>
             <PEER_AS>65001</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -16,6 +17,7 @@
             <PEER_IP_ADDR>192.168.1.2</PEER_IP_ADDR>
             <PEER_PORT>12179</PEER_PORT>
             <PEER_AS>65002</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -24,6 +26,7 @@
             <PEER_IP_ADDR>192.168.1.3</PEER_IP_ADDR>
             <PEER_PORT>13179</PEER_PORT>
             <PEER_AS>65003</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -32,6 +35,7 @@
             <PEER_IP_ADDR>192.168.1.4</PEER_IP_ADDR>
             <PEER_PORT>14179</PEER_PORT>
             <PEER_AS>65004</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -40,6 +44,7 @@
             <PEER_IP_ADDR>192.168.1.5</PEER_IP_ADDR>
             <PEER_PORT>15179</PEER_PORT>
             <PEER_AS>65005</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -48,6 +53,7 @@
             <PEER_IP_ADDR>192.168.1.6</PEER_IP_ADDR>
             <PEER_PORT>16179</PEER_PORT>
             <PEER_AS>65006</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
         <PEER>
             <MONITOR_AS>65000</MONITOR_AS>
@@ -56,6 +62,7 @@
             <PEER_IP_ADDR>192.168.1.7</PEER_IP_ADDR>
             <PEER_PORT>17179</PEER_PORT>
             <PEER_AS>65007</PEER_AS>
+            <LABEL_ACTION>0</LABEL_ACTION>
         </PEER>
     </PEERS>
     <PEER_GROUPS/>
