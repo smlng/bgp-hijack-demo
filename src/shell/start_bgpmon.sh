@@ -9,7 +9,5 @@ CDIR="../../etc"
 LDIR="../../log"
 
 mkdir -p $LDIR
-# start daemons
-$BGPMON -c $CDIR/bgpmon_config1.txt 2>&1 > $LDIR/bgpmon1.log &
-$BGPMON -c $CDIR/bgpmon_config2.txt 2>&1 > $LDIR/bgpmon2.log &
-$BGPMON -c $CDIR/bgpmon_config3.txt 2>&1 > $LDIR/bgpmon3.log &
+# start daemon
+$BGPMON -c $CDIR/bgpmon_config.txt 2>&1 > $LDIR/bgpmon.log &

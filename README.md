@@ -1,4 +1,4 @@
-# BGP Hijack Demonstrator
+# BGP Hijack Demonstrator - README
 
 ## system requirements
 
@@ -13,11 +13,13 @@ Debian stable to testing. To do so, proceed as follows:
     # apt-get --download-only dist-upgrade
     # apt-get dist-upgrade
 
-(thx to: [http://unix.stackexchange.com/questions/90389/how-to-upgrade-debian-stable-wheezy-to-testing-jessie])
+see [here](http://unix.stackexchange.com/questions/90389/how-to-upgrade-debian-stable-wheezy-to-testing-jessie)
+for details and the original post.
 
 ## install packages and software
 
-On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
+On Debian/Ubuntu the following packages can be installed via apt-get or aptitude:
+
  - libxml2-dev
  - openvpn
  - python-dev
@@ -29,12 +31,12 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
 
 On other Linux Distros search for equivalents in its package-management.
 
-If 'bgpmon' is required, its source code can be downloaded here:
- [http://bgpmon.netsec.colostate.edu/index.php/download]
+If `bgpmon` is required, its source code can be downloaded 
+[here](http://bgpmon.netsec.colostate.edu/index.php/download).
 
-Compile with './configure && make', optional 'sudo make install'.
+Compile with `./configure && make`, optional `sudo make install`.
 
-## Python dependencies
+## python dependencies
 
 We recommend using Python with virtualenv and pip, no need to mess up your
 local Python environment. However, the demo depends on these packages:
@@ -44,20 +46,19 @@ local Python environment. However, the demo depends on these packages:
  - twisted
  - autobahn
 
-For ease of deployment we provide a 'requirements.txt' under 'src/python', run
+For ease of deployment we provide a `requirements.txt` under `src/python`, run
 
+    # cd src/python
+    # virtualenv .
+    # source bin/activate
     # pip install -r requirements.txt
 
-## configure and setup
+## further notes
 
-Using Debian quagga daemons are installed to '/usr/lib/quagga'; this directory
-is not in PATH environment, so 'bgpd' is not found automatically.
+Using Debian, the quagga daemons are installed to `/usr/lib/quagga`; this directory
+is not in PATH environment, so `bgpd` is not found automatically.
 
-## start up
+The binray of BGPmon will be installed to `/usr/local/bin/bgpmon` by default, which
+typically is within the PATH environment variable.
 
-First create separate (TAP) interfaces with distinct IP addresses for BGPd and BGPmon:
-    $ cd src/shell
-    $ sudo ./create_taps.sh
-
-Afterwards start BGP daemons:
-    $ sudo ./start_bgpd.sh
+More information and details on the demo setup can be found in the `SETUP.md`.
