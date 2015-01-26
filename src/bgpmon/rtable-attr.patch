@@ -1,0 +1,28 @@
+diff --git Labeling/rtable.c Labeling/rtable.c
+index 7f7b6e4..facbf78 100644
+--- Labeling/rtable.c
++++ Labeling/rtable.c
+@@ -180,8 +180,11 @@ createAttributeTable(int sessionID, uint32_t attributeTableSize, uint16_t maxCol
+ 	int 		error;
+ 
+ 	Session_structp session = Sessions[sessionID];
+-	assert(session->attributeTable == NULL);	/* TODO: need better
+-							 * error handling */
++
++	if (session->attributeTable != NULL) {
++		log_msg("createAttributeTable: warning. attribute table already present for session:%d. Deleting.", sessionID);
++		destroyAttrTable(session->attributeTable, session);
++	}
+ 
+ 	/* Allocation Memory */
+ 	session->attributeTable = malloc(sizeof(struct AttrTableStruct));
+@@ -345,6 +348,9 @@ destroyAttrTable(AttrTable * attrTable, Session_structp session)
+ 	attrTable->attrCount = 0;
+ 	attrTable->ocupiedSize = 0;
+ 	attrTable->maxNodeCount = 0;
++	/*dsp: freeing the AttrTable memory and set it to NULL to protect.*/
++	free(attrTable);
++	attrTable=NULL;
+ 
+ 	return 0;
+ }
