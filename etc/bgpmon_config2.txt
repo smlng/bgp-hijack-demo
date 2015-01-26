@@ -17,14 +17,6 @@
             <PEER_PORT>15179</PEER_PORT>
             <PEER_AS>65005</PEER_AS>
         </PEER>
-        <PEER>
-            <MONITOR_AS>65000</MONITOR_AS>
-            <MONITOR_IP_ADDR>192.168.1.102</MONITOR_IP_ADDR>
-            <MONITOR_PORT>26179</MONITOR_PORT>
-            <PEER_IP_ADDR>192.168.1.6</PEER_IP_ADDR>
-            <PEER_PORT>16179</PEER_PORT>
-            <PEER_AS>65006</PEER_AS>
-        </PEER>
     </PEERS>
     <PEER_GROUPS/>
     <LOGIN>
