@@ -30,7 +30,7 @@ def get_vars():
 #data.csv
 @route('/<filename>')
 def get_file(filename):
-	return static_file(filename, root='../html')	
+	return static_file(filename, root='../../html')	
 
 #snmp bulk
 @route('/bulk')
