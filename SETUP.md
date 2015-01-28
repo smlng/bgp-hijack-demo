@@ -8,12 +8,12 @@ _Note_: you could easily spread out the deployment on multiple physical or virtu
 
 ## BGP topology
 
-The 7 Quagga BGP daemons run on seperate virtual/alias IP interfaces with IPs `192.168.1.1` to `192.168.1.7` and ports `11179` to `17179`. Each BGPd has its own _autonomous system_ (AS) with numbers `65001` - `65007` and an IP prefixes `160.45.111.0/26` - `160.45.177.0/26`.
+The 7 Quagga BGP daemons run on seperate virtual/alias IP interfaces with IPs `192.168.1.1` - `192.168.1.7` and ports `11179` - `17179`. Each BGPd has its own _autonomous system_ (AS) with numbers `65001` - `65007` and an IP prefixes `160.45.111.0/26` - `160.45.177.0/26`.
 
-BGPmon uses virtual/alias IP interfaces with IPs `192.168.1.{100,101,102,103}`; we currently test 2 BGPmon setups: 
+BGPmon uses virtual/alias IP interfaces with IPs `192.168.1.{100,101,102,103}`. We are currently testing 2 BGPmon setups: 
 
-a) single instance (unstable), and 
-b) multiple instances with CHAINs 
+- single instance (unstable), and 
+- multiple instances with CHAINs 
 
 For the latter we use `etc/bgpmon_config{0,1,2,3}.txt` and for single instance setup its `etc/bgpmon_config.txt`. BGPmon requires its own AS (`AS65000`) for monitoring of its peers.
 

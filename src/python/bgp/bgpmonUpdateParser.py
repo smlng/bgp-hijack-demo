@@ -61,7 +61,7 @@ def parse2JSON(xml):
     if withdraw is not None:
         prefix = withdraw.text
         print_log ("BGP WITHDRAW %s by AS %s" % (prefix, src_asn))
-        json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"withdraw\", \"path\": [  ] } ] }"
+        json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"withdraw\", \"path\": [ \""+src_asn+"\" ] } ] }"
         return json
 
     # got here? proceed with bgp update parsing
