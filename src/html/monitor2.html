@@ -207,6 +207,7 @@
         });
 
         var nodeToUpdate = tmp[0];
+        console.log("updateAS: "+nodeToUpdate.asn)
 
         // check whether the update is an 'announcement'
         if (updateNode.type == "announcement") {
@@ -221,6 +222,7 @@
             var originASNode = nodes.filter(function (d) {
                 return d.asn == updateNode.path[lastASIndex];
             });
+            console.log("originAS: "+originASNode.asn)
 
             // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
             var newPrefixAsNodeNeeded = true;
@@ -230,6 +232,7 @@
                 }
             })
             if (newPrefixAsNodeNeeded) {
+                console.log("Add node for prefix: "+updateNode.prefix)
                 // add new prefix as node and new link to 'complete graph'
                 var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
                 links.push({source: originASNode, target: nodes[newNode-1]});
