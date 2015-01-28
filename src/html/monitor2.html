@@ -203,7 +203,7 @@
 
         // return the origin node that will be updated
         var nodeToUpdate = nodes.filter(function (d) {
-            return (d.asn === updateNode.asn);
+            return (d.asn == updateNode.asn);
         })[0];
 
         console.log("updateAS: "+nodeToUpdate.asn);
@@ -239,8 +239,9 @@
             };
 
             var prefixNode = nodes.filter(function (d) {
-                return (d.asn == null && d.prefix[0] == updateNode.prefix[0] && d.parent == nodeToUpdate.asn);
-            });
+                if (d.parent != null && d.prefix[0] == updateNode.prefix[0])
+                    return (d.parent == nodeToUpdate.asn);
+            })[0];
 
             if (prefixNode != null && updateNode.path.length > 1) {
                 console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
