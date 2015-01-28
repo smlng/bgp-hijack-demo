@@ -237,6 +237,34 @@
                 var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
                 links.push({source: originASNode, target: nodes[newNode-1]});
             };
+
+            var prefixNode = nodes.filter(function (d) {
+                return (d.asn == null && d.prefix[0] == updateNode.prefix[0] && d.parent == nodeToUpdate.asn);
+            });
+
+            if (prefixNode != null && updateNode.path.length > 1) {
+                console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
+                var allNewNodes = nodes.filter(function (d) {
+                    // 'd' is a node
+                    if (d.asn != null)
+                        return d;
+                    // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
+                    else if (d.parent != null && d.prefix[0] != updateNode.prefix[0])
+                        return d;
+                });
+
+                var allNewLinks = links.filter(function (d) {
+                    // 'target' is a node
+                    if (d.target.asn != null)
+                        return d;
+                    // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
+                    else if (d.target.prefix[0] != updateNode.prefix[0])
+                        return d;
+                });
+                
+                nodes = allNewNodes;
+                links = allNewLinks;
+            }
         }
         else {
             console.log("Unknown message received via websocket!");
