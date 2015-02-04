@@ -242,7 +242,7 @@
                         return d;
                     // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
                     else if (d.parent != null && d.prefix[0] != updateNode.prefix[0])
-                        return d;
+                        return (d != prefixNode);
                 });
 
                 var allNewLinks = links.filter(function (d) {
@@ -251,7 +251,7 @@
                         return d;
                     // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
                     else if (d.target.prefix[0] != updateNode.prefix[0])
-                        return d;
+                        return (d != prefixNode);
                 });
                 
                 nodes = allNewNodes;
