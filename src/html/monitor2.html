@@ -200,7 +200,7 @@
     function newData(json) {
         // get the updated node
         var updateNode = json.nodes[0];
-
+        var updateGraph = false
         // return the origin node that will be updated
         var nodeToUpdate = nodes.filter(function (d) {
             return (d.asn == updateNode.asn);
@@ -242,7 +242,7 @@
                         return d;
                     // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
                     else if (d.parent != null && d.prefix[0] != updateNode.prefix[0])
-                        return (d != prefixNode);
+                        return (d.parent != prefixNode.parent);
                 });
 
                 var allNewLinks = links.filter(function (d) {
@@ -251,11 +251,12 @@
                         return d;
                     // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
                     else if (d.target.prefix[0] != updateNode.prefix[0])
-                        return (d != prefixNode);
+                        return (d.parent != prefixNode.parent);
                 });
                 
                 nodes = allNewNodes;
                 links = allNewLinks;
+                updateGraph = true
             }
             else
             {
@@ -271,14 +272,15 @@
                     // add new prefix as node and new link to 'complete graph'
                     var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
                     links.push({source: originASNode, target: nodes[newNode-1]});
+                    updateGraph = true
                 };
             }
         }
         else {
             console.log("Unknown message received via websocket!");
         }
-
-        update();
+        if (updateGraph)
+            update();
     }
 
     function updateFromJSONFile() {
