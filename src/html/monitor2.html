@@ -216,11 +216,20 @@
 
             // get the index of the last element in 'path'
             var lastASIndex = updateNode.path.length-1;
-
+            if (lastASIndex > 0) {
+                return;
+            }
             // return the origin node that will receive a new prefix
-            var originASNode = nodes.filter(function (d) {
-                return d.asn == updateNode.path[lastASIndex];
-            })[0];
+            var originASNode;
+            if (lastASIndex < 0) {
+                originASNode = nodeToUpdate;
+            }
+            else 
+            {
+                originASNode= nodes.filter(function (d) {
+                    return d.asn == updateNode.path[lastASIndex];
+                })[0];
+            }
 
             console.log("originAS: "+originASNode.asn);
 
