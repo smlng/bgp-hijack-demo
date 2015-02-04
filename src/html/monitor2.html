@@ -214,6 +214,7 @@
             nodeToUpdate.path.push(updateNode.path);
             nodeToUpdate.reaches.push(updateNode.prefix[0]);
 
+            var lastASIndex = updateNode.path.length-1;
             // return the origin node that will receive a new prefix
             var originASNode;
             if (lastASIndex < 0) {
