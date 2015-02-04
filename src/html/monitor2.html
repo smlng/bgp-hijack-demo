@@ -214,11 +214,6 @@
             nodeToUpdate.path.push(updateNode.path);
             nodeToUpdate.reaches.push(updateNode.prefix[0]);
 
-            // get the index of the last element in 'path'
-            var lastASIndex = updateNode.path.length-1;
-            if (lastASIndex > 0) {
-                return;
-            }
             // return the origin node that will receive a new prefix
             var originASNode;
             if (lastASIndex < 0) {
@@ -232,20 +227,6 @@
             }
 
             console.log("originAS: "+originASNode.asn);
-
-            // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
-            var newPrefixAsNodeNeeded = true;
-            nodes.filter(function (d) {
-                if (d.parent == originASNode.asn && d.prefix[0] == updateNode.prefix[0]) {
-                    newPrefixAsNodeNeeded = false;
-                }
-            })
-            if (newPrefixAsNodeNeeded) {
-                console.log("Add node for prefix: "+updateNode.prefix);
-                // add new prefix as node and new link to 'complete graph'
-                var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
-                links.push({source: originASNode, target: nodes[newNode-1]});
-            };
 
             var prefixNode = nodes.filter(function (d) {
                 if (d.parent != null && d.prefix[0] == updateNode.prefix[0])
@@ -274,6 +255,22 @@
                 
                 nodes = allNewNodes;
                 links = allNewLinks;
+            }
+            else
+            {
+                // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
+                var newPrefixAsNodeNeeded = true;
+                nodes.filter(function (d) {
+                    if (d.parent == originASNode.asn && d.prefix[0] == updateNode.prefix[0]) {
+                        newPrefixAsNodeNeeded = false;
+                    }
+                })
+                if (newPrefixAsNodeNeeded) {
+                    console.log("Add node for prefix: "+updateNode.prefix);
+                    // add new prefix as node and new link to 'complete graph'
+                    var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
+                    links.push({source: originASNode, target: nodes[newNode-1]});
+                };
             }
         }
         else {
