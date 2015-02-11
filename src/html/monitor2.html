@@ -79,7 +79,7 @@
     
     var force = d3.layout.force()
         .charge(-500)
-        .linkDistance(80)
+        .linkDistance(function (d) { return d.target.prefix ? 40 : 120  } )
         .size([width, height])
         .on("tick", tick);
     
