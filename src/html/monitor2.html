@@ -79,11 +79,17 @@
     
     var force = d3.layout.force()
         .charge(-500)
+        .linkStrength(function (d) { 
+            if ((d.source.asn != null) && (d.target.asn != null))
+                return 0.3;
+            else
+                return 0.1; 
+        })
         .linkDistance(function (d) { 
             if ((d.source.asn != null) && (d.target.asn != null))
-                return 120;
+                return 150;
             else
-                return 40; 
+                return 50; 
         })
         .size([width, height])
         .on("tick", tick);
