@@ -136,7 +136,7 @@
         path.exit().remove();
         path.enter().insert("line", "node")
             .attr("class", "link")
-            .style("stroke-width", function(function (d) { 
+            .style("stroke-width", function(d) { 
             if ((d.source.asn != null) && (d.target.asn != null))
                 return 3;
             else
