@@ -201,13 +201,13 @@ def demo_graph():
 					path = ndata[3]
 				if source == '0.0.0.0':
 					node['prefix'] = prefix
-				else:
+				elif source != '':
 					node['reaches'].append(prefix)
 					node['path'].append(path.split())
-				print "----"
-				json.dumps(node)
-				print "----"
-			response += res + "\n"
+			print "----"
+			json.dumps(node)
+			print "----"
+			response += res[1] + "\n"
 	return response
 
 @route('/demo/set', method='POST')
