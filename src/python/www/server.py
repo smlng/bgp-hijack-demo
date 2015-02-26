@@ -12,6 +12,7 @@ import parser
 import subprocess
 import re
 import csv
+import json
 
 def get_vars():
 	host = 'localhost'
@@ -181,8 +182,31 @@ def demo_graph():
 		oid = oid_base + asn + '.' + asn_port[asn]
 		res = snmp_agent.get_string(oid)
 		if res:
-			print res
-			#print res[1][:-2]
+			print res[1]
+			node = dict()
+			node['asn'] = asn
+			node['prefix'] = ''
+			node['path'] = []
+			node['reaches'] = []
+			nodes = res[1].split('\\n')
+			for n in nodes:
+				ndata = n.split('\\t')
+				prefix = ''
+				source = ''
+				path = ''
+				if len(ndata) > 2:
+					prefix = ndata[1]
+					source = ndata[2]
+				if len(ndata) > 3:
+					path = ndata[3]
+				if source == '0.0.0.0':
+					node['prefix'] = prefix
+				else:
+					node['reaches'].append(prefix)
+					node['path'].append(path.split())
+				print "----"
+				json.dumps(node)
+				print "----"
 			response += res + "\n"
 	return response
 
