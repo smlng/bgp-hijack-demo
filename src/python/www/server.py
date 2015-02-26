@@ -215,7 +215,7 @@ def demo_graph():
 			print res[1]
 			node = dict()
 			node['asn'] = asn
-			node['prefix'] = ''
+			node['prefixes'] = []
 			node['path'] = []
 			node['reaches'] = []
 			nodes = res[1].split('\\n')
@@ -232,7 +232,7 @@ def demo_graph():
 					path = ndata[3]
 					print "PATH: "+path
 				if source == '0.0.0.0':
-					node['prefix'] = prefix
+					node['prefixes'].append(prefix)
 				elif source != '':
 					node['reaches'].append(prefix)
 					node['path'].append(path.split())

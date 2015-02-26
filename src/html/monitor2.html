@@ -103,6 +103,7 @@
     var path = svg.append("g").selectAll("path"),
         node = svg.append("g").selectAll("circle"),
         text = svg.append("g").selectAll("text");
+
     /***
     d3.json("initialGraph.json", function(json) {
         // add nodes
@@ -125,7 +126,8 @@
         
         update();
     });
-    */
+    ***/
+
     function initGraph() {
         var request = new XMLHttpRequest();
         request.open("POST", "/demo/graph", false);
@@ -143,10 +145,10 @@
             
         // add prefixes as nodes and add links to corresponding 'asn'
         json.nodes.forEach(function (nodeWithPrefix) {
-            if (nodeWithPrefix.prefix != null) {
-                var newNode = nodes.push({prefix: nodeWithPrefix.prefix, parent: nodeWithPrefix.asn});
+            nodeWithPrefix.prefixes.forEach(function (pfx) {
+                var newNode = nodes.push({prefix: pfx, parent: nodeWithPrefix.asn});
                 links.push({source: nodeWithPrefix, target: nodes[newNode-1]});
-            }
+            });
         });
         
         update();
