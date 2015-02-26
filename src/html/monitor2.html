@@ -103,12 +103,8 @@
     var path = svg.append("g").selectAll("path"),
         node = svg.append("g").selectAll("circle"),
         text = svg.append("g").selectAll("text");
-
+    /***
     d3.json("initialGraph.json", function(json) {
-        var request = new XMLHttpRequest();
-        request.open("POST", "/demo/graph", false);
-        request.send("dummy");
-        console.log(request.responseText);
         // add nodes
         json.nodes.forEach(function (d) {
             nodes.push(d);
@@ -129,7 +125,33 @@
         
         update();
     });
-    
+    *//
+    function initGraph() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "/demo/graph", false);
+        request.send("dummy");
+        console.log(request.responseText);
+        json = request.responseText;
+        json.nodes.forEach(function (d) {
+            nodes.push(d);
+        });
+        
+        // add links
+        json.links.forEach(function (d) {
+            links.push({source: d.source, target: d.target});
+        });
+            
+        // add prefixes as nodes and add links to corresponding 'asn'
+        json.nodes.forEach(function (nodeWithPrefix) {
+            if (nodeWithPrefix.prefix != null) {
+                var newNode = nodes.push({prefix: nodeWithPrefix.prefix, parent: nodeWithPrefix.asn});
+                links.push({source: nodeWithPrefix, target: nodes[newNode-1]});
+            }
+        });
+        
+        update();
+    };
+
     function update() {
         force
             .nodes(nodes)
@@ -304,6 +326,8 @@
 
         text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     }
+
+    initGraph();
 
     </script>
     </body>
