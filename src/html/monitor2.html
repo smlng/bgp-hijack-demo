@@ -259,7 +259,7 @@
             console.log("originAS: "+originASNode.asn);
 
             var prefixNode = nodes.filter(function (d) {
-                if (d.parent != null && d.prefix[0] == updateNode.prefix[0])
+                if (d.parent != null && d.prefix == updateNode.prefix[0])
                     return (d.parent == nodeToUpdate.asn);
             })[0];
 
@@ -270,7 +270,7 @@
                     if (d.asn != null)
                         return d;
                     // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
-                    else if (d.parent != null && ((d.prefix[0] != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
+                    else if (d.parent != null && ((d.prefix != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
                         return d;
                 });
 
@@ -292,7 +292,7 @@
                 // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
                 var newPrefixAsNodeNeeded = true;
                 nodes.filter(function (d) {
-                    if (d.parent == originASNode.asn && d.prefix[0] == updateNode.prefix[0]) {
+                    if (d.parent == originASNode.asn && d.prefix == updateNode.prefix[0]) {
                         newPrefixAsNodeNeeded = false;
                     }
                 })
