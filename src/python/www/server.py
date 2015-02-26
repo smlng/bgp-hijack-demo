@@ -165,6 +165,27 @@ def demo_get():
 	response = snmp_agent.get_string(request.forms.get('oid'))
 	return response[1][:-2]
 
+@route('/demo/graph', method='POST')
+def demo_graph():
+	response = ''
+	oid_base = '1.3.6.1.4.1.8072.2.267.'
+	asn_port = { "65001":"2001", 
+				 "65002":"2002",
+				 "65003":"2003",
+				 "65004":"2004",
+				 "65005":"2005",
+				 "65006":"2006",
+				 "65007":"2007"}
+
+	for asn in asn_port:
+		oid = oid_base + asn + '.' + asn_port[asn]
+		res = snmp_agent.get_string(oid)
+		if res:
+			print res
+			#print res[1][:-2]
+			response += res + "\n"
+	return response
+
 @route('/demo/set', method='POST')
 def demo_set():
 	#not possible because of missing type definition

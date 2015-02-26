@@ -105,6 +105,10 @@
         text = svg.append("g").selectAll("text");
 
     d3.json("initialGraph.json", function(json) {
+        var request = new XMLHttpRequest();
+        request.open("POST", "/demo/graph", false);
+        request.send("dummy");
+        console.log(request.responseText);
         // add nodes
         json.nodes.forEach(function (d) {
             nodes.push(d);
