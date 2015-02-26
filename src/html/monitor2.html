@@ -125,13 +125,13 @@
         
         update();
     });
-    *//
+    */
     function initGraph() {
         var request = new XMLHttpRequest();
         request.open("POST", "/demo/graph", false);
         request.send("dummy");
         console.log(request.responseText);
-        json = request.responseText;
+        json = JSON.parse(request.responseText);
         json.nodes.forEach(function (d) {
             nodes.push(d);
         });
