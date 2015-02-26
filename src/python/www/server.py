@@ -168,7 +168,6 @@ def demo_get():
 
 @route('/demo/graph', method='POST')
 def demo_graph():
-	response = ''
 	oid_base = '1.3.6.1.4.1.8072.2.267.'
 	asn_port = { "65001":"2001", 
 				 "65002":"2002",
@@ -177,7 +176,38 @@ def demo_graph():
 				 "65005":"2005",
 				 "65006":"2006",
 				 "65007":"2007"}
-
+	response = dict()
+	response['nodes'] = []
+	response['links'] = [
+        {
+            "source": 0,
+            "target": 1
+        },
+        {
+            "source": 1,
+            "target": 2
+        },
+        {
+            "source": 2,
+            "target": 3
+        },
+        {
+            "source": 3,
+            "target": 5
+        },
+        {
+            "source": 5,
+            "target": 6
+        },
+        {
+            "source": 1,
+            "target": 4
+        },
+        {
+            "source": 4,
+            "target": 5
+        }
+    ]
 	for asn in asn_port:
 		oid = oid_base + asn + '.' + asn_port[asn]
 		res = snmp_agent.get_string(oid)
@@ -209,8 +239,8 @@ def demo_graph():
 			print "----"
 			print json.dumps(node)
 			print "----"
-			response += res[1] + "\n"
-	return response
+			response['nodes'].append(node)
+	return json.dumps(response)
 
 @route('/demo/set', method='POST')
 def demo_set():
