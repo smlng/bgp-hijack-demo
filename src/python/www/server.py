@@ -207,7 +207,7 @@ def demo_graph():
 					node['reaches'].append(prefix)
 					node['path'].append(path.split())
 			print "----"
-			json.dumps(node)
+			print json.dumps(node)
 			print "----"
 			response += res[1] + "\n"
 	return response
