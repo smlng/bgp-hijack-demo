@@ -197,8 +197,10 @@ def demo_graph():
 				if len(ndata) > 2:
 					prefix = ndata[1]
 					source = ndata[2]
+					print prefix+" : "+source
 				if len(ndata) > 3:
 					path = ndata[3]
+					print "PATH: "+path
 				if source == '0.0.0.0':
 					node['prefix'] = prefix
 				elif source != '':
