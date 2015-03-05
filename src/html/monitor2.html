@@ -78,13 +78,8 @@
         height = 550;
     
     var force = d3.layout.force()
-        .charge(-500)
-        .linkDistance(function (d) { 
-            if ((d.source.asn != null) && (d.target.asn != null))
-                return 160;
-            else
-                return 32;
-        })
+        .charge(function (d) { return node_charge(d)} )
+        .linkDistance(function (d) { return node_link_distance(d) } )
         .size([width, height])
         .on("tick", tick);
     
@@ -164,12 +159,7 @@
         path.exit().remove();
         path.enter().insert("line", "node")
             .attr("class", "link")
-            .style("stroke-width", function(d) { 
-            if ((d.source.asn != null) && (d.target.asn != null))
-                return 4;
-            else
-                return 1;
-        })
+            .style("stroke-width", function(d) { return node_link_width(d) })
             .style("opacity", 0)
             .transition().duration(3000)
             .style("opacity", 1);
@@ -327,6 +317,28 @@
             .attr("y2", function(d) { return d.target.y; });
 
         text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    }
+
+            // set charge according to node
+    function node_charge(d) {
+        if (d.asn != null)
+            return -2000;
+        else
+            return -350;
+    }
+
+    function node_link_distance(d) {
+        if ((d.source.asn != null) && (d.target.asn != null))
+            return 150;
+        else
+            return 30;
+    }
+
+    function node_link_width(d) {
+        if ((d.source.asn != null) && (d.target.asn != null))
+            return 5;
+        else
+            return 1;
     }
 
     initGraph();
