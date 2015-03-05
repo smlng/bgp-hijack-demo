@@ -197,7 +197,7 @@
             .call(force.drag)
             .transition().duration(1000)
             // .attr("r", 8)
-            .attr("r", function (d) {return d.asn != null ? 40 : 16})
+            .attr("r", function (d) {return d.asn != null ? 35 : 14})
             .style("fill", function (d) {
                 if (d.asn == null)  // node is a prefix
                     return "red";
@@ -319,21 +319,21 @@
         text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     }
 
-            // set charge according to node
+    // set charge according to node
     function node_charge(d) {
         if (d.asn != null)
-            return -2000;
+            return -1500;
         else
-            return -350;
+            return -300;
     }
-
+    // set link length by src-dst node type
     function node_link_distance(d) {
         if ((d.source.asn != null) && (d.target.asn != null))
-            return 150;
+            return 100;
         else
-            return 30;
+            return 0;
     }
-
+    // set link width by src-dst node type
     function node_link_width(d) {
         if ((d.source.asn != null) && (d.target.asn != null))
             return 5;
