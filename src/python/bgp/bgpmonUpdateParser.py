@@ -38,9 +38,9 @@ def parse2JSON(xml):
     except:
         print_error("Cannot parse XML: %s!" % xml)
         return None
-    print_log("root: %s" % tree.tag)
+    print_info("root: %s" % tree.tag)
     for child in tree:
-	print_log(child.tag)
+        print_info(child.tag)
     src = tree.find('{urn:ietf:params:xml:ns:bgp_monitor}SOURCE')
     # check if source exists, otherwise return
     if src is None:
