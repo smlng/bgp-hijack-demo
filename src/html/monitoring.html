@@ -24,8 +24,8 @@
         position: absolute;
         text-align: center;
         vertical-align: middle;
-        padding: 2px;
-        font: 16pt sans-serif;
+        padding: 4px;
+        font: 12pt sans-serif;
         background: black;
         border: 2px solid white;
         border-radius: 4px;
@@ -188,7 +188,7 @@
                 tooltipDiv
                 .text(function (o) {
                     if (d.prefix && d.asn == null)
-                        return "Prefix: " + d.prefix;
+                        return d.prefix;
                 })
                 .style("color", "white")
                 .style("left", (d3.event.pageX - 93) + "px")
