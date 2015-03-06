@@ -83,7 +83,7 @@
 			border-left-style: none;
 		}
 		table {
-			border-spacing: 8px 2px;
+			border-spacing: 16px 2px;
 		}
 		.wrapper {
 			position:absolute; 
@@ -469,7 +469,7 @@
 			d3.select("#viewer")
 				.append("slider")
 				.attr("class", "wrapper")
-				.style("position", "relative")
+				.style("position", "absolute")
 				.style("left", "50px")
 				.style("top", top+"px")
 				.call(d3.slider()
