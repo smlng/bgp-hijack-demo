@@ -23,13 +23,12 @@
     {
         position: absolute;
         text-align: center;
-        width: 170px;
-        height: 12px;
-        padding: 8px;
-        font: 12px sans-serif;
-        background: #000; /* vorher: #ddd */
-        border: solid 1px #aaa;
-        border-radius: 8px;
+        vertical-align: middle;
+        padding: 2px;
+        font: 16pt sans-serif;
+        background: black;
+        border: 2px solid white;
+        border-radius: 4px;
         pointer-events: none;
     }
     </style>
@@ -92,9 +91,10 @@
         .attr("width", width)
         .attr("height", height)
     
-    var tooltipDiv = d3.select("#viewer").append("div")
+    var tooltipDiv = d3.select("#viewer")
+        .append("div")
         .attr("class", "tooltip")
-        .style("opacity", 1e-6);
+        .style("opacity", 0);
     
     var path = svg.append("g").selectAll("path"),
         node = svg.append("g").selectAll("circle"),
@@ -174,9 +174,7 @@
 		if (d.asn == null) {
                 	tooltipDiv.transition()
                 	.duration(200)
-                	.style("opacity", function (t) {
-                    		return 0.9;
-                	})
+                	.style("opacity", .80);
 		}
             })
             .on("mouseout", function (d) {
@@ -192,6 +190,7 @@
                     if (d.prefix && d.asn == null)
                         return "Prefix: " + d.prefix;
                 })
+                .style("color", "white")
                 .style("left", (d3.event.pageX - 93) + "px")
                 .style("top", (d3.event.pageY - 45) + "px");
             })
