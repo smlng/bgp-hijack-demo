@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SWP Mobilkommunikation: Prefix Hijack</title>
+        <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
+    </head>
+    <style>
+    body {
+        background-color: #555;
+    }
+    .link {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5px;
+    }
+    
+    circle {
+        stroke: #fff;
+        stroke-width: 1.5px;
+    }
+    
+    div.tooltip
+    {
+        position: absolute;
+        text-align: center;
+        width: 170px;
+        height: 12px;
+        padding: 8px;
+        font: 12px sans-serif;
+        background: lightsteelblue; /* vorher: #ddd */
+        border: solid 1px #aaa;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+    </style>
+    <body>
+    <div id="header" align="center" style="background-color:#e41a1c">
+        <h1 style="color:#fff;font-size:36pt">BGP Monitoring</h1>
+    </div>
+    <div id="viewer" align="center">
+    
+    <script>
+
+    // websockets -------------------------------------
+    // function newWebsocket() {
+
+        var connection = new WebSocket('ws://141.22.28.194:5002');
+       
+        // When the connection is open, send some data to the server
+        connection.onopen = function ()
+        {
+            console.log('OPEN');
+        };
+       
+        // Log errors
+        connection.onerror = function (error)
+        {
+            console.log('WebSocket Error ' + error);
+        };
+       
+        // Log messages from the server
+        connection.onmessage = function (e)
+        {
+            console.log("update graph...");
+
+            // TODO:
+            // only parse, if update has no line break
+
+            if (e.data != "\n") {
+                // parse string to json object
+                json = JSON.parse(e.data)
+                newData(json);
+            };
+            
+        };
+    // }
+    //-------------------------------------------------
+
+    var width  = window.innerWidth-100,
+        height = window.innerHeight-200;
+    
+    var force = d3.layout.force()
+        .charge(function (d) { return node_charge(d)} )
+        .linkDistance(function (d) { return node_link_distance(d) } )
+        .size([width, height])
+        .on("tick", tick);
+    
+    var nodes = [],
+        links = [];
+    
+    var svg = d3.select("#viewer").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+    
+    var tooltipDiv = d3.select("#viewer").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 1e-6);
+    
+    var path = svg.append("g").selectAll("path"),
+        node = svg.append("g").selectAll("circle"),
+        text = svg.append("g").selectAll("text");
+
+    /***
+    d3.json("initialGraph.json", function(json) {
+        // add nodes
+        json.nodes.forEach(function (d) {
+            nodes.push(d);
+        });
+        
+        // add links
+        json.links.forEach(function (d) {
+            links.push({source: d.source, target: d.target});
+        });
+            
+        // add prefixes as nodes and add links to corresponding 'asn'
+        json.nodes.forEach(function (nodeWithPrefix) {
+            if (nodeWithPrefix.prefix != null) {
+                var newNode = nodes.push({prefix: nodeWithPrefix.prefix, parent: nodeWithPrefix.asn});
+                links.push({source: nodeWithPrefix, target: nodes[newNode-1]});
+            }
+        });
+        
+        update();
+    });
+    ***/
+
+    function initGraph() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "/demo/graph", false);
+        request.send("dummy");
+        console.log(request.responseText);
+        json = JSON.parse(request.responseText);
+        json.nodes.forEach(function (d) {
+            nodes.push(d);
+        });
+        
+        // add links
+        json.links.forEach(function (d) {
+            links.push({source: d.source, target: d.target});
+        });
+            
+        // add prefixes as nodes and add links to corresponding 'asn'
+        json.nodes.forEach(function (nodeWithPrefix) {
+            nodeWithPrefix.prefixes.forEach(function (pfx) {
+                var newNode = nodes.push({prefix: pfx, parent: nodeWithPrefix.asn});
+                links.push({source: nodeWithPrefix, target: nodes[newNode-1]});
+            });
+        });
+        
+        update();
+    };
+
+    function update() {
+        force
+            .nodes(nodes)
+            .links(links)
+            .start();
+
+        path = path.data(links);
+        path.exit().remove();
+        path.enter().insert("line", "node")
+            .attr("class", "link")
+            .style("stroke-width", function(d) { return node_link_width(d) })
+            .style("opacity", 0)
+            .transition().duration(3000)
+            .style("opacity", 1);
+
+        node = node.data(nodes);
+        node.enter().append("circle")
+        node.exit().remove();
+        node
+            .attr("class", "node")
+            .on("mouseover", function (d) {
+		if (d.asn == null) {
+                	tooltipDiv.transition()
+                	.duration(200)
+                	.style("opacity", function (t) {
+                    		return 0.9;
+                	})
+		}
+            })
+            .on("mouseout", function (d) {
+                tooltipDiv.transition()
+                .duration(200)
+                .style("opacity", function (t) {
+                    return 0;
+                })
+            })
+            .on("mousemove", function (d) {
+                tooltipDiv
+                .text(function (o) {
+                    if (d.prefix && d.asn == null)
+                        return "Prefix: " + d.prefix;
+                })
+                .style("left", (d3.event.pageX - 93) + "px")
+                .style("top", (d3.event.pageY - 45) + "px");
+            })
+            .call(force.drag)
+            .transition().duration(1000)
+            // .attr("r", 8)
+            .attr("r", function (d) { return node_size(d) })
+            .style("fill", function (d) { return node_color(d) });
+
+        text = text.data(nodes);
+        text.enter().append("text")
+            .attr("class", "label")
+            .attr("x", "-2.5ex")
+            .attr("y", ".31em")
+            .style("opacity", 0)
+            .transition().duration(2000)
+            .style("opacity", 1);
+        text.exit().remove();
+        text
+            .text(function(d) { return d.asn ? d.asn : "" });
+    }
+
+    function newData(json) {
+        // get the updated node
+        var updateNode = json.nodes[0];
+        var updateGraph = false
+        // return the origin node that will be updated
+        var nodeToUpdate = nodes.filter(function (d) {
+            return (d.asn == updateNode.asn);
+        })[0];
+
+        console.log("updateAS: "+nodeToUpdate.asn);
+
+        // check whether the update is an 'announcement'
+        if (updateNode.type == "announcement") {
+            // add new 'prefix' that the already existing AS reaches with specific 'path'
+            nodeToUpdate.path.push(updateNode.path);
+            nodeToUpdate.reaches.push(updateNode.prefix[0]);
+
+            var lastASIndex = updateNode.path.length-1;
+            // return the origin node that will receive a new prefix
+            var originASNode;
+            if (lastASIndex < 0) {
+                originASNode = nodeToUpdate;
+            }
+            else 
+            {
+                originASNode= nodes.filter(function (d) {
+                    return d.asn == updateNode.path[lastASIndex];
+                })[0];
+            }
+
+            console.log("originAS: "+originASNode.asn);
+
+            var prefixNode = nodes.filter(function (d) {
+                if (d.parent != null && d.prefix == updateNode.prefix[0])
+                    return (d.parent == nodeToUpdate.asn);
+            })[0];
+
+            if (prefixNode != null && updateNode.path.length > 1) {
+                console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
+                var allNewNodes = nodes.filter(function (d) {
+                    // 'd' is a node
+                    if (d.asn != null)
+                        return d;
+                    // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
+                    else if (d.parent != null && ((d.prefix != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
+                        return d;
+                });
+
+                var allNewLinks = links.filter(function (d) {
+                    // 'target' is a node
+                    if (d.target.asn != null)
+                        return d;
+                    // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
+                    else if ((d.target.prefix[0] != updateNode.prefix[0]) || (d.target.parent != prefixNode.parent))
+                        return d;
+                });
+                
+                nodes = allNewNodes;
+                links = allNewLinks;
+                updateGraph = true
+            }
+            else
+            {
+                // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
+                var newPrefixAsNodeNeeded = true;
+                nodes.filter(function (d) {
+                    if (d.parent == originASNode.asn && d.prefix == updateNode.prefix[0]) {
+                        newPrefixAsNodeNeeded = false;
+                    }
+                })
+                if (newPrefixAsNodeNeeded) {
+                    console.log("Add node for prefix: "+updateNode.prefix);
+                    // add new prefix as node and new link to 'complete graph'
+                    var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
+                    links.push({source: originASNode, target: nodes[newNode-1]});
+                    updateGraph = true
+                };
+            }
+        }
+        else {
+            console.log("Unknown message received via websocket!");
+        }
+        if (updateGraph)
+            update();
+    }
+
+    function updateFromJSONFile() {
+        d3.json("updateAnnounce.json", function(json) {
+            newData(json);
+        });
+    }
+
+    function tick() {
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+             
+        path.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    }
+
+    // set charge according to node
+    function node_charge(d) {
+        if (d.asn != null)
+            return -1500;
+        else
+            return -300;
+    }
+    // set node size
+    function node_size(d) {
+        // node of attacker
+        if (d.asn != null) return 45;
+        return 15;
+    }
+    // set node color
+    function node_color(d) {
+        if (d.asn != null) return "#4daf4a";
+        return "#377eb8";
+    }
+    // set link length by src-dst node type
+    function node_link_distance(d) {
+        if ((d.source.asn != null) && (d.target.asn != null))
+            return 100;
+        else
+            return 0;
+    }
+    // set link width by src-dst node type
+    function node_link_width(d) {
+        if ((d.source.asn != null) && (d.target.asn != null))
+            return 5;
+        else
+            return 1;
+    }
+
+    initGraph();
+
+    </script>
+    </body>
+</html>
