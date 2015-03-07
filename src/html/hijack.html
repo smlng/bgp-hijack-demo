@@ -140,13 +140,13 @@
 				.style("fill", function (d) { return node_color(d) } )
 				.on("click", node_click)
 				.on("mouseover", function (d) {
-						if(d.attacker) {
+						if(d.attacker || d.displays) {
 							div.transition()
 								.duration(200)
 								.style("opacity", .75);
 							div.html(tip_text(d))
 								.style("color", "white")
-								.style("left", d.x + 50 + "px")
+								.style("left", d.x + 5 + "px")
 								.style("top", d.y + 150 +"px");
 						}
 					})
