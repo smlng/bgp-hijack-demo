@@ -16,10 +16,13 @@ div.tooltip
 }
 
 table {
+    /*cellspacing: 4; 
+    cellpadding: 2;*/
     border-spacing: 16px 2px;
 }
 
 th, td {
+    text-align: left;
     border-top-style: none;
     border-right-style: none;
     border-bottom-style: none;
