@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## network interfaces for quagga bgpd
 openvpn --mktun --dev tap1

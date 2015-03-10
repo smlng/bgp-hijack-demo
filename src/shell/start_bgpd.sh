@@ -1,13 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 # path to bgpd binary, Debian default
 BGPD=/usr/lib/quagga/bgpd
-
+SCRIPT=$(readlink $0)
+BASEDIR=$(dirname $SCRIPT)
 # base directory, default: within repo
 # config directory
-CDIR="../../etc/quagga"
+CDIR="$BASEDIR/../../etc/quagga"
 # pid directory
-PDIR="../../run/quagga"
+PDIR="$BASEDIR/../../run/quagga"
 
 # create pid dir, if necessary
 mkdir -p $PDIR
