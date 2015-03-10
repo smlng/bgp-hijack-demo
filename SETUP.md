@@ -65,7 +65,7 @@ $ cd www
 $ python server.py -h <IP address> -p <port>
 ```
 
-* Default IP is `127.0.0.1` (localhost) with port `8000`. _Note_: you must also replace <IP address> for the websocket in `src/html/monitoring.html`, otherwise the bgp update will not work!
+* Default IP is `127.0.0.1` (localhost) with port `8000`. _Note_: you must also replace `<IP address>` for the websocket in `src/html/monitoring.html`, otherwise the bgp update will not work!
 
 * Check if everything is up and running, go to:
 ```
