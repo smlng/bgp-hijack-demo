@@ -257,7 +257,8 @@
                         newPrefixAsNodeNeeded = false;
                     }
                 })
-                if (newPrefixAsNodeNeeded  && (updateNode.path.length < 2)) {
+                //if (newPrefixAsNodeNeeded  && (updateNode.path.length < 2)) {
+                if (newPrefixAsNodeNeeded ) {
                     console.log("Add node for prefix: "+updateNode.prefix);
                     // add new prefix as node and new link to 'complete graph'
                     var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
