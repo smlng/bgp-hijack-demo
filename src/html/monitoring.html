@@ -224,33 +224,38 @@
                     return (d.parent == nodeToUpdate.asn);
             })[0];
 
-            if (prefixNode != null && updateNode.path.length > 1) {
-                console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
-                var allNewNodes = nodes.filter(function (d) {
-                    // 'd' is a node
-                    if (d.asn != null)
-                        return d;
-                    // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
-                    else if (d.parent != null && ((d.prefix != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
-                        return d;
-                });
+            if (updateNode.path.length > 1) {
+                if (prefixNode != null) {
+                    console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
+                    var allNewNodes = nodes.filter(function (d) {
+                        // 'd' is a node
+                        if (d.asn != null)
+                            return d;
+                        // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
+                        else if (d.parent != null && ((d.prefix != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
+                            return d;
+                    });
 
-                var allNewLinks = links.filter(function (d) {
-                    // 'target' is a node
-                    if (d.target.asn != null)
-                        return d;
-                    // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
-                    else if ((d.target.prefix[0] != updateNode.prefix[0]) || (d.target.parent != prefixNode.parent))
-                        return d;
-                });
-                
-                nodes = allNewNodes;
-                links = allNewLinks;
-                updateGraph = true
+                    var allNewLinks = links.filter(function (d) {
+                        // 'target' is a node
+                        if (d.target.asn != null)
+                            return d;
+                        // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
+                        else if ((d.target.prefix[0] != updateNode.prefix[0]) || (d.target.parent != prefixNode.parent))
+                            return d;
+                    });
+                    
+                    nodes = allNewNodes;
+                    links = allNewLinks;
+                    updateGraph = true
+                }
+                else {
+                    console.log("Update path length > 1, but no prefix node found.")
+                }
             }
             else
             {
-                // check whether new prefix already exist at 'nodeWithNewPrefix' (at 'complete graph')
+                // check whether new prefix already exist at 'nodeWithNewPrefix' (in 'complete graph')
                 var newPrefixAsNodeNeeded = true;
                 nodes.filter(function (d) {
                     if (d.parent == originASNode.asn && d.prefix == updateNode.prefix[0]) {
