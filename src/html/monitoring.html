@@ -73,30 +73,6 @@
         node = svg.append("g").selectAll("circle"),
         text = svg.append("g").selectAll("text");
 
-    /***
-    d3.json("initialGraph.json", function(json) {
-        // add nodes
-        json.nodes.forEach(function (d) {
-            nodes.push(d);
-        });
-        
-        // add links
-        json.links.forEach(function (d) {
-            links.push({source: d.source, target: d.target});
-        });
-            
-        // add prefixes as nodes and add links to corresponding 'asn'
-        json.nodes.forEach(function (nodeWithPrefix) {
-            if (nodeWithPrefix.prefix != null) {
-                var newNode = nodes.push({prefix: nodeWithPrefix.prefix, parent: nodeWithPrefix.asn});
-                links.push({source: nodeWithPrefix, target: nodes[newNode-1]});
-            }
-        });
-        
-        update();
-    });
-    ***/
-
     function initGraph() {
         var request = new XMLHttpRequest();
         request.open("POST", "/demo/graph", false);
@@ -144,11 +120,11 @@
         node
             .attr("class", "node")
             .on("mouseover", function (d) {
-		if (d.asn == null) {
-                	tooltipDiv.transition()
-                	.duration(200)
-                	.style("opacity", .80);
-		}
+		      if (d.asn == null) {
+                tooltipDiv.transition()
+                .duration(200)
+                .style("opacity", .80);
+		      }
             })
             .on("mouseout", function (d) {
                 tooltipDiv.transition()
@@ -169,7 +145,6 @@
             })
             .call(force.drag)
             .transition().duration(1000)
-            // .attr("r", 8)
             .attr("r", function (d) { return node_size(d) })
             .style("fill", function (d) { return node_color(d) });
 
