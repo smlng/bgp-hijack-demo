@@ -15,8 +15,8 @@
 	<script src="d3.slider.js"></script>
 	<script type="text/javascript">
 
-		var width  = window.innerWidth-100,
-			height = window.innerHeight-150,
+		var width  = window.innerWidth-50,
+			height = window.innerHeight-110,
 			padding = 100, // separation between nodes
 			maxRadius = 50;
 
@@ -37,7 +37,7 @@
 
 		// init force layout
 		var force = d3.layout.force()
-			.linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-125 : 30  } )
+			.linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-100 : 20  } )
 			.size([width, height])
 			.gravity(0)
 			.charge(function (d) { return node_charge(d)} )
