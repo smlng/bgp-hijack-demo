@@ -46,25 +46,29 @@ You may also run BGPmon in background, logs are writen to `log/bgpmon`:
 Next, start all webservices
 
 1. create python environment
-
-    $ cd src/python
-    $ virtualenv local
-    $ source local/bin/activate
-    $ pip install -r requirements
+```
+$ cd src/python
+$ virtualenv local
+$ source local/bin/activate
+$ pip install -r requirements
+```
 
 2. run bgp update parser and websocket server
-
-    $ cd bgp
-    $ python bgpmonUpdateParser.py -j | python broadcastServer.py
+```
+$ cd bgp
+$ python bgpmonUpdateParser.py -j | python broadcastServer.py
+```
 
 3. open another terminal/bash and re-run step 1 in it. _Note_: check the directory you are in, to create the python env you must be in `<repo-root>/src/python`. Afterwards:
-
-    $ cd www
-    $ python server.py -h <IP address> -p <port>
+```
+$ cd www
+$ python server.py -h <IP address> -p <port>
+```
 
 Default IP is `127.0.0.1` (localhost) with port `8000`. _Note_: you must also replace <IP address> for the websocket in `src/html/monitoring.html`, otherwise the bgp update will not work!
 
 4. Check if everything is up and running, go to:
-
-    http://<IP address>:<port>/hijack.html
-    http://<IP address>:<port>/monitoring.html
+```
+http://<IP address>:<port>/hijack.html
+http://<IP address>:<port>/monitoring.html
+```
