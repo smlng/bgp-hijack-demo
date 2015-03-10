@@ -46,12 +46,12 @@ You may also run BGPmon in background, logs are writen to `log/bgpmon`:
 Next, start all webservices
 
 1. create python environment
-```
-$ cd src/python
-$ virtualenv local
-$ source local/bin/activate
-$ pip install -r requirements
-```
+    ```
+    $ cd src/python
+    $ virtualenv local
+    $ source local/bin/activate
+    $ pip install -r requirements
+    ```
 2. run bgp update parser and websocket server
 ```
 $ cd bgp
