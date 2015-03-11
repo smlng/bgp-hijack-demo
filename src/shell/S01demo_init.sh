@@ -17,7 +17,7 @@ echo "RUN" > /tmp/demo_bgp_pipe
 sleep 1
 echo "RUN" > /tmp/demo_www_pipe
 sleep 2
-rm -rf /tmp/demo_bgp_pipe
 rm -rf /tmp/demo_www_pipe
+rm -rf /tmp/demo_bgp_pipe
 sudo $BGPMON -c etc/bgpmon_config.txt
 exit 0

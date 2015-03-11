@@ -12,6 +12,12 @@ echo " - BASEDIR           [ OK ]"
 env WSIP=$IPADDR sed -e "s/ws:\/\/.*:5002/ws:\/\/$WSIP:5002/g" -i '' src/html/monitoring.html
 echo " - set websocket IP  [ OK ]"
 sleep 5
+cd src/python/www
+virtualenv demo
+source demo/bin/activate
+echo " - python init       [ OK ]"
+pip install -r ../requirements.txt
+echo " - python deps       [ OK ]"
 while read SIGNAL; do
     case "$SIGNAL" in
         *RUN*)break;;
@@ -20,11 +26,5 @@ while read SIGNAL; do
 done < /tmp/demo_www_pipe
 echo " - got signal to proceed ... wait 5s ..."
 sleep 5
-cd src/python/www
-virtualenv demo
-source demo/bin/activate
-echo " - python init       [ OK ]"
-pip install -r ../requirements.txt
-echo " - python deps       [ OK ]"
 python server -h $DEMOHOST -p $DEMOPORT
 exit 0

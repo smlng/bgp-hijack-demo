@@ -6,6 +6,12 @@ BGPMON=/usr/local/bin/bgpmon
 [ ! -d "$(pwd)/src/python/bgp" ] && { echo "Missing source directory (src/python/bgp)! Run from repo root!"; exit 1; }
 echo " - BASEDIR           [ OK ]"
 sleep 5
+cd src/python/bgp
+virtualenv demo
+source demo/bin/activate
+echo " - python init       [ OK ]"
+pip install -r ../requirements.txt
+echo " - python deps       [ OK ]"
 while read SIGNAL; do
     case "$SIGNAL" in
         *RUN*)break;;
@@ -14,11 +20,5 @@ while read SIGNAL; do
 done < /tmp/demo_bgp_pipe
 echo " - got signal to proceed ... wait 5s ..."
 sleep 5
-cd src/python/bgp
-virtualenv demo
-source demo/bin/activate
-echo " - python init       [ OK ]"
-pip install -r ../requirements.txt
-echo " - python deps       [ OK ]"
 python bgpmonUpdateParser.py -j | python broadcastServer.py
 exit 0
