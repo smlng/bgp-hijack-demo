@@ -72,12 +72,6 @@
 				.attr('d', 'M0,-5L10,0L0,5')
 				.attr('fill', '#e41a1c');
 
-		// define tooltip
-		var div = d3.select("#viewer")
-			.append("div")
-			.attr("class", "tooltip")
-			.style("opacity", 0);
-
 		// selection of links
 		var path = svg.selectAll('path')
 			.data(links);
@@ -139,24 +133,6 @@
 				.attr("r", 0)
 				.style("fill", function (d) { return node_color(d) } )
 				.on("click", node_click)
-/***
-				.on("mouseover", function (d) {
-						if(d.attacker || d.displays) {
-							div.transition()
-								.duration(200)
-								.style("opacity", .75);
-							div.html(tip_text(d))
-								.style("color", "white")
-								.style("left", d.x + 5 + "px")
-								.style("top", d.y + 150 +"px");
-						}
-					})
-				.on("mouseout", function(d) {
-					div.transition()
-						.duration(500)
-						.style("opacity", 0);
-				})
-***/
 				.call(force.drag);
 			// enter links
 			path.enter().insert("path", "circle")
@@ -187,18 +163,6 @@
 
 
 			update_slider();
-		}
-
-		function tip_text(d) {
-			// get announced prefixes
-			var request = new XMLHttpRequest();
-			request.open("POST", "/demo/get", false);
-			request.send("oid=1.3.6.1.4.1.8072.2.267."+d.asn+"."+d.port);
-			if(request.readyState == 4) {
-				head = "<table cellspacing=\"4\" cellpadding=\"2\"><tr><th></th><th>network</th><th>next hop</th><th>path</th></tr><tr><td>";
-				end = "</td></tr></table>";
-				return head+(request.responseText.split("\\t").join("</td><td>")).split("\\n").join("</td></tr><tr><td>")+end;
-			}
 		}
 
 		// set arrow and its color

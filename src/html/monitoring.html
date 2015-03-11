@@ -127,14 +127,14 @@
                     tooltipDiv
                         .text(function (o) { return d.prefix; })
                         .style("color", "white")
-                        .style("left", d.x +  5 + "px")
-                        .style("top",  d.y - 50 + "px");
+                        .style("left", d.x + 25 + "px")
+                        .style("top",  d.y + 75 + "px");
                 }
                 else {
                     tooltipDiv.html(tip_text(d))
                         .style("color", "white")
-                        .style("left", d.x +  5  + "px")
-                        .style("top",  d.y + 150 + "px");
+                        .style("left", d.x +  25 + "px")
+                        .style("top",  d.y + 125 + "px");
                 }
             })
             .on("mouseout", function (d) {
@@ -142,18 +142,6 @@
                     .duration(500)
                     .style("opacity", 0);
             })
-/***
-            .on("mousemove", function (d) {
-                tooltipDiv
-                .text(function (o) {
-                    if (d.prefix && d.asn == null)
-                        return d.prefix;
-                })
-                .style("color", "white")
-                .style("left", (d3.event.pageX - 93) + "px")
-                .style("top", (d3.event.pageY - 45) + "px");
-            })
-***/
             .call(force.drag)
             .transition().duration(1000)
             .attr("r", function (d) { return node_size(d) })
