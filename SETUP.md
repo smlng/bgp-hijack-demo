@@ -19,9 +19,9 @@ AS65001 ---- AS65002 ---- AS65003 ---- AS65004
 AS65000             AS65005 ---- AS65006 ---- AS65007
 ```
 
-The 7 Quagga BGP daemons run on seperate virtual/alias IP interfaces with IPs `192.168.1.1` - `192.168.1.7` and ports `11179` - `17179`. Each BGPd has its own _autonomous system_ (AS) with numbers `65001` - `65007` and an IP prefixes `160.45.111.0/26` - `160.45.177.0/26`.
+The 7 Quagga BGP daemons run on seperate virtual/alias IP interfaces with IPs `10.168.1.1` - `10.168.1.7` and ports `11179` - `17179`. Each BGPd has its own _autonomous system_ (AS) with numbers `65001` - `65007` and an IP prefixes `160.45.111.0/26` - `160.45.177.0/26`.
 
-BGPmon also uses a virtual/alias IP interfaces with IP `192.168.1.100`.  Its configuration is in `etc/bgpmon_config.txt`. Further, BGPmon requires its own AS (`AS65000`) for monitoring of its peers.
+BGPmon also uses a virtual/alias IP interfaces with IP `10.168.1.100`.  Its configuration is in `etc/bgpmon_config.txt`. Further, BGPmon requires its own AS (`AS65000`) for monitoring of its peers.
 
 ## setup
 
