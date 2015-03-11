@@ -2,7 +2,7 @@
 
 # path to bgpd binary, Debian default
 BGPD=/usr/lib/quagga/bgpd
-SCRIPT=$(readlink $0)
+SCRIPT=$(readlink -f $0)
 SCRIPTDIR=$(dirname $SCRIPT)
 # base directory, default: within repo
 # config directory
