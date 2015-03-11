@@ -10,7 +10,7 @@ mkfifo /tmp/demo_www_pipe
 echo " - create pipe       [ OK ]"
 sudo ./src/shell/create_taps.sh
 echo " - create interfaces [ OK ]"
-sudo ./src/shell/start_bgpd.sh
+sudo ./src/shell/start_bgpd.sh &
 sleep 7
 echo " - start bgp daemons [ OK ]"
 echo "RUN" > /tmp/demo_bgp_pipe
