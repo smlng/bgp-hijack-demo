@@ -11,7 +11,7 @@ while read SIGNAL; do
         *RUN*)break;;
         *)echo "signal  $SIGNAL  is unsupported" >/dev/stderr;;
     esac
-done < /tmp/demopipe
+done < /tmp/demo_bgp_pipe
 echo " - got signal to proceed ... wait 5s ..."
 sleep 5
 cd src/python/bgp
