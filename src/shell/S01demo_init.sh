@@ -13,9 +13,9 @@ echo " - create interfaces [ OK ]"
 sudo ./src/shell/start_bgpd.sh &
 sleep 7
 echo " - start bgp daemons [ OK ]"
-echo "RUN" > /tmp/demo_bgp_pipe
-sleep 1
 echo "RUN" > /tmp/demo_www_pipe
+sleep 1
+echo "RUN" > /tmp/demo_bgp_pipe
 sleep 2
 rm -rf /tmp/demo_www_pipe
 rm -rf /tmp/demo_bgp_pipe

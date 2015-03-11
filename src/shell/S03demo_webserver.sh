@@ -1,15 +1,16 @@
 #!/bin/bash
-env BASEDIR=$(pwd)
-env IPADDR=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
-env DEMOHOST="0.0.0.0"
-env DEMOPORT="8000"
-env BGPMON=/usr/local/bin/bgpmon
+BASEDIR=$(pwd)
+IPADDR=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
+DEMOHOST="0.0.0.0"
+DEMOPORT="8000"
+BGPMON=/usr/local/bin/bgpmon
+export DEMOIP=$IPADDR
 # check if directory correct
 [ ! -d "$BASEDIR/etc" ] && { echo "Missing config directory (etc)! Run from repo root!"; exit 1; }
 [ ! -d "$BASEDIR/src/python/www" ] && { echo "Missing source directory (src/python/www)! Run from repo root!"; exit 1; }
 [ ! -d "$BASEDIR/src/html" ] && { echo "Missing source directory (src/html)! Run from repo root!"; exit 1; }
 echo " - BASEDIR           [ OK ]"
-sed -e "s/ws:\/\/.*:5002/ws:\/\/$IPADDR:5002/g" -i '' $BASEDIR/src/html/monitoring.html
+sed -e "s/ws:\/\/.*:5002/ws:\/\/$DEMOIP:5002/g" -i '' $BASEDIR/src/html/monitoring.html
 echo " - set websocket IP  [ OK ]"
 sleep 5
 cd $BASEDIR/src/python/www
