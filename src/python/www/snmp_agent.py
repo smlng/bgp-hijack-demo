@@ -23,7 +23,7 @@ def bulk(oid):
 				errorIndex and varBinds[-1][int(errorIndex)-1] or '?')
 			)
 		else:
-			file  = open('../../html/controller/data.csv', "w")
+			file  = open('../../html/data.csv', "w")
 			writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 			writer.writerow(["OID","Value"])	
 
@@ -49,7 +49,7 @@ def get(oid):
 				errorIndex and varBinds[int(errorIndex)-1] or '?')
 			)
 		else:
-			file  = open('../../html/controller/data.csv', "w")
+			file  = open('../../html/data.csv', "w")
 			writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 			writer.writerow(["OID","Value"])	
 
@@ -93,7 +93,7 @@ def set(oid, value):
 				errorIndex and varBinds[int(errorIndex)-1] or '?')
 			)
 		else:
-			file  = open('../../html/controller/data.csv', "w")
+			file  = open('../../html/data.csv', "w")
 			writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 			writer.writerow(["OID","Value"])	
 
@@ -121,7 +121,7 @@ def walk(oid):
 				errorIndex and varBinds[int(errorIndex)-1] or '?')
 			)
 		else:
-			file  = open('../../html/controller/data.csv', "w")
+			file  = open('../../html/data.csv', "w")
 			writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 			writer.writerow(["OID","Value"])	
 	
