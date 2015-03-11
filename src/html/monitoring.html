@@ -127,14 +127,14 @@
                     tooltipDiv
                         .text(function (o) { return d.prefix; })
                         .style("color", "white")
-                        .style("left", (d3.event.pageX - 93) + "px")
-                        .style("top", (d3.event.pageY - 45) + "px");
+                        .style("left", d.x +  5 + "px")
+                        .style("top",  d.y - 50 + "px");
                 }
                 else {
                     tooltipDiv.html(tip_text(d))
                         .style("color", "white")
-                        .style("left", d.x + 5 + "px")
-                        .style("top", d.y + 150 +"px");
+                        .style("left", d.x +  5  + "px")
+                        .style("top",  d.y + 150 + "px");
                 }
             })
             .on("mouseout", function (d) {
