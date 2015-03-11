@@ -66,13 +66,29 @@ var rpkiWidget = require("sdk/widget").Widget({
   panel: rpkiPanel
 });
 
-tabs.on('ready', updateData);
+//tabs.on('ready', updateData);
 //tabs.on('activate', updateData);
+tabs.on('ready', function(tab) {
+  var worker = tab.attach({
+    contentScript: 'self.port.emit("html", document.body.innerHTML);'
+  });
+  worker.port.on("html", function(message) {
+    console.log(message)
+    if (hijack(message)) {
+        console.log("with peeroskop meta tag");
+    }
+    else {
+        console.log("w/o peeroskop meta tag");
+        updateData(tab);
+    }
+  })
+});
 tabs.on('activate', function(tab) {
   var worker = tab.attach({
     contentScript: 'self.port.emit("html", document.body.innerHTML);'
   });
   worker.port.on("html", function(message) {
+    console.log(message)
     if (hijack(message)) {
         console.log("with peeroskop meta tag");
     }
