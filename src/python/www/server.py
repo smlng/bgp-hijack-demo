@@ -50,7 +50,7 @@ def do_bulk_oid():
 #snmp get
 @route('/')
 def index():
-	redirect("/demo.html")
+	redirect("/monitoring.html")
 
 @route('/get')
 def get_oid():
@@ -114,7 +114,7 @@ def do_set_oid():
 	regex="(.+\.\d+)\.(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s\=\sINTEGER\:\s(\d{1,2})"
 	result = re.match(regex, output[0]) 
 
-	file  = open('../../html/controller/data.csv', "w")
+	file  = open('../../html/data.csv', "w")
 	writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 	writer.writerow(["OID","Value"])
 	writer.writerow([result.group(1),result.group(2)+"/"+result.group(3)])
@@ -147,7 +147,7 @@ def get_mrt():
 @route('/mrt', method='POST')
 def parse_mrt():
 	parser.string_to_json(request.forms.get('mrt'))
-	redirect("/demo.html")
+	redirect("/monitoring.html")
 
 @route('/attacker')
 def get_attacker():
