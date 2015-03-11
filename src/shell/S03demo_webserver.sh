@@ -9,7 +9,7 @@ BGPMON=/usr/local/bin/bgpmon
 [ ! -d "$(pwd)/src/python/www" ] && { echo "Missing source directory (src/python/www)! Run from repo root!"; exit 1; }
 [ ! -d "$(pwd)/src/html" ] && { echo "Missing source directory (src/html)! Run from repo root!"; exit 1; }
 echo " - BASEDIR           [ OK ]"
-env WSIP=$IPADDR sed -e "s/ws:\/\/.*:5002/ws:\/\/$WSIP:5002/g" -i '' ./src/html/monitoring.html
+env WSIP=$IPADDR sed -e "s/ws:\/\/.*:5002/ws:\/\/$WSIP:5002/g" -i '' src/html/monitoring.html
 echo " - set websocket IP  [ OK ]"
 sleep 5
 while read SIGNAL; do
@@ -17,7 +17,9 @@ while read SIGNAL; do
         *RUN*)break;;
         *)echo "signal  $SIGNAL  is unsupported" >/dev/stderr;;
     esac
-done < /tmp/demopipe
+done < /tmp/demo_www_pipe
+echo " - got signal to proceed ... wait 5s ..."
+sleep 5
 cd src/python/www
 virtualenv demo
 source demo/bin/activate
