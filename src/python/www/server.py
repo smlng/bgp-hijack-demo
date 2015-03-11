@@ -215,6 +215,7 @@ def demo_graph():
 			print res[1]
 			node = dict()
 			node['asn'] = asn
+			node['port'] = asn_port[asn]
 			node['prefixes'] = []
 			node['path'] = []
 			node['reaches'] = []
