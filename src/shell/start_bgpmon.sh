@@ -3,11 +3,11 @@
 # path to bgpd binary, Debian default
 BGPMON=/usr/local/bin/bgpmon
 SCRIPT=$(readlink $0)
-BASEDIR=$(dirname $SCRIPT)
+SCRIPTDIR=$(dirname $SCRIPT)
 # base directory, default: within repo
 # config directory
-CDIR="$BASEDIR/../../etc"
-LDIR="$BASEDIR/../../log"
+CDIR="$SCRIPTDIR/../../etc"
+LDIR="$SCRIPTDIR/../../log"
 
 mkdir -p $LDIR
 # start daemon

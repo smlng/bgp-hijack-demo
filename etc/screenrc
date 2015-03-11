@@ -1,0 +1,13 @@
+startup_message	off
+defutf8		on
+hardcopydir	$HOME
+defscrollback	10000
+defmonitor	off
+hardstatus 	alwayslastline
+hardstatus 	string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+### TABS ###
+screen -t htop htop
+screen -t bgpmon ./src/shell/S01demo_init.sh
+screen -t bgpupdate ./src/shell/S02demo_bgpupdate.sh
+screen -t webserver ./src/shell/S03demo_webserver.sh
+screen -t shell
