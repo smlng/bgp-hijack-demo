@@ -12,3 +12,4 @@ LDIR="$SCRIPTDIR/../../log"
 mkdir -p $LDIR
 # start daemon
 $BGPMON -c $CDIR/bgpmon_config.txt 2>&1 > $LDIR/bgpmon &
+exit 0

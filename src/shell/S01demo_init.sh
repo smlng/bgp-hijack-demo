@@ -8,7 +8,7 @@ echo " - BASEDIR           [ OK ]"
 mkfifo /tmp/demo_bgp_pipe
 mkfifo /tmp/demo_www_pipe
 echo " - create pipe       [ OK ]"
-sudo ./src/shell/create_tabs.sh
+sudo ./src/shell/create_taps.sh
 echo " - create interfaces [ OK ]"
 sudo ./src/shell/start_bgpd.sh
 sleep 7

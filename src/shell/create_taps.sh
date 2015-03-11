@@ -20,3 +20,4 @@ ifconfig tap7 up 192.168.1.7 netmask 255.255.255.255
 ## network interface for bgpmon
 openvpn --mktun --dev tap100
 ifconfig tap100 up 192.168.1.100 netmask 255.255.255.255
+exit 0
