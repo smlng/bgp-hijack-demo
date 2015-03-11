@@ -139,6 +139,7 @@
 				.attr("r", 0)
 				.style("fill", function (d) { return node_color(d) } )
 				.on("click", node_click)
+/***
 				.on("mouseover", function (d) {
 						if(d.attacker || d.displays) {
 							div.transition()
@@ -155,6 +156,7 @@
 						.duration(500)
 						.style("opacity", 0);
 				})
+***/
 				.call(force.drag);
 			// enter links
 			path.enter().insert("path", "circle")
