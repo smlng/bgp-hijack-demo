@@ -66,70 +66,35 @@ var rpkiWidget = require("sdk/widget").Widget({
   panel: rpkiPanel
 });
 
-//tabs.on('ready', updateData);
-//tabs.on('activate', updateData);
-tabs.on('ready', function(tab) {
-  var worker = tab.attach({
-    contentScript: 'self.postMessage("html", document.body.innerHTML);'
-  });
-  worker.onMessage("html", function(message) {
-    console.log(message)
-    if (hijack(message)) {
-        console.log("with peeroskop meta tag");
-    }
-    else {
-        console.log("w/o peeroskop meta tag");
-        updateData(tab);
-    }
-  })
-});
-tabs.on('activate', function(tab) {
-  var worker = tab.attach({
-    contentScript: 'self.postMessage("html", document.body.innerHTML);'
-  });
-  worker.onMessage("html", function(message) {
-    console.log(message)
-    if (hijack(message)) {
-        console.log("with peeroskop meta tag");
-    }
-    else {
-        console.log("w/o peeroskop meta tag");
-        updateData(tab);
-    }
-  })
-});
-
-function hijack(content) {
-    var html = HTMLParser(content);
-    var metas = html.getElementsByTagName('meta');
-    for (i=0; i<metas.length; i++) { 
-        if (metas[i].getAttribute("property") == "peeroskop") {
-            hack = metas[i].getAttribute("content");
-            var info = new Object();
-            info["ip"] = "62.138.116.3";
-            info["prefix"] = "62.138.0.0/16";
-            if (hack == "on") {
-                info["asName"] = "Peeroskop";
-                info["asn"] = "AS65005";
-                info["validity"] = "0";
-                
-            }
-            else {
-                info["asName"] = "TGOS-ASN1";
-                info["asn"] = "AS61157";
-                info["validity"] = "1";
-            }
-            updateWidgetIcon(info["validity"])
-            rpkiPanel.port.emit("panelContentReady", info);
-            return true; 
-        } 
-    } 
-    return false;
-}
+tabs.on('ready', updateData);
+tabs.on('activate', updateData);
 
 // The main function which updates the icon and the information in the panel
 function updateData(tab) {
     var host = getHost();
+    var ipaddr = getIPonly(host);
+    if ((ipaddr.indexOf("192.168.") > -1) || (ipaddr.indexOf("10.168.") > -1 )) {
+        console.log("URL resolves to possilbe Peeroskop")
+        var info = new Object();
+        info["ip"] = ipaddr;
+        info["prefix"] = "N/A";
+        if (ipaddr.indexOf("192.168.") > -1) {
+            info["prefix"] = "192.168.0.0/16";
+        }
+        if (ipaddr.indexOf("10.168.") > -1) {
+            info["prefix"] = "10.0.0.0/8";
+        }
+        if (host.indexOf("spiegel.de") > -1) {
+            info["ip"] = "62.138.116.3";
+            info["prefix"] = "62.138.0.0/16";  
+        }
+        info["asName"] = "AS of Peeroskop Attacker";
+        info["asn"] = "65005";
+        info["validity"] = "0";
+        updateWidgetIcon(info["validity"]);
+        updatePanelContent(info);
+        return
+    }
     var info = rpkiData[host];
     var now = new Date();
     if(info == null || (now - info["timestamp"])>getCacheTimeToLive()) {
@@ -176,6 +141,19 @@ function getIp(host) {
     }
     var ip = ipArray[0];
     getAsData(ip, host);
+}
+
+function getIPonly(host) {
+    if(host==null) {
+        return;
+    }
+    var record = dns.resolve(host, true);
+    var ipArray = new Array();
+    while (record.hasMore())
+    {
+        ipArray.push(record.getNextAddrAsString());
+    }
+    return ipArray[0];  
 }
 
 /****************************************************************************

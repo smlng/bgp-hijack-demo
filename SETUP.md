@@ -25,7 +25,21 @@ BGPmon also uses a virtual/alias IP interfaces with IP `10.168.1.100`.  Its conf
 
 ## setup
 
-We recommend using multiple terminal/shell sessions to start and monitor the demo, e.g., using `screen` or `tmux`. _Note_: all commands are run from the root directory of the demo repository.
+We recommend using multiple terminal/shell sessions to start and monitor the demo, e.g., using `screen` or `tmux`. _Note_: all commands are run from the root directory of the demo repository. For ease of deployment we provide a screen config to start the demo, run:
+
+    $ screen -c etc/screenrc
+
+_Note_: navigate through all tabs using `ctrl+a+[0-4]`, i.e., goto the first screen tab with `ctrl+a+1` - sudo requires your password. The following tabs are created:
+
+- 0: htop 
+- 1: bgpmon daemon foreground, creates also taps and start quagga bgpd
+- 2: bgp update parser and websocket broadcaster
+- 3: webserver
+- 4: empty shell/bash
+
+-----
+
+Or start the demo manually, as follows:
 
 First, create separate (TAP) interfaces with distinct IP addresses for BGPd and BGPmon:
     
