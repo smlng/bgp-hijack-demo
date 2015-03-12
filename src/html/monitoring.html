@@ -126,10 +126,10 @@
 
         node.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", function(d) { return (d.asn == "65005") ? "-20px": "-12px"; })
-            .attr("y", function(d) { return (d.asn == "65005") ? "-20px": "-12px"; })
-            .attr("width", function(d) { return (d.asn == "65005") ? "40px": "24px"; })
-            .attr("height", function(d) { return (d.asn == "65005") ? "40px": "24px"; });
+            .attr("x", function(d) { return (d.asn == "65005") ? "-20px": "-10px"; })
+            .attr("y", function(d) { return (d.asn == "65005") ? "-20px": "-10px"; })
+            .attr("width", function(d) { return (d.asn == "65005") ? "40px": "20px"; })
+            .attr("height", function(d) { return (d.asn == "65005") ? "40px": "20px"; });
 
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
@@ -169,7 +169,11 @@
             .style("opacity", 1);
         text.exit().remove();
         text
-            .text(function(d) { return d.asn ? d.asn : "" });
+            .text(function(d) { 
+                if (d.asn && (d.asn != "65005"))
+                    return d.asn;
+                return "";
+            });
     }
 /**
     function update() {
