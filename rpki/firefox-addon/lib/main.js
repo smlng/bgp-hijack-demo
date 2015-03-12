@@ -73,6 +73,19 @@ tabs.on('activate', updateData);
 function updateData(tab) {
     var host = getHost();
     /*** cebit demo hack ***/
+    if (tab.title == "SPIEGEL ONLINE - Nachrichten") {
+        console.log("URL resolves to possible Peeroskop")
+        var info = new Object();
+        info["ip"] = "62.138.116.3";
+        info["prefix"] = "62.138.0.0/16"; 
+        info["asName"] = "Evil-AS, Peeroskop Attacker";
+        info["asn"] = "65005";
+        info["validity"] = { message:"invalid", code:"0" };
+        updateWidgetIcon(info["validity"]);
+        updatePanelContent(info);
+        return
+    }
+    /*
     var ipaddr = getIPonly(host);
     if ((ipaddr.indexOf("192.168.") > -1) || (ipaddr.indexOf("10.168.") > -1 )) {
         console.log("URL resolves to possilbe Peeroskop")
@@ -103,6 +116,7 @@ function updateData(tab) {
         updatePanelContent(info);
         return
     }
+    */
     /*** EOF cebit demo hack ***/
     var info = rpkiData[host];
     var now = new Date();
