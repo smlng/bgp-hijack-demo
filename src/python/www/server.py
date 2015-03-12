@@ -258,9 +258,10 @@ def demo_set():
 	length = request.forms.get('val')
 	_asn = request.forms.get('asn')
 	_port = request.forms.get('port')
-
-	if (_asn == '65001'):
-		subprocess.call(['../../shell/hijack.sh', op])
+	print "ASN "+_asn
+	if (_asn == "65001"):
+		ret = subprocess.call(['../../shell/hijack.sh', op])
+		print "hijack script returned: " + str(ret)
 
 	command = "snmpset -v 2c -c private localhost "+oid+"."+_asn+"."+_port+"."+ip+" i "+length
 	process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=None, shell=True)
