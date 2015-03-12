@@ -119,17 +119,17 @@
             .attr("class", "node")            
             .call(force.drag)
             .transition().duration(1000);
-            
+
         node.append("circle")
             .attr("r", function (d) { return node_size(d) })
             .style("fill", function (d) { return node_color(d) });
 
-        node.enter().append("image")
+        node.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", "-12px")
-            .attr("y", "-12px")
-            .attr("width", "24px")
-            .attr("height", "24px");
+            .attr("x", function(d) { return (d.asn == "65005") ? "-20px": "-12px"; })
+            .attr("y", function(d) { return (d.asn == "65005") ? "-20px": "-12px"; })
+            .attr("width", function(d) { return (d.asn == "65005") ? "40px": "24px"; })
+            .attr("height", function(d) { return (d.asn == "65005") ? "40px": "24px"; });
 
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
@@ -376,7 +376,11 @@
     }
     // set node color
     function node_color(d) {
-        if (d.asn != null) return "#4daf4a";
+        if (d.asn != null) {
+            if (d.asn == "65005")
+                return "#e41a1c"
+            return "#4daf4a";
+        }
         return "#377eb8";
     }
     function node_icon(d) {
