@@ -90,7 +90,7 @@ function updateData(tab) {
         }
         info["asName"] = "AS of Peeroskop Attacker";
         info["asn"] = "65005";
-        info["validity"] = "0";
+        info["validity"] = { message:"invalid", code:"0" };
         updateWidgetIcon(info["validity"]);
         updatePanelContent(info);
         return
