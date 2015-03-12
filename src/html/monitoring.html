@@ -303,9 +303,12 @@
         return "#377eb8";
     }
     function node_icon(d) {
-        if (d.asn == null && d.prefix == "160.45.111.0/26") {
+        if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
+            console.log("node with zeit.de prefix")
             return "zeit.png"
         }
+        console.log("some other node")
+        return ""
     }
     // set link length by src-dst node type
     function node_link_distance(d) {
