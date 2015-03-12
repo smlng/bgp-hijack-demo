@@ -98,7 +98,7 @@
         
         update();
     };
-
+/*
     function update() {
         force
             .nodes(nodes)
@@ -115,7 +115,7 @@
             .style("opacity", 1);
 
         node = node.data(nodes);
-        nodeEnter = node.enter().append("circle")
+        node.enter().append("circle")
         node.exit().remove();
         node
             .attr("class", "node")
@@ -147,12 +147,85 @@
             .attr("r", function (d) { return node_size(d) })
             .style("fill", function (d) { return node_color(d) });
 
-        nodeEnter.append("image")
+        node.enter().append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
             .attr("x", "-12px")
             .attr("y", "-12px")
             .attr("width", "24px")
             .attr("height", "24px");
+
+        text = text.data(nodes);
+        text.enter().append("text")
+            .style("fill","white")
+            .attr("class", "label")
+            .attr("x", "-2.5ex")
+            .attr("y", ".31em")
+            .style("opacity", 0)
+            .transition().duration(2000)
+            .style("opacity", 1);
+        text.exit().remove();
+        text
+            .text(function(d) { return d.asn ? d.asn : "" });
+    }
+*/
+    function update() {
+        force
+            .nodes(nodes)
+            .links(links)
+            .start();
+
+        var link = svg.selectAll(".link")
+                .data(links);
+            .enter().append("line")
+                .attr("class", "link")
+                .style("stroke-width", function(d) { return node_link_width(d) })
+                .style("opacity", 0)
+                .transition().duration(2000)
+                .style("opacity", 1);
+        link.exit().remove();
+
+        var node = svg.selectAll(".node")
+                .data(nodes)
+            .enter().append("g")
+                .attr("class", "node")
+                .call(force.drag);
+
+        node.append("circle")
+            .attr("r", function (d) { return node_size(d) })
+            .style("fill", function (d) { return node_color(d) });
+
+        node.append("image")
+            .attr("xlink:href", function(d) { return node_icon(d); })
+            .attr("x", "-12px")
+            .attr("y", "-12px")
+            .attr("width", "24px")
+            .attr("height", "24px");
+
+        node.on("mouseover", function (d) {
+                tooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", .75);
+                if (d.prefix && d.asn == null) {
+                    tooltipDiv
+                        .text(function (o) { return d.prefix; })
+                        .style("color", "white")
+                        .style("left", d.x + 25 + "px")
+                        .style("top",  d.y + 75 + "px");
+                }
+                else {
+                    tooltipDiv.html(tip_text(d))
+                        .style("color", "white")
+                        .style("left", d.x +  25 + "px")
+                        .style("top",  d.y + 125 + "px");
+                }
+            });
+        node.on("mouseout", function (d) {
+                tooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+
+        node.exit().remove();
 
         text = text.data(nodes);
         text.enter().append("text")
@@ -306,6 +379,10 @@
         if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
             console.log("node with zeit.de prefix")
             return "zeit.png"
+        }
+        if ((d.asn != null) && (d.asn == "65005")) {
+            console.log("node with attacker asn")
+            return "devil.png"
         }
         console.log("some other node")
         return ""
