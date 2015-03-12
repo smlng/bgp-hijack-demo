@@ -128,10 +128,10 @@
 
         node.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", function (d) { return (d.asn == "65005") ? "-30px": "-20px"; })
-            .attr("y", function (d) { return (d.asn == "65005") ? "-30px": "-20px"; })
-            .attr("width", function (d) { return (d.asn == "65005") ? "60px": "40px"; })
-            .attr("height", function (d) { return (d.asn == "65005") ? "60px": "40px"; });
+            .attr("x", function (d) { return (d.asn == "65005") ? "-50px": "-20px"; })
+            .attr("y", function (d) { return (d.asn == "65005") ? "-50px": "-20px"; })
+            .attr("width", function (d) { return (d.asn == "65005") ? "100px": "40px"; })
+            .attr("height", function (d) { return (d.asn == "65005") ? "100px": "40px"; });
 
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
