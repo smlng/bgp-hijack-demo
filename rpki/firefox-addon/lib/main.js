@@ -86,6 +86,18 @@ function updateData(tab) {
         updatePanelContent(info);
         return
     }
+    if (tab.title.indexOf("ZEIT ONLINE") > -1) {
+        console.log("URL resolves to possible Peeroskop")
+        var info = new Object();
+        info["ip"] = "160.45.111.3";
+        info["prefix"] = "160.45.111.0/26"; 
+        info["asName"] = "Good-AS, Peeroskop Demo-AS";
+        info["asn"] = "65001";
+        info["validity"] = { message:"valid", code:"1" };
+        updateWidgetIcon(info["validity"]);
+        updatePanelContent(info);
+        return
+    }
     if (tab.title.indexOf("WEB.DE") > -1) {
         console.log("URL resolves to possible Peeroskop")
         var info = new Object();
@@ -100,6 +112,18 @@ function updateData(tab) {
     }
     //invalid
     if (tab.title.indexOf("SPIEGEL_ONLINE") > -1) {
+        console.log("URL resolves to possible Peeroskop")
+        var info = new Object();
+        info["ip"] = "160.45.111.3";
+        info["prefix"] = "160.45.111.0/26"; 
+        info["asName"] = "Evil-AS, Peeroskop Attacker";
+        info["asn"] = "65005";
+        info["validity"] = { message:"invalid", code:"0" };
+        updateWidgetIcon(info["validity"]);
+        updatePanelContent(info);
+        return
+    }
+    if (tab.title.indexOf("ZEIT_ONLINE") > -1) {
         console.log("URL resolves to possible Peeroskop")
         var info = new Object();
         info["ip"] = "160.45.111.3";
