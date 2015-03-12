@@ -1,6 +1,6 @@
 #!/bin/bash
 WWWPATH="/var/www"
-WEBSITES=(spiegel.de web.de)
+WEBSITES=(spiegel.de web.de zeit.de)
 
 for w in ${WEBSITES[@]}; do
 	if [ "$1" == "add" ] ; then
