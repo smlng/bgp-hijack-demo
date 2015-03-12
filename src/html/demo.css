@@ -29,11 +29,6 @@ th, td {
     border-left-style: none;
 }
 
-circle {
-    stroke: #fff;
-    stroke-width: 1.5px;
-}
-
 path.link {
     fill: none;
     stroke: #fff;

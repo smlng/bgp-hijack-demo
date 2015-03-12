@@ -52,7 +52,7 @@
         height = window.innerHeight-110;
     
     var force = d3.layout.force()
-        .charge(function (d) { return node_charge(d)} )
+        .charge(function (d) { return d.asn ? -1500 : -300 } )
         .linkDistance(function (d) { return node_link_distance(d) } )
         .size([width, height])
         .on("tick", tick);
@@ -120,16 +120,18 @@
             .call(force.drag)
             .transition().duration(1000);
 
-        node.append("circle")
-            .attr("r", function (d) { return node_size(d) })
-            .style("fill", function (d) { return node_color(d) });
 
         node.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", function(d) { return (d.asn == "65005") ? "-20px": "-10px"; })
-            .attr("y", function(d) { return (d.asn == "65005") ? "-20px": "-10px"; })
-            .attr("width", function(d) { return (d.asn == "65005") ? "40px": "20px"; })
-            .attr("height", function(d) { return (d.asn == "65005") ? "40px": "20px"; });
+            .attr("x", function (d) { return (d.asn == "65005") ? "-24px": "-12px"; })
+            .attr("y", function (d) { return (d.asn == "65005") ? "-24px": "-12px"; })
+            .attr("width", function (d) { return (d.asn == "65005") ? "48px": "24px"; })
+            .attr("height", function (d) { return (d.asn == "65005") ? "48px": "24px"; });
+        node.append("circle")
+                .attr("r", function (d) { return d.asn ? 36 : 12 ; })
+                .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
+                .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
+                .style("fill", function (d) { return node_color(d) });
 
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
@@ -157,23 +159,6 @@
 
 
         node.exit().remove();
-
-        text = text.data(nodes);
-        text.enter().append("text")
-            .style("fill","white")
-            .attr("class", "label")
-            .attr("x", "-2.5ex")
-            .attr("y", ".31em")
-            .style("opacity", 0)
-            .transition().duration(2000)
-            .style("opacity", 1);
-        text.exit().remove();
-        text
-            .text(function(d) { 
-                if (d.asn && (d.asn != "65005"))
-                    return d.asn;
-                return "";
-            });
     }
 /**
     function update() {
@@ -365,25 +350,10 @@
         }
     }
 
-    // set charge according to node
-    function node_charge(d) {
-        if (d.asn != null)
-            return -1500;
-        else
-            return -300;
-    }
-    // set node size
-    function node_size(d) {
-        // node of attacker
-        if (d.asn != null) return 36;
-        return 12;
-    }
     // set node color
     function node_color(d) {
         if (d.asn != null) {
-            if (d.asn == "65005")
-                return "#e41a1c"
-            return "#4daf4a";
+            return "#fff";
         }
         return "#377eb8";
     }
@@ -392,10 +362,8 @@
             console.log("node with zeit.de prefix")
             return "zeit.png"
         }
-        if ((d.asn != null) && (d.asn == "65005")) {
-            console.log("node with attacker asn")
-            return "devil.png"
-        }
+        if (d.asn != null)
+            return d.icon
         console.log("some other node")
         return ""
     }

@@ -176,6 +176,13 @@ def demo_graph():
 				 "65005":"2005",
 				 "65006":"2006",
 				 "65007":"2007"}
+	asn_icon = { "65001":"gaertner.png", 
+				 "65002":"vodafone.png",
+				 "65003":"o2.png",
+				 "65004":"telekom.png",
+				 "65005":"devil.png",
+				 "65006":"kabelde.png",
+				 "65007":"att.png"}
 	response = dict()
 	response['nodes'] = []
 	response['links'] = [
@@ -216,6 +223,7 @@ def demo_graph():
 			node = dict()
 			node['asn'] = asn
 			node['port'] = asn_port[asn]
+			node['icon'] = asn_icon[asn]
 			node['prefixes'] = []
 			node['path'] = []
 			node['reaches'] = []
