@@ -258,8 +258,8 @@ def demo_set():
 	length = request.forms.get('val')
 	_asn = request.forms.get('asn')
 	_port = request.forms.get('port')
-	print "ASN "+_asn
-	if (_asn == "65001"):
+	print "ASN "+_asn+", IP "+ip
+	if (ip == "160.45.111.0"):
 		ret = subprocess.call(['../../shell/hijack.sh', op])
 		print "hijack script returned: " + str(ret)
 
