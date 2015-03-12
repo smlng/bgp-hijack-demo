@@ -115,7 +115,7 @@
             .style("opacity", 1);
 
         node = node.data(nodes);
-        node.enter().append("circle")
+        nodeEnter = node.enter().append("circle")
         node.exit().remove();
         node
             .attr("class", "node")
@@ -146,6 +146,13 @@
             .transition().duration(1000)
             .attr("r", function (d) { return node_size(d) })
             .style("fill", function (d) { return node_color(d) });
+
+        nodeEnter.append("image")
+            .attr("xlink:href", function(d) { return node_icon(d); })
+            .attr("x", "-12px")
+            .attr("y", "-12px")
+            .attr("width", "24px")
+            .attr("height", "24px");
 
         text = text.data(nodes);
         text.enter().append("text")
@@ -294,6 +301,11 @@
     function node_color(d) {
         if (d.asn != null) return "#4daf4a";
         return "#377eb8";
+    }
+    function node_icon(d) {
+        if (d.asn == null && d.prefix == "160.45.111.0/26") {
+            return "zeit.png"
+        }
     }
     // set link length by src-dst node type
     function node_link_distance(d) {

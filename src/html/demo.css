@@ -1,5 +1,5 @@
 body {
-    background-color: #555;
+    background-color: #999;
 }
 
 div.tooltip
@@ -8,7 +8,7 @@ div.tooltip
     text-align: center;
     vertical-align: middle;
     padding: 4px;
-    font: 20px sans-serif;
+    font: 16px sans-serif;
     background: black;
     border: 2px solid white;
     border-radius: 4px;
@@ -49,7 +49,7 @@ path.hijack {
 }
 
 text {
-    font-size: 20px;
+    font-size: 16px;
     font-family: sans-serif;
     font-weight: normal;
     pointer-events: none;
@@ -58,11 +58,11 @@ text {
 }
 
 text.slider-text {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .field {
-    font-size:20px;
+    font-size:16px;
     font-family:Courier New;
     font-weight:normal;
     -moz-border-radius:4px;
