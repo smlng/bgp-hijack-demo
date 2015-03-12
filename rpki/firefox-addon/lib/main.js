@@ -72,29 +72,38 @@ tabs.on('activate', updateData);
 // The main function which updates the icon and the information in the panel
 function updateData(tab) {
     var host = getHost();
+    /*** cebit demo hack ***/
     var ipaddr = getIPonly(host);
     if ((ipaddr.indexOf("192.168.") > -1) || (ipaddr.indexOf("10.168.") > -1 )) {
         console.log("URL resolves to possilbe Peeroskop")
         var info = new Object();
         info["ip"] = ipaddr;
         info["prefix"] = "N/A";
+        // any private IP address is invalid
         if (ipaddr.indexOf("192.168.") > -1) {
             info["prefix"] = "192.168.0.0/16";
         }
         if (ipaddr.indexOf("10.168.") > -1) {
             info["prefix"] = "10.0.0.0/8";
         }
+        // redirection of spiegel.des
         if (host.indexOf("spiegel.de") > -1) {
             info["ip"] = "62.138.116.3";
             info["prefix"] = "62.138.0.0/16";  
         }
-        info["asName"] = "AS of Peeroskop Attacker";
+        // redirection of facebook.com
+        if (host.indexOf("facebook") > -1) {
+            info["ip"] = "66.220.156.2";
+            info["prefix"] = "66.220.144.0/20";  
+        }
+        info["asName"] = "Evil-AS, Peeroskop Attacker";
         info["asn"] = "65005";
         info["validity"] = { message:"invalid", code:"0" };
         updateWidgetIcon(info["validity"]);
         updatePanelContent(info);
         return
     }
+    /*** EOF cebit demo hack ***/
     var info = rpkiData[host];
     var now = new Date();
     if(info == null || (now - info["timestamp"])>getCacheTimeToLive()) {
