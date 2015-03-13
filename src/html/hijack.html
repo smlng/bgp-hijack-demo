@@ -8,7 +8,7 @@
     </head>
     <body>
     <div id="header" align="center" style="height:100px; line-height:100px; background-color:#e41a1c">
-        <span style="color:#fff;font-size:80px">Prefix Hijacking</span>
+        <span style="color:#fff;font-size:80px; font-family:sans-serif;">Prefix Hijacking</span>
     </div>
     <div id="viewer" align="center">
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
@@ -135,8 +135,9 @@
 
             // enter nodes
             node = svg.selectAll(".node")
-                .data(nodes, function(d) { return d.id; });
+                .data(nodes);
             node.attr("r", function (d) { return node_size(d)});
+
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
                 .call(force.drag);
@@ -223,9 +224,15 @@
             return d.displays ? -1500 : -500;
         }
         function node_icon(d) {
-            if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
-                console.log("node with zeit.de prefix")
-                return "zeit.png"
+            if (d.asn == null) {
+                if (d.prefix == "160.45.111.0/26")) {
+                    console.log("node with zeit.de prefix")
+                    return "zeit.png"
+                }
+                if (d.prefix == "160.45.144.0/26")) {
+                    console.log("node with enduser prefix")
+                    return "user.png"
+                }
             }
             if (d.asn != null)
                 return d.icon
