@@ -139,6 +139,8 @@
 			// enter nodes
 			node = svg.selectAll(".node")
             	.data(nodes);
+            // remove nodes
+			node.exit().transition().duration(500).attr("r",0).remove();
         	node.enter().append("g")
             	.attr("class", "node")            
             	.call(force.drag)
@@ -153,10 +155,10 @@
 				.attr("r", function (d) { return node_size(d)});
 			node.append("image")
             	.attr("xlink:href", function(d) { return node_icon(d); })
-            	.attr("x", function (d) { return (d.asn == "65005") ? "-50px": "-16px"; })
-            	.attr("y", function (d) { return (d.asn == "65005") ? "-50px": "-16px"; })
-            	.attr("width", function (d) { return (d.asn == "65005") ? "100px": "32px"; })
-            	.attr("height", function (d) { return (d.asn == "65005") ? "100px": "32px"; });
+            	.attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
+            	.attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
+            	.attr("width", function (d) { return (d.asn == "65005") ? "128px": "32px"; })
+            	.attr("height", function (d) { return (d.asn == "65005") ? "128px": "32px"; });
 			node.on("click", node_click);
 			node.on("mouseover", function (d) {
 						if(d.attacker || d.displays) {
@@ -174,8 +176,7 @@
 						.duration(500)
 						.style("opacity", 0);
 				});
-			// remove nodes
-			node.exit().transition().duration(500).attr("r",0).remove();
+
 			// update links
 			update_slider();
 		}
@@ -212,7 +213,7 @@
 			// node of single prefix
 			if (d.parent) return 12;
 			// node of target showing prefixes or not
-			return d.displays ? 36 : 24;
+			return d.displays ? 36 : 28;
 		}
 
 		function node_color(d) {
