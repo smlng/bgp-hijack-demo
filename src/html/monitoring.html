@@ -69,9 +69,8 @@
         .attr("class", "tooltip")
         .style("opacity", 0);
     
-    var path = svg.append("g").selectAll("path"),
-        node = svg.append("g").selectAll("circle"),
-        text = svg.append("g").selectAll("text");
+    var path = svg.selectAll(".link"),
+        node = svg.selectAll(".node");
 
     function initGraph() {
         var request = new XMLHttpRequest();
@@ -105,34 +104,33 @@
             .links(links)
             .start();
 
-        path = path.data(links);
-        path.exit().remove();
+        path = svg.selectAll(".link")
+            .data(links);
         path.enter().insert("line", "node")
             .attr("class", "link")
             .style("stroke-width", function(d) { return node_link_width(d) })
             .style("opacity", 0)
             .transition().duration(3000)
             .style("opacity", 1);
+        path.exit().remove();
 
-        node = node.data(nodes);
+        node = svg.selectAll(".node")
+            .data(nodes);
         node.enter().append("g")
             .attr("class", "node")            
             .call(force.drag)
             .transition().duration(1000);
-
         node.append("circle")
                 .attr("r", function (d) { return d.asn ? 36 : 12 ; })
                 .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) });
-
         node.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
             .attr("x", function (d) { return (d.asn == "65005") ? "-50px": "-16px"; })
             .attr("y", function (d) { return (d.asn == "65005") ? "-50px": "-16px"; })
             .attr("width", function (d) { return (d.asn == "65005") ? "100px": "32px"; })
             .attr("height", function (d) { return (d.asn == "65005") ? "100px": "32px"; });
-
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
                     .duration(200)
@@ -156,84 +154,9 @@
                     .duration(500)
                     .style("opacity", 0);
             });
-
-
         node.exit().remove();
     }
-/**
-    function update() {
-        force
-            .nodes(nodes)
-            .links(links)
-            .start();
 
-        var link = svg.selectAll(".link")
-                .data(links);
-            .enter().append("line")
-                .attr("class", "link")
-                .style("stroke-width", function(d) { return node_link_width(d) })
-                .style("opacity", 0)
-                .transition().duration(2000)
-                .style("opacity", 1);
-        link.exit().remove();
-
-        var node = svg.selectAll(".node")
-                .data(nodes)
-            .enter().append("g")
-                .attr("class", "node")
-                .call(force.drag);
-
-        node.append("circle")
-            .attr("r", function (d) { return node_size(d) })
-            .style("fill", function (d) { return node_color(d) });
-
-        node.append("image")
-            .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", "-12px")
-            .attr("y", "-12px")
-            .attr("width", "24px")
-            .attr("height", "24px");
-
-        node.on("mouseover", function (d) {
-                tooltipDiv.transition()
-                    .duration(200)
-                    .style("opacity", .75);
-                if (d.prefix && d.asn == null) {
-                    tooltipDiv
-                        .text(function (o) { return d.prefix; })
-                        .style("color", "white")
-                        .style("left", d.x + 25 + "px")
-                        .style("top",  d.y + 75 + "px");
-                }
-                else {
-                    tooltipDiv.html(tip_text(d))
-                        .style("color", "white")
-                        .style("left", d.x +  25 + "px")
-                        .style("top",  d.y + 125 + "px");
-                }
-            });
-        node.on("mouseout", function (d) {
-                tooltipDiv.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
-
-        node.exit().remove();
-
-        text = text.data(nodes);
-        text.enter().append("text")
-            .style("fill","white")
-            .attr("class", "label")
-            .attr("x", "-2.5ex")
-            .attr("y", ".31em")
-            .style("opacity", 0)
-            .transition().duration(2000)
-            .style("opacity", 1);
-        text.exit().remove();
-        text
-            .text(function(d) { return d.asn ? d.asn : "" });
-    }
-**/
     function newData(json) {
         // get the updated node
         var updateNode = json.nodes[0];
@@ -334,8 +257,6 @@
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
-
-        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     }
 
     function tip_text(d) {

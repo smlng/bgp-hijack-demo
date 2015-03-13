@@ -20,22 +20,39 @@ for details and the original post.
 
 On Debian/Ubuntu the following packages can be installed via apt-get or aptitude:
 
- - libxml2-dev
- - openvpn
- - python-dev
- - python-pip
- - python-virtualenv
- - quagga
- - snmp
- - snmpd
+ - libxml2-dev          needed by python for xml parsing and bgpmon
+ - openvpn              to create tap tunnel devices
+ - nginx                a light webserver to demonstrate rpki verification
+ - python-dev           needed to build and install python libraries via pip
+ - python-pip           a package manager for python
+ - python-virtualenv    run python code in a change-root like environment
+ - quagga               BGP daemon
+ - snmp                 SNMP client stuff
+ - snmpd                SNMP server stuff
+
+ - screen               terminal/shell multiplexer
+ - vim                  the editor
+
+Install shutcut:
+
+    # apt-get install libxml2-dev openvpn nginx python-dev python-pip python-virtualenv quagga snmp snmpd screen vim
 
 On other Linux Distros search for equivalents in its package-management.
 
 At the moment `bgpmon` cannot be found in standard package repos. So you
 need to compile and install it from scratch. Its source code can be downloaded 
-[here](http://bgpmon.netsec.colostate.edu/index.php/download).
+[here](http://bgpmon.netsec.colostate.edu/download.html).
 
 Compile with `./configure && make`, optional `sudo make install`.
+
+_Note_: there is bug in bgpmon-7.4 causing segfaults when connecting to multiple bgp peers, but luckily we provide a
+patch for that. Apply the patch as follows:
+
+    $ cd /path/to/bgpmon-7.4-source
+    $ patch -p1 < /path/to/bgp-hijack-demo/src/bgpmon/createSessionStruct.patch
+    $ ./configure
+    $ make
+    $ sudo make install
 
 ## python dependencies
 
@@ -49,10 +66,10 @@ local Python environment. However, the demo depends on these packages:
 
 For ease of deployment we provide a `requirements.txt` under `src/python`, run
 
-    # cd src/python
-    # virtualenv .
-    # source bin/activate
-    # pip install -r requirements.txt
+    $ cd src/python
+    $ virtualenv .
+    $ source bin/activate
+    $ pip install -r requirements.txt
 
 ## further notes
 
