@@ -64,8 +64,8 @@
         .attr("width", width)
         .attr("height", height)
     
-    var path,
-        node;
+    var node = svg.selectAll(".node"),
+        path = svg.selectAll(".link");
 
     var tooltipDiv = d3.select("#viewer")
         .append("div")

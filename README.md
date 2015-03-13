@@ -2,7 +2,7 @@
 
 ## system requirements
 
-This software is under development and testing on Linux Debian (testing). 
+This software is under development and testing on Linux Debian 7 (testing). 
 
 We want to use latest software versions, i.e., of quagga bgpd, so we switched from
 Debian stable to testing. To do so, proceed as follows:
@@ -14,7 +14,7 @@ Debian stable to testing. To do so, proceed as follows:
     # apt-get dist-upgrade
 
 see [here](http://unix.stackexchange.com/questions/90389/how-to-upgrade-debian-stable-wheezy-to-testing-jessie)
-for details and the original post.
+for details and the original post. Or install Debian 8 (Jessie, RC1)
 
 ## install packages and software
 
