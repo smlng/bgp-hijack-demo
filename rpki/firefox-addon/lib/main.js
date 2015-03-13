@@ -74,36 +74,12 @@ function updateData(tab) {
     var host = getHost();
     /*** cebit demo hack, using tab title to switch between vaild and invalid ***/
     // valid
-    if (tab.title.indexOf("SPIEGEL ONLINE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
-        var info = new Object();
-        info["ip"] = "160.45.111.3";
-        info["prefix"] = "160.45.111.0/26"; 
-        info["asName"] = "Good-AS, Peeroskop Demo-AS";
-        info["asn"] = "65001";
-        info["validity"] = { message:"valid", code:"1" };
-        updateWidgetIcon(info["validity"]);
-        updatePanelContent(info);
-        return
-    }
     if (tab.title.indexOf("ZEIT ONLINE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
+        console.log("URL belongs to Cebit demo, VALID")
         var info = new Object();
         info["ip"] = "160.45.111.3";
         info["prefix"] = "160.45.111.0/26"; 
-        info["asName"] = "Good-AS, Peeroskop Demo-AS";
-        info["asn"] = "65001";
-        info["validity"] = { message:"valid", code:"1" };
-        updateWidgetIcon(info["validity"]);
-        updatePanelContent(info);
-        return
-    }
-    if (tab.title.indexOf("WEB.DE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
-        var info = new Object();
-        info["ip"] = "160.45.111.3";
-        info["prefix"] = "160.45.111.0/26"; 
-        info["asName"] = "Good-AS, Peeroskop Demo-AS";
+        info["asName"] = "Good-AS, gaertner datensysteme";
         info["asn"] = "65001";
         info["validity"] = { message:"valid", code:"1" };
         updateWidgetIcon(info["validity"]);
@@ -111,32 +87,8 @@ function updateData(tab) {
         return
     }
     //invalid
-    if (tab.title.indexOf("SPIEGEL_ONLINE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
-        var info = new Object();
-        info["ip"] = "160.45.111.3";
-        info["prefix"] = "160.45.111.0/26"; 
-        info["asName"] = "Evil-AS, Peeroskop Attacker";
-        info["asn"] = "65005";
-        info["validity"] = { message:"invalid", code:"0" };
-        updateWidgetIcon(info["validity"]);
-        updatePanelContent(info);
-        return
-    }
     if (tab.title.indexOf("ZEIT_ONLINE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
-        var info = new Object();
-        info["ip"] = "160.45.111.3";
-        info["prefix"] = "160.45.111.0/26"; 
-        info["asName"] = "Evil-AS, Peeroskop Attacker";
-        info["asn"] = "65005";
-        info["validity"] = { message:"invalid", code:"0" };
-        updateWidgetIcon(info["validity"]);
-        updatePanelContent(info);
-        return
-    }
-    if (tab.title.indexOf("WEB_DE") > -1) {
-        console.log("URL resolves to possible Peeroskop")
+        console.log("URL belongs to Cebit demo, INVALID")
         var info = new Object();
         info["ip"] = "160.45.111.3";
         info["prefix"] = "160.45.111.0/26"; 
