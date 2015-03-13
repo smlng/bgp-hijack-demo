@@ -120,6 +120,8 @@
             // enter links
             path = svg.selectAll("path")
                 .data(links);
+            path.attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
+                .attr("marker-end", arrow);
             path.enter().insert("path", "g")
                 .attr("opacity", 0)
                 .attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
@@ -133,7 +135,8 @@
 
             // enter nodes
             node = svg.selectAll(".node")
-                .data(nodes);
+                .data(nodes, function(d) { return d.id; });
+            node.attr("r", function (d) { return node_size(d)});
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
                 .call(force.drag);
@@ -165,7 +168,6 @@
                         .duration(500)
                         .style("opacity", 0);
                 });
-            node.attr("r", function (d) { return node_size(d)});
             // remove nodes
             node.exit().remove();
             // update links

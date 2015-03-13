@@ -104,7 +104,7 @@
             .links(links)
             .start();
 
-        path = svg.selectAll("path")
+        path = svg.selectAll(".link")
             .data(links);
         path.enter().insert("line", "g")
             .attr("class", "link")
