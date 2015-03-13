@@ -208,24 +208,25 @@
 		// set size of node according to properties
 		function node_size(d) {
 			// node of attacker
-			if (d.attacker) return 48;
+			if (d.attacker) return 36;
 			// node of single prefix
 			if (d.parent) return 12;
 			// node of target showing prefixes or not
-			return d.displays ? 36 : 12;
+			return d.displays ? 36 : 24;
 		}
 
 		function node_color(d) {
-			if (d.attacker) return "#e41a1c";
-			if (d.parent) return "#377eb8";
-			return "#4daf4a";
-		}
+        	if (d.asn != null) {
+            	return "#fff";
+        	}
+        	return "#377eb8";
+    	}
 
 		// set charge according to node
 		function node_charge(d) {
 			if (d.attacker) return -2000;
-			if (d.parent) return -350;
-			return d.displays ? -1500 : -350;
+			if (d.parent) return -300;
+			return d.displays ? -1500 : -500;
 		}
     	function node_icon(d) {
        		if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
