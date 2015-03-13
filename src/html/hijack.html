@@ -138,20 +138,19 @@
 
 			// enter nodes
 			node = svg.selectAll(".node")
-            	.data(nodes);
+            	.data(nodes)
             	.attr("r", function (d) { return node_size(d)});
-            // remove nodes
-			node.exit().transition().duration(500).attr("r",0).remove();
-        	node.enter().append("g")
+
+        	nodeEnter = node.enter().append("g")
             	.attr("class", "node")            
             	.call(force.drag)
             	.transition().duration(1000);
-            node.append("circle")
+           	nodeEnter.append("circle")
 				.style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) })
 				.attr("r", function (d) { return node_size(d)});
-			node.append("image")
+			nodeEnter.append("image")
             	.attr("xlink:href", function(d) { return node_icon(d); })
             	.attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
             	.attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
@@ -174,7 +173,8 @@
 						.duration(500)
 						.style("opacity", 0);
 				});
-
+            // remove nodes
+			node.exit().transition().duration(500).attr("r",0).remove();
 			// update links
 			update_slider();
 		}
