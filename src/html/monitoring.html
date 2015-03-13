@@ -278,19 +278,19 @@
     }
     function node_icon(d) {
         if (d.asn == null) {
-            if (d.prefix == "160.45.111.0/26")) {
-                console.log("node with zeit.de prefix")
-                return "zeit.png"
+            if (d.prefix == "160.45.111.0/26") {
+                console.log("node with zeit.de prefix");
+                return "zeit.png";
             }
-            if (d.prefix == "160.45.144.0/26")) {
-                console.log("node with enduser prefix")
-                return "user.png"
+            if (d.prefix == "160.45.144.0/26") {
+                console.log("node with enduser prefix");
+                return "user.png";
             }
         }
         if (d.asn != null)
-            return d.icon
-        console.log("some other node")
-        return ""
+            return d.icon;
+        console.log("some other node");
+        return "";
     }
     // set link length by src-dst node type
     function node_link_distance(d) {
