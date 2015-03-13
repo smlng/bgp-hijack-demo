@@ -1,436 +1,436 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Peeroskop: Prefix Hijack</title>
-		<link rel="stylesheet" type="text/css" href="d3.slider.css"/>
-		<link rel="stylesheet" type="text/css" href="demo.css"/>
-	</head>
-	<body>
-	<div id="header" align="center" style="height:100px; line-height:100px; background-color:#e41a1c">
-		<span style="color:#fff;font-size:80px">Prefix Hijacking</span>
-	</div>
-	<div id="viewer" align="center">
-	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="d3.slider.js"></script>
-	<script type="text/javascript">
+    <head>
+        <meta charset="utf-8">
+        <title>Peeroskop: Prefix Hijack</title>
+        <link rel="stylesheet" type="text/css" href="d3.slider.css"/>
+        <link rel="stylesheet" type="text/css" href="demo.css"/>
+    </head>
+    <body>
+    <div id="header" align="center" style="height:100px; line-height:100px; background-color:#e41a1c">
+        <span style="color:#fff;font-size:80px">Prefix Hijacking</span>
+    </div>
+    <div id="viewer" align="center">
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.slider.js"></script>
+    <script type="text/javascript">
 
-		var width  = window.innerWidth-50,
-			height = window.innerHeight-110,
-			padding = 100, // separation between nodes
-			maxRadius = 50;
+        var width  = window.innerWidth-50,
+            height = window.innerHeight-110,
+            padding = 100, // separation between nodes
+            maxRadius = 50;
 
-		var n = 10, // total number of nodes
-			m = 2; // number of distinct clusters
+        var n = 10, // total number of nodes
+            m = 2; // number of distinct clusters
 
-		// define attacker and target field
-		var x = d3.scale.ordinal()
-			.domain(d3.range(m))
-			.rangePoints([0, width], 1);
+        // define attacker and target field
+        var x = d3.scale.ordinal()
+            .domain(d3.range(m))
+            .rangePoints([0, width], 1);
 
-		var newSource = null,
-			newTarget = null;
+        var newSource = null,
+            newTarget = null;
 
-		// start without links
-		var nodes = [],
-			links = [];
+        // start without links
+        var nodes = [],
+            links = [];
 
-		// init force layout
-		var force = d3.layout.force()
-			.linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-100 : 20  } )
-			.size([width, height])
-			.gravity(0)
-			.charge(function (d) { return node_charge(d)} )
-			.on("tick", tick);
+        // init force layout
+        var force = d3.layout.force()
+            .linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-100 : 20  } )
+            .size([width, height])
+            .gravity(0)
+            .charge(function (d) { return node_charge(d)} )
+            .on("tick", tick);
 
-		// add svg
-		var svg = d3.select("#viewer")
-			.append("svg")
-			.attr("width", width)
-			.attr("height", height);
+        // add svg
+        var svg = d3.select("#viewer")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-		// build arrow header of links
-		svg.append('svg:defs').append('svg:marker')
-			.attr('id', 'end-arrow')
-			.attr('viewBox', '0 -5 10 10')
-			.attr('refX', 18)
-			.attr('markerWidth', 5)
-			.attr('markerHeight', 5)
-			.attr('orient', 'auto')
-			.append('svg:path')
-				.attr('d', 'M0,-5L10,0L0,5')
-				.attr('fill', '#fff');
+        // build arrow header of links
+        svg.append('svg:defs').append('svg:marker')
+            .attr('id', 'end-arrow')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 18)
+            .attr('markerWidth', 5)
+            .attr('markerHeight', 5)
+            .attr('orient', 'auto')
+            .append('svg:path')
+                .attr('d', 'M0,-5L10,0L0,5')
+                .attr('fill', '#fff');
 
-		svg.append('svg:defs').append('svg:marker')
-			.attr('id', 'end-arrow-red')
-			.attr('viewBox', '0 -5 10 10')
-			.attr('refX', 18)
-			.attr('markerWidth', 5)
-			.attr('markerHeight', 5)
-			.attr('orient', 'auto')
-			.append('svg:path')
-				.attr('d', 'M0,-5L10,0L0,5')
-				.attr('fill', '#e41a1c');
+        svg.append('svg:defs').append('svg:marker')
+            .attr('id', 'end-arrow-red')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 18)
+            .attr('markerWidth', 5)
+            .attr('markerHeight', 5)
+            .attr('orient', 'auto')
+            .append('svg:path')
+                .attr('d', 'M0,-5L10,0L0,5')
+                .attr('fill', '#e41a1c');
 
-		// define tooltip
-		var div = d3.select("#viewer")
-			.append("div")
-			.attr("class", "tooltip")
-			.style("opacity", 0);
+        // define tooltip
+        var div = d3.select("#viewer")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
-		// selection of links
-		var path = svg.selectAll('path')
-			.data(links);
+        // selection of links
+        var path = svg.selectAll('path')
+            .data(links);
 
-		// selection of nodes
-		var node = svg.selectAll(".node")
-			.data(nodes);
+        // selection of nodes
+        var node = svg.selectAll(".node")
+            .data(nodes);
 
-		// get nodes from json    graph.json
-		d3.json("graph.json", function(error, graph) {
-			graph.nodes.forEach(function(item) {
-				if(item.prefix) {
-					nodes.push({
-						asn: item.asn,
-						port: item.port,
-						icon: item.icon,
-						attacker: item.attacker ? true : false,
-						prefix: item.prefix,
-						cx: item.attacker ? x(0) : x(1),
-						cy: height / 2
-					});
-				} else {
-					nodes.push({
-						asn: item.asn,
-						port: item.port,
-						icon: item.icon,
-						attacker: item.attacker ? true : false,
-						cx: item.attacker ? x(0) : x(1),
-						cy: height / 2
-					});
-				}
-				update();
-			});
-		});
-		
-		// start force layout
-		force.start();
+        // get nodes from json    graph.json
+        d3.json("graph.json", function(error, graph) {
+            graph.nodes.forEach(function(item) {
+                if(item.prefix) {
+                    nodes.push({
+                        asn: item.asn,
+                        port: item.port,
+                        icon: item.icon,
+                        attacker: item.attacker ? true : false,
+                        prefix: item.prefix,
+                        cx: item.attacker ? x(0) : x(1),
+                        cy: height / 2
+                    });
+                } else {
+                    nodes.push({
+                        asn: item.asn,
+                        port: item.port,
+                        icon: item.icon,
+                        attacker: item.attacker ? true : false,
+                        cx: item.attacker ? x(0) : x(1),
+                        cy: height / 2
+                    });
+                }
+                update();
+            });
+        });
+        
+        // start force layout
+        force.start();
 
-		function update() {
-			// add new data to force
-			force
-				.nodes(nodes)
-				.links(links)
-				.start();
-			// enter links
-			path = svg.selectAll("path")
-				.data(links);
-			path.enter().insert("path", "g")
-				.attr("opacity", 0)
-				.attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
-				.attr("marker-end", arrow)
-				.on("click", link_click)
-				.transition()
-				.duration(500)
-				.attr("opacity", 1);
-			// remove links
-			path.exit().transition().duration(500).attr("opacity", 0).remove();
+        function update() {
+            // add new data to force
+            force
+                .nodes(nodes)
+                .links(links)
+                .start();
+            // enter links
+            path = svg.selectAll("path")
+                .data(links);
+            path.enter().insert("path", "g")
+                .attr("opacity", 0)
+                .attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
+                .attr("marker-end", arrow)
+                .on("click", link_click)
+                .transition()
+                .duration(500)
+                .attr("opacity", 1);
+            // remove links
+            path.exit().transition().duration(500).attr("opacity", 0).remove();
 
-			// enter nodes
-			node = svg.selectAll(".node")
-            	.data(nodes);
-            circle = svg.selectAll("circle");
+            // enter nodes
+            node = svg.selectAll(".node")
+                .data(nodes);
+            var circle = svg.selectAll("circle");
             circle.attr("r", function (d) { return node_size(d)});
 
-        	node.enter().append("g")
-            	.attr("class", "node")            
-            	.call(force.drag)
-            	.transition().duration(1000);
-           	node.append("circle")
-				.style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
+            var enterNode = node.enter().append("g")
+                .attr("class", "node")            
+                .call(force.drag)
+                .transition().duration(1000);
+            enterNode.append("circle")
+                .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) })
-				.attr("r", function (d) { return node_size(d)})
-			node.append("image");
-            	.attr("xlink:href", function(d) { return node_icon(d); })
-            	.attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
-            	.attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
-            	.attr("width", function (d) { return (d.asn == "65005") ? "128px": "32px"; })
-            	.attr("height", function (d) { return (d.asn == "65005") ? "128px": "32px"; });
-			node.on("click", node_click);
-			node.on("mouseover", function (d) {
-						if(d.attacker || d.displays) {
-							div.transition()
-								.duration(200)
-								.style("opacity", .75);
-							div.html(tip_text(d))
-								.style("color", "white")
-								.style("left", d.x + 5 + "px")
-								.style("top", d.y + 150 +"px");
-						}
-					});
-			node.on("mouseout", function(d) {
-					div.transition()
-						.duration(500)
-						.style("opacity", 0);
-				});
+                .attr("r", function (d) { return node_size(d)});
+            enterNode.append("image")
+                .attr("xlink:href", function(d) { return node_icon(d); })
+                .attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
+                .attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
+                .attr("width", function (d) { return (d.asn == "65005") ? "128px": "32px"; })
+                .attr("height", function (d) { return (d.asn == "65005") ? "128px": "32px"; });
+            node.on("click", node_click);
+            node.on("mouseover", function (d) {
+                        if(d.attacker || d.displays) {
+                            div.transition()
+                                .duration(200)
+                                .style("opacity", .75);
+                            div.html(tip_text(d))
+                                .style("color", "white")
+                                .style("left", d.x + 5 + "px")
+                                .style("top", d.y + 150 +"px");
+                        }
+                    });
+            node.on("mouseout", function(d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
             // remove nodes
-			node.exit().transition().duration(500).attr("r",0).remove();
-			// update links
-			update_slider();
-		}
+            node.exit().transition().duration(500).attr("r",0).remove();
+            // update links
+            update_slider();
+        }
 
-		function tip_text(d) {
-			// get announced prefixes
-			var request = new XMLHttpRequest();
-			request.open("POST", "/demo/get", false);
-			request.send("oid=1.3.6.1.4.1.8072.2.267."+d.asn+"."+d.port);
-			if(request.readyState == 4) {
-				head = "<table cellspacing=\"4\" cellpadding=\"2\"><tr><th></th><th>network</th><th>next hop</th><th>path</th></tr><tr><td>";
-				end = "</td></tr></table>";
-				return head+(request.responseText.split("\\t").join("</td><td>")).split("\\n").join("</td></tr><tr><td>")+end;
-			}
-		}
+        function tip_text(d) {
+            // get announced prefixes
+            var request = new XMLHttpRequest();
+            request.open("POST", "/demo/get", false);
+            request.send("oid=1.3.6.1.4.1.8072.2.267."+d.asn+"."+d.port);
+            if(request.readyState == 4) {
+                head = "<table cellspacing=\"4\" cellpadding=\"2\"><tr><th></th><th>network</th><th>next hop</th><th>path</th></tr><tr><td>";
+                end = "</td></tr></table>";
+                return head+(request.responseText.split("\\t").join("</td><td>")).split("\\n").join("</td></tr><tr><td>")+end;
+            }
+        }
 
-		// set arrow and its color
-		function arrow(d) {
-			if (d.source.attacker) {
-				if (d.hijack) {
-					return "url(#end-arrow-red)"
-				} else {
-					return "url(#end-arrow)"
-				}
-			} else {
-				return null;
-			}
-		}
+        // set arrow and its color
+        function arrow(d) {
+            if (d.source.attacker) {
+                if (d.hijack) {
+                    return "url(#end-arrow-red)"
+                } else {
+                    return "url(#end-arrow)"
+                }
+            } else {
+                return null;
+            }
+        }
 
-		// set size of node according to properties
-		function node_size(d) {
-			// node of attacker
-			if (d.attacker) return 36;
-			// node of single prefix
-			if (d.parent) return 12;
-			// node of target showing prefixes or not
-			return d.displays ? 36 : 28;
-		}
+        // set size of node according to properties
+        function node_size(d) {
+            // node of attacker
+            if (d.attacker) return 36;
+            // node of single prefix
+            if (d.parent) return 12;
+            // node of target showing prefixes or not
+            return d.displays ? 36 : 28;
+        }
 
-		function node_color(d) {
-        	if (d.asn != null) {
-            	return "#fff";
-        	}
-        	return "#377eb8";
-    	}
+        function node_color(d) {
+            if (d.asn != null) {
+                return "#fff";
+            }
+            return "#377eb8";
+        }
 
-		// set charge according to node
-		function node_charge(d) {
-			if (d.attacker) return -2000;
-			if (d.parent) return -300;
-			return d.displays ? -1500 : -500;
-		}
-    	function node_icon(d) {
-       		if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
-            	console.log("node with zeit.de prefix")
-            	return "zeit.png"
-        	}
-        	if (d.asn != null)
-            	return d.icon
-        	console.log("some other node")
-        	return ""
-    	}
-		// set label of node
-		function node_label(d) {
-			if (d.parent) return d.prefix;
-			return d.asn;
-		}
+        // set charge according to node
+        function node_charge(d) {
+            if (d.attacker) return -2000;
+            if (d.parent) return -300;
+            return d.displays ? -1500 : -500;
+        }
+        function node_icon(d) {
+            if ((d.asn == null) && (d.prefix == "160.45.111.0/26")) {
+                console.log("node with zeit.de prefix")
+                return "zeit.png"
+            }
+            if (d.asn != null)
+                return d.icon
+            console.log("some other node")
+            return ""
+        }
+        // set label of node
+        function node_label(d) {
+            if (d.parent) return d.prefix;
+            return d.asn;
+        }
 
-		// iteration of force layout
-		function tick(e) {
-			path.attr("d", function(d) {
-				var dx = d.target.x - d.source.x,
-					dy = d.target.y - d.source.y,
-					dr = 0;
-				return "M" +
-					d.source.x + "," +
-					d.source.y + "A" +
-					dr + "," + dr + " 0 0,1 " +
-					d.target.x + "," +
-					d.target.y;
-			});
-			node.each(gravity(.2 * e.alpha))
-				.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-		}
+        // iteration of force layout
+        function tick(e) {
+            path.attr("d", function(d) {
+                var dx = d.target.x - d.source.x,
+                    dy = d.target.y - d.source.y,
+                    dr = 0;
+                return "M" +
+                    d.source.x + "," +
+                    d.source.y + "A" +
+                    dr + "," + dr + " 0 0,1 " +
+                    d.target.x + "," +
+                    d.target.y;
+            });
+            node.each(gravity(.2 * e.alpha))
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        }
 
-		// move nodes toward cluster focus
-		function gravity(alpha) {
-			return function(d) {
-				d.y += (d.cy - d.y) * alpha;
-				d.x += (d.cx - d.x) * alpha;
-			};
-		}
+        // move nodes toward cluster focus
+        function gravity(alpha) {
+            return function(d) {
+                d.y += (d.cy - d.y) * alpha;
+                d.x += (d.cx - d.x) * alpha;
+            };
+        }
 
-		// handle click on node
-		function node_click(d) {
-			// target nodes
-			if ((d.asn !== undefined) && (d.prefix !== undefined) && !d.attacker) {
-				if (!d.displays) {
-					// add prefix nodes
-					d.prefix.forEach(function(item) {
-						new_node_index = nodes.push({parent: d.asn, prefix: item, cx: d.x, cy: d.y});
-						links.push({source: d, target: nodes[new_node_index-1]});
-					});
-					d.displays = true;
-				} else {
-					// remove prefix nodes and its links
-					delete_nodes = nodes.filter(function (item) {
-						return (item.parent === d.asn);
-					});
-					nodes = nodes.filter(function (item) {
-						return (item.parent !== d.asn);
-					});
-					deleted_links = links.filter(function (item) {
-						return (delete_nodes.indexOf(item.target) != -1)
-					});
-					links = links.filter(function (item) {
-						return (delete_nodes.indexOf(item.target) == -1)
-					});
-					// delete active announcements
-					deleted_links.forEach(function (d) {d.hijack && link_click(d)});
-					d.displays = false;
-				}
-			} 
-			// attacker nodes
-			if (d.attacker) {
-				newSource = d;
-			}
-			// prefix nodes
-			if (d.parent) {
-				newTarget = d;
-			}
-			// add hijack links
-			if (newSource && newTarget) {
-				 links.push({source: newSource, target: newTarget});
-				 newSource = null;
-				 newTarget = null;
-			}
-			update();
-		}
+        // handle click on node
+        function node_click(d) {
+            // target nodes
+            if ((d.asn !== undefined) && (d.prefix !== undefined) && !d.attacker) {
+                if (!d.displays) {
+                    // add prefix nodes
+                    d.prefix.forEach(function(item) {
+                        new_node_index = nodes.push({parent: d.asn, prefix: item, cx: d.x, cy: d.y});
+                        links.push({source: d, target: nodes[new_node_index-1]});
+                    });
+                    d.displays = true;
+                } else {
+                    // remove prefix nodes and its links
+                    delete_nodes = nodes.filter(function (item) {
+                        return (item.parent === d.asn);
+                    });
+                    nodes = nodes.filter(function (item) {
+                        return (item.parent !== d.asn);
+                    });
+                    deleted_links = links.filter(function (item) {
+                        return (delete_nodes.indexOf(item.target) != -1)
+                    });
+                    links = links.filter(function (item) {
+                        return (delete_nodes.indexOf(item.target) == -1)
+                    });
+                    // delete active announcements
+                    deleted_links.forEach(function (d) {d.hijack && link_click(d)});
+                    d.displays = false;
+                }
+            } 
+            // attacker nodes
+            if (d.attacker) {
+                newSource = d;
+            }
+            // prefix nodes
+            if (d.parent) {
+                newTarget = d;
+            }
+            // add hijack links
+            if (newSource && newTarget) {
+                 links.push({source: newSource, target: newTarget});
+                 newSource = null;
+                 newTarget = null;
+            }
+            update();
+        }
 
-		// handle click on link
-		function link_click(d) {
-			// handle links from attacker to prefix node
-			if(d.source.attacker) {
-				if(!d.hijack) {
-					// start prefix announcement
-					parameter = "op=add"+
-								"&asn="+d.source.asn+
-								"&port="+d.source.port+
-								"&ip="+d.target.prefix.slice(0,-3)+
-								"&val="+d.target.prefix.slice(d.target.prefix.length-2);
-					d.hijack = true;
-				} else {
-					// stop prefix announcement
-					parameter = "op=del"+
-								"&asn="+d.source.asn+
-								"&port="+d.source.port+
-								"&ip="+d.target.prefix.slice(0,-3)+
-								"&val="+d.target.prefix.slice(d.target.prefix.length-2);
-					d.hijack = false;
-				}
-				// http request to server to start snmpset
-				var request = new XMLHttpRequest();
-				request.open("POST", "/demo/set", false);
-				request.send(parameter);
-			}
-			update();
-		}
+        // handle click on link
+        function link_click(d) {
+            // handle links from attacker to prefix node
+            if(d.source.attacker) {
+                if(!d.hijack) {
+                    // start prefix announcement
+                    parameter = "op=add"+
+                                "&asn="+d.source.asn+
+                                "&port="+d.source.port+
+                                "&ip="+d.target.prefix.slice(0,-3)+
+                                "&val="+d.target.prefix.slice(d.target.prefix.length-2);
+                    d.hijack = true;
+                } else {
+                    // stop prefix announcement
+                    parameter = "op=del"+
+                                "&asn="+d.source.asn+
+                                "&port="+d.source.port+
+                                "&ip="+d.target.prefix.slice(0,-3)+
+                                "&val="+d.target.prefix.slice(d.target.prefix.length-2);
+                    d.hijack = false;
+                }
+                // http request to server to start snmpset
+                var request = new XMLHttpRequest();
+                request.open("POST", "/demo/set", false);
+                request.send(parameter);
+            }
+            update();
+        }
 
-		// handle hit on button like click on node
-		function field_enter(asn) {
-			if (!isNaN(asn)) {
-				// select node according to asn
-				selected_node = nodes.filter(function (item) {
-					return (item.asn === asn.toString());
-				});
-				// "click" on
-				selected_node[0] && node_click(nodes[nodes.indexOf(selected_node[0])]);
-			}
-		}
+        // handle hit on button like click on node
+        function field_enter(asn) {
+            if (!isNaN(asn)) {
+                // select node according to asn
+                selected_node = nodes.filter(function (item) {
+                    return (item.asn === asn.toString());
+                });
+                // "click" on
+                selected_node[0] && node_click(nodes[nodes.indexOf(selected_node[0])]);
+            }
+        }
 
-		// update slider
-		function update_slider() {
-			// remove all old sliders
-			d3.selectAll('slider').transition().remove();
-			svg.selectAll(".slider-text").remove();
-			// get links which need a slider
-			slider_links = links.filter(function (item) {
-				return (item.source.attacker) 
-			});
-			// create sliders
-			var top = 0;
-			var index = 0;
-			slider_links.forEach(function (d) {
-				index = parseInt(d.source.index+"00000"+d.target.index);
-				top += 50;
-				create_slider(index, (d.hijack ? index : -index), top, d.target.prefix);
-			});
-		}
+        // update slider
+        function update_slider() {
+            // remove all old sliders
+            d3.selectAll('slider').transition().remove();
+            svg.selectAll(".slider-text").remove();
+            // get links which need a slider
+            slider_links = links.filter(function (item) {
+                return (item.source.attacker) 
+            });
+            // create sliders
+            var top = 0;
+            var index = 0;
+            slider_links.forEach(function (d) {
+                index = parseInt(d.source.index+"00000"+d.target.index);
+                top += 50;
+                create_slider(index, (d.hijack ? index : -index), top, d.target.prefix);
+            });
+        }
 
-		// create slider for link interaction
-		function create_slider(index, val, top, label) {
-			// create slider
-			d3.select("#viewer")
-				.append("slider")
-				.attr("class", "wrapper")
-				.style("position", "absolute")
-				.style("left", "50px")
-				.style("top", top+120+"px")
-				.call(d3.slider()
-					.min(-index)
-					.max(index)
-					.step(2*index)
-					.value(val)
-					.classed(val < 0 ? "d3-slider-handle" : "d3-slider-handle-red")
-					.on("slide", slide));
-			// create label of slider
-			svg.append('text')
-				.attr("class","slider-text")
-				.text(label)
-				.attr("fill", "#fff")
-				.attr("x", 15)
-				.attr("y", top);
-		}
+        // create slider for link interaction
+        function create_slider(index, val, top, label) {
+            // create slider
+            d3.select("#viewer")
+                .append("slider")
+                .attr("class", "wrapper")
+                .style("position", "absolute")
+                .style("left", "50px")
+                .style("top", top+120+"px")
+                .call(d3.slider()
+                    .min(-index)
+                    .max(index)
+                    .step(2*index)
+                    .value(val)
+                    .classed(val < 0 ? "d3-slider-handle" : "d3-slider-handle-red")
+                    .on("slide", slide));
+            // create label of slider
+            svg.append('text')
+                .attr("class","slider-text")
+                .text(label)
+                .attr("fill", "#fff")
+                .attr("x", 15)
+                .attr("y", top);
+        }
 
-		// slide simulates click on link
-		function slide (evt, val) {
-			function startsWith(str, prefix) {
-				return str.lastIndexOf(prefix, 0) === 0;
-			}
-			function endsWith(str, suffix) {
-				return str.indexOf(suffix, str.length - suffix.length) !== -1;
-			}
-			// get right link
-			val = (val > 0 ? val : -1*val);
-			val = val.toString();
-			source_index = 0;
-			target_index = 0;
-			if (endsWith(val, "000000")) {
-				source_index = parseInt(val.substr(0,val.length-(1+6)));
-			}
-			if (startsWith(val, "000000")) {
-				target_index = parseInt(val.substr(6,val.length-1));
-			} 
-			else {
-				index = val.lastIndexOf("00000");
-				source_index = parseInt(val.substr(0,index));
-				target_index = parseInt(val.substr(index+5,val.length-1));
-			}
-			// "click" on
-			selected_link = links.filter(function (item) {
-				return (item.source.index==source_index && item.target.index==target_index);
-			});
-			selected_link[0] && link_click(links[links.indexOf(selected_link[0])]);
-		}
-	</script>
-	</body>
+        // slide simulates click on link
+        function slide (evt, val) {
+            function startsWith(str, prefix) {
+                return str.lastIndexOf(prefix, 0) === 0;
+            }
+            function endsWith(str, suffix) {
+                return str.indexOf(suffix, str.length - suffix.length) !== -1;
+            }
+            // get right link
+            val = (val > 0 ? val : -1*val);
+            val = val.toString();
+            source_index = 0;
+            target_index = 0;
+            if (endsWith(val, "000000")) {
+                source_index = parseInt(val.substr(0,val.length-(1+6)));
+            }
+            if (startsWith(val, "000000")) {
+                target_index = parseInt(val.substr(6,val.length-1));
+            } 
+            else {
+                index = val.lastIndexOf("00000");
+                source_index = parseInt(val.substr(0,index));
+                target_index = parseInt(val.substr(index+5,val.length-1));
+            }
+            // "click" on
+            selected_link = links.filter(function (item) {
+                return (item.source.index==source_index && item.target.index==target_index);
+            });
+            selected_link[0] && link_click(links[links.indexOf(selected_link[0])]);
+        }
+    </script>
+    </body>
 </html>
