@@ -51,7 +51,7 @@
 
         var node = svg.selectAll(".node"),
             path = svg.selectAll("path");
-            
+
         // build arrow header of links
         svg.append('svg:defs').append('svg:marker')
             .attr('id', 'end-arrow')
@@ -138,8 +138,7 @@
 
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
-                .call(force.drag)
-                .transition().duration(1000);
+                .call(force.drag);
             nodeEnter.append("circle")
                 .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )

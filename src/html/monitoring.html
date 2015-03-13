@@ -118,8 +118,7 @@
             .data(nodes, function(d) { return d.id; });
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
-            .call(force.drag)
-            .transition().duration(1000);
+            .call(force.drag);
         nodeEnter.append("circle")
             .attr("r", function (d) { return d.asn ? 36 : 12 ; })
             .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
