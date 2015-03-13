@@ -138,7 +138,8 @@
 
 			// enter nodes
 			node = svg.selectAll(".node")
-            	.data(nodes)
+            	.data(nodes);
+            node.selectAll("circle")
             	.attr("r", function (d) { return node_size(d)});
 
         	nodeEnter = node.enter().append("g")
