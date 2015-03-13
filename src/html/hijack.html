@@ -135,8 +135,6 @@
             node = svg.selectAll(".node")
                 .data(nodes, function(d) { return d.id; });
 
-            node.attr("r", function (d) { return node_size(d)});
-
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
                 .call(force.drag);
@@ -168,6 +166,7 @@
                         .duration(500)
                         .style("opacity", 0);
                 });
+            node.attr("r", function (d) { return node_size(d)});
             // remove nodes
             node.exit().remove();
             // update links
