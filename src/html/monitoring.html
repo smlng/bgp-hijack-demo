@@ -126,10 +126,10 @@
             .style("fill", function (d) { return node_color(d) });
         nodeEnter.append("image")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", function (d) { return (d.asn == "65005") ? "-50px": "-15px"; })
-            .attr("y", function (d) { return (d.asn == "65005") ? "-50px": "-15px"; })
-            .attr("width", function (d) { return (d.asn == "65005") ? "100px": "30px"; })
-            .attr("height", function (d) { return (d.asn == "65005") ? "100px": "30px"; });
+            .attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-15px"; })
+            .attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-15px"; })
+            .attr("width", function (d) { return (d.asn == "65005") ? "128px": "30px"; })
+            .attr("height", function (d) { return (d.asn == "65005") ? "128px": "30px"; });
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
                     .duration(200)
@@ -295,9 +295,9 @@
     // set link length by src-dst node type
     function node_link_distance(d) {
         if ((d.source.asn != null) && (d.target.asn != null))
-            return 100;
+            return 150;
         else
-            return 20;
+            return 30;
     }
     // set link width by src-dst node type
     function node_link_width(d) {

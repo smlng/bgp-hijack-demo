@@ -37,7 +37,7 @@
 
         // init force layout
         var force = d3.layout.force()
-            .linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-100 : 20  } )
+            .linkDistance(function (d) { return d.source.attacker ? x(1)-x(0)-100 : 30  } )
             .size([width, height])
             .gravity(0)
             .charge(function (d) { return node_charge(d)} )
