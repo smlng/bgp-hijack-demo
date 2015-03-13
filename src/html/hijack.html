@@ -155,22 +155,6 @@
                 .attr("width", function (d) { return (d.asn == "65005") ? "128px": "30px"; })
                 .attr("height", function (d) { return (d.asn == "65005") ? "128px": "30px"; });
             node.on("click", node_click);
-            node.on("mouseover", function (d) {
-                        if(d.attacker || d.displays) {
-                            div.transition()
-                                .duration(200)
-                                .style("opacity", .75);
-                            div.html(tip_text(d))
-                                .style("color", "white")
-                                .style("left", d.x + 5 + "px")
-                                .style("top", d.y + 150 +"px");
-                        }
-                    });
-            node.on("mouseout", function(d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
             // remove nodes
             node.exit().remove();
             // update links
@@ -221,9 +205,9 @@
 
         // set charge according to node
         function node_charge(d) {
-            if (d.attacker) return -2000;
+            if (d.attacker) return -1200;
             if (d.parent) return -300;
-            return d.displays ? -1500 : -500;
+            return d.displays ? -800 : -400;
         }
         function node_icon(d) {
             if (d.asn == null) {
