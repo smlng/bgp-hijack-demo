@@ -150,10 +150,10 @@
                 .attr("r", function (d) { return node_size(d)});
             nodeEnter.append("image")
                 .attr("xlink:href", function(d) { return node_icon(d); })
-                .attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-15px"; })
-                .attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-15px"; })
-                .attr("width", function (d) { return (d.asn == "65005") ? "128px": "30px"; })
-                .attr("height", function (d) { return (d.asn == "65005") ? "128px": "30px"; });
+                .attr("x", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
+                .attr("y", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
+                .attr("width", function (d) { return (d.asn == "65005") ? "110px": "30px"; })
+                .attr("height", function (d) { return (d.asn == "65005") ? "110px": "30px"; });
             node.on("click", node_click);
             // remove nodes
             node.exit().remove();
