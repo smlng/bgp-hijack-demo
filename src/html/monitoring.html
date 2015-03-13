@@ -101,8 +101,8 @@
             .links(links)
             .start();
 
-        var path = svg.selectAll(".link")
-            .data(links);
+        path = svg.selectAll("path")
+            .data(links, function(d) { return d.target.id; });
         path.enter().insert("line", "node")
             .attr("class", "link")
             .style("stroke-width", function(d) { return node_link_width(d) })
@@ -111,8 +111,8 @@
             .style("opacity", 1);
         path.exit().remove();
 
-        var node = svg.selectAll(".node")
-            .data(nodes);
+        node = svg.selectAll(".node")
+            .data(nodes, function(d) { return d.id; });
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
             .call(force.drag)

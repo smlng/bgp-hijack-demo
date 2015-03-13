@@ -31,6 +31,9 @@
         var newSource = null,
             newTarget = null;
 
+        var node,
+            path;
+
         // start without links
         var nodes = [],
             links = [];
@@ -115,8 +118,8 @@
                 .links(links)
                 .start();
             // enter links
-            var path = svg.selectAll("path")
-                .data(links);
+            path = svg.selectAll("path")
+                .data(links, function(d) { return d.target.id; });
             path.enter().insert("path", "g")
                 .attr("opacity", 0)
                 .attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
@@ -129,10 +132,9 @@
             path.exit().transition().duration(500).attr("opacity", 0).remove();
 
             // enter nodes
-            var node = svg.selectAll(".node")
-                .data(nodes);
-            var circle = svg.selectAll("circle");
-            circle.attr("r", function (d) { return node_size(d)});
+            node = svg.selectAll(".node")
+                .data(nodes, function(d) { return d.id; })
+                .attr("r", function (d) { return node_size(d)});
 
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
@@ -238,7 +240,6 @@
 
         // iteration of force layout
         function tick(e) {
-            var path = svg.selectAll("path")
             path.attr("d", function(d) {
                 var dx = d.target.x - d.source.x,
                     dy = d.target.y - d.source.y,
@@ -250,7 +251,6 @@
                     d.target.x + "," +
                     d.target.y;
             });
-            var node = svg.selectAll(".node")
             node.each(gravity(.2 * e.alpha))
                 .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
         }
