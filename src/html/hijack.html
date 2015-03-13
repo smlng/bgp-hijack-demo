@@ -145,7 +145,7 @@
 				.attr("r", 0)
 				.style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
-                .style("fill", function (d) { return node_color(d) });
+                .style("fill", function (d) { return node_color(d) })
                 .transition()
 				.duration(500)
 				.attr("r", function (d) { return node_size(d)});
