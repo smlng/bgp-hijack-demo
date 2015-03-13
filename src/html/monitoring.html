@@ -68,9 +68,6 @@
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-    
-    var path = svg.selectAll(".link"),
-        node = svg.selectAll(".node");
 
     function initGraph() {
         var request = new XMLHttpRequest();
@@ -104,7 +101,7 @@
             .links(links)
             .start();
 
-        path = svg.selectAll(".link")
+        var path = svg.selectAll(".link")
             .data(links);
         path.enter().insert("line", "node")
             .attr("class", "link")
@@ -114,7 +111,7 @@
             .style("opacity", 1);
         path.exit().remove();
 
-        node = svg.selectAll(".node")
+        var node = svg.selectAll(".node")
             .data(nodes);
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
@@ -251,8 +248,9 @@
     }
 
     function tick() {
+        var node = svg.selectAll(".node")
         node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-             
+        var path = svg.selectAll(".link")
         path.attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })

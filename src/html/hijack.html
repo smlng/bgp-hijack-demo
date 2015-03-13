@@ -78,14 +78,6 @@
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-        // selection of links
-        var path = svg.selectAll('path')
-            .data(links);
-
-        // selection of nodes
-        var node = svg.selectAll(".node")
-            .data(nodes);
-
         // get nodes from json    graph.json
         d3.json("graph.json", function(error, graph) {
             graph.nodes.forEach(function(item) {
@@ -123,7 +115,7 @@
                 .links(links)
                 .start();
             // enter links
-            path = svg.selectAll("path")
+            var path = svg.selectAll("path")
                 .data(links);
             path.enter().insert("path", "g")
                 .attr("opacity", 0)
@@ -137,21 +129,21 @@
             path.exit().transition().duration(500).attr("opacity", 0).remove();
 
             // enter nodes
-            node = svg.selectAll(".node")
+            var node = svg.selectAll(".node")
                 .data(nodes);
             var circle = svg.selectAll("circle");
             circle.attr("r", function (d) { return node_size(d)});
 
-            var enterNode = node.enter().append("g")
+            var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
                 .call(force.drag)
                 .transition().duration(1000);
-            enterNode.append("circle")
+            nodeEnter.append("circle")
                 .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) })
                 .attr("r", function (d) { return node_size(d)});
-            enterNode.append("image")
+            nodeEnter.append("image")
                 .attr("xlink:href", function(d) { return node_icon(d); })
                 .attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
                 .attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
@@ -246,6 +238,7 @@
 
         // iteration of force layout
         function tick(e) {
+            var path = svg.selectAll("path")
             path.attr("d", function(d) {
                 var dx = d.target.x - d.source.x,
                     dy = d.target.y - d.source.y,
@@ -257,6 +250,7 @@
                     d.target.x + "," +
                     d.target.y;
             });
+            var node = svg.selectAll(".node")
             node.each(gravity(.2 * e.alpha))
                 .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
         }
