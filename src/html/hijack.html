@@ -129,12 +129,13 @@
                 .duration(500)
                 .attr("opacity", 1);
             // remove links
-            path.exit().transition().duration(500).attr("opacity", 0).remove();
+            path.exit().remove();
 
             // enter nodes
             node = svg.selectAll(".node")
-                .data(nodes, function(d) { return d.id; })
-                .attr("r", function (d) { return node_size(d)});
+                .data(nodes, function(d) { return d.id; });
+
+            node.attr("r", function (d) { return node_size(d)});
 
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
@@ -168,7 +169,7 @@
                         .style("opacity", 0);
                 });
             // remove nodes
-            node.exit().transition().duration(500).attr("r",0).remove();
+            node.exit().remove();
             // update links
             update_slider();
         }
