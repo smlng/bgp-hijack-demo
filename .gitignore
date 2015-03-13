@@ -2,3 +2,5 @@ log/
 run/
 build/
 *.pyc
+.DS_*
+._*
