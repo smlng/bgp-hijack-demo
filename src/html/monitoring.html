@@ -59,11 +59,14 @@
     
     var nodes = [],
         links = [];
-    
+
     var svg = d3.select("#viewer").append("svg")
         .attr("width", width)
         .attr("height", height)
     
+    var path = svg.selectAll(".link"),
+        node = svg.selectAll(".node");
+
     var tooltipDiv = d3.select("#viewer")
         .append("div")
         .attr("class", "tooltip")
@@ -102,7 +105,7 @@
             .start();
 
         path = svg.selectAll("path")
-            .data(links, function(d) { return d.target.id; });
+            .data(links);
         path.enter().insert("line", "node")
             .attr("class", "link")
             .style("stroke-width", function(d) { return node_link_width(d) })
