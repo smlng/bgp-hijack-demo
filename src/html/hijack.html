@@ -93,6 +93,7 @@
 					nodes.push({
 						asn: item.asn,
 						port: item.port,
+						icon: item.icon,
 						attacker: item.attacker ? true : false,
 						prefix: item.prefix,
 						cx: item.attacker ? x(0) : x(1),
@@ -102,6 +103,7 @@
 					nodes.push({
 						asn: item.asn,
 						port: item.port,
+						icon: item.icon,
 						attacker: item.attacker ? true : false,
 						cx: item.attacker ? x(0) : x(1),
 						cy: height / 2
@@ -123,7 +125,7 @@
 			// enter links
 			path = svg.selectAll("path")
 				.data(links);
-			path.enter().insert("path", "node")
+			path.enter().insert("path", "g")
 				.attr("opacity", 0)
 				.attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
 				.attr("marker-end", arrow)
