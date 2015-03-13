@@ -139,19 +139,19 @@
 			// enter nodes
 			node = svg.selectAll(".node")
             	.data(nodes);
-            node.selectAll("circle")
-            	.attr("r", function (d) { return node_size(d)});
+            circle = svg.selectAll("circle");
+            circle.attr("r", function (d) { return node_size(d)});
 
         	node.enter().append("g")
             	.attr("class", "node")            
             	.call(force.drag)
-            	.transition().duration(1000)
-           	.append("circle")
+            	.transition().duration(1000);
+           	node.append("circle")
 				.style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) })
 				.attr("r", function (d) { return node_size(d)})
-			.append("image")
+			node.append("image");
             	.attr("xlink:href", function(d) { return node_icon(d); })
             	.attr("x", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
             	.attr("y", function (d) { return (d.asn == "65005") ? "-64px": "-16px"; })
