@@ -121,7 +121,9 @@
             path = svg.selectAll("path")
                 .data(links);
             path.attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
-                .attr("marker-end", arrow);
+                .attr("marker-end", arrow)
+                .attr("opacity", 1);
+
             path.enter().insert("path", "g")
                 .attr("opacity", 0)
                 .attr("class", function (d) { return d.hijack ? "hijack" : "link" } )
