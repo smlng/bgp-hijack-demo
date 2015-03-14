@@ -188,12 +188,64 @@
             }
 
             console.log("originAS: "+originASNode.asn);
+            /***
+                Two types of announcements:
+                1.) nodeToUpdate.asn == originASNode.asn -> AS has new prefix
+                2.) nodeToUpdate.asn != originASNode.asn -> AS has new path for prefix
+            ***/
+            if (nodeToUpdate.asn == originASNode.asn) {
+                var createPrefixNode = true;
+                nodes.filter(function (d) {
+                    if (d.parent == nodeToUpdate.asn && d.prefix == updateNode.prefix[0]) {
+                        nodeToUpdate = false;
+                    }
+                })
+                if (nodeToUpdate) {
+                    console.log("Add new node for prefix: "+updateNode.prefix);
+                    // add new prefix as node and new link to 'complete graph'
+                    var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
+                    links.push({source: originASNode, target: nodes[newNode-1]});
+                    updateGraph = true
+                };
+            }
+            else {
+                var deletePrefixNode = false;
+                nodes.filter(function (d) {
+                    if ((d.parent == nodeToUpdate.asn) && (d.prefix == updateNode.prefix[0])) {
+                        deletePrefixNode = true;
+                    }
+                })
+                if (deletePrefixNode) {
+                    console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+nodeToUpdate.asn);
+                    var newNodes = nodes.filter(function (d) {
+                        // 'd' is a node
+                        if (d.asn != null)
+                            return d;
+                        // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
+                        else if ((d.parent != nodeToUpdate.asn) || (d.prefix != updateNode.prefix[0]))
+                            return d;
+                    });
 
+                    var newLinks = links.filter(function (d) {
+                        // as-as link
+                        if ((d.source.asn != null) && (d.target.asn != null))
+                            return d;
+                        // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
+                        else if ((d.target.prefix != updateNode.prefix[0]) || (d.target.parent != nodeToUpdate.asn))
+                        return d;
+                    });
+                
+                    nodes = newNodes;
+                    links = newLinks;
+                    updateGraph = true
+                }
+            }
+
+            /*
             var prefixNode = nodes.filter(function (d) {
                 if (d.parent != null && d.prefix == updateNode.prefix[0])
                     return (d.parent == nodeToUpdate.asn);
             })[0];
-
             if ((prefixNode != null) && (updateNode.path.length > 1)) {
                 console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
                 var allNewNodes = nodes.filter(function (d) {
@@ -241,6 +293,7 @@
                     updateGraph = true
                 };
             }
+            */
         }
         else {
             console.log("Unknown message received via websocket!");
