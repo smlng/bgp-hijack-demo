@@ -91,7 +91,7 @@ def parse2JSON(xml):
     prefixes = update.findall('.//{urn:ietf:params:xml:ns:xfb}NLRI')
     json = ""
     for prefix in prefixes:
-        json += "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\n"
+        json += "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix.text+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\n"
     return json
     
 def parse2XML(xml):
