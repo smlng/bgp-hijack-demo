@@ -139,6 +139,7 @@
             node = svg.selectAll(".node")
                 .data(nodes);
             node.selectAll("circle").attr("r", function (d) { return node_size(d)});
+            node.selectAll("image").attr("xlink:href", function(d) { return node_icon(d); });
 
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
