@@ -113,10 +113,9 @@
             .transition().duration(3000)
             .style("opacity", 1);
         path.exit().remove();
-
         node = svg.selectAll(".node")
+            .attr("xlink:href", function(d) { return node_icon(d); })
             .data(nodes);
-        node.selectAll("image").attr("xlink:href", function(d) { return node_icon(d); });
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
             .call(force.drag);
@@ -126,6 +125,7 @@
             .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
             .style("fill", function (d) { return node_color(d) });
         nodeEnter.append("image")
+            .attr("class", "icon")
             .attr("xlink:href", function(d) { return node_icon(d); })
             .attr("x", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
             .attr("y", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
@@ -241,60 +241,6 @@
                     updateGraph = true
                 }
             }
-
-            /*
-            var prefixNode = nodes.filter(function (d) {
-                if (d.parent != null && d.prefix == updateNode.prefix[0])
-                    return (d.parent == nodeToUpdate.asn);
-            })[0];
-            if ((prefixNode != null) && (updateNode.path.length > 1)) {
-                console.log("Prefix "+updateNode.prefix[0]+" withdrawn by "+prefixNode.parent);
-                var allNewNodes = nodes.filter(function (d) {
-                    // 'd' is a node
-                    if (d.asn != null)
-                        return d;
-                    // 'd' is a prefix AND matches not to 'updateNode.prefix[0]'
-                    else if (d.parent != null && ((d.prefix != updateNode.prefix[0]) || (d.parent != prefixNode.parent)))
-                        return d;
-                });
-
-                var allNewLinks = links.filter(function (d) {
-                    // 'target' is a node
-                    if (d.target.asn != null)
-                        return d;
-                    // 'target' is a prefix AND matches not to 'updateNode.prefix[0]'
-                    else if ((d.target.prefix[0] != updateNode.prefix[0]) || (d.target.parent != prefixNode.parent))
-                        return d;
-                });
-                
-                nodes = allNewNodes;
-                links = allNewLinks;
-                updateGraph = true
-            }
-            else
-            {
-                // check whether new prefix already exist at 'nodeWithNewPrefix' (in 'complete graph')
-                var newPrefixAsNodeNeeded = true;
-                if (updateNode.asn != originASNode.asn) {
-                    newPrefixAsNodeNeeded = false;
-                }
-                else {
-                    nodes.filter(function (d) {
-                        if (d.parent == originASNode.asn && d.prefix == updateNode.prefix[0]) {
-                            newPrefixAsNodeNeeded = false;
-                        }
-                    })
-                }
-                //if (newPrefixAsNodeNeeded  && (updateNode.path.length < 2)) {
-                if (newPrefixAsNodeNeeded ) {
-                    console.log("Add node for prefix: "+updateNode.prefix);
-                    // add new prefix as node and new link to 'complete graph'
-                    var newNode = nodes.push({prefix: updateNode.prefix, parent: originASNode.asn});
-                    links.push({source: originASNode, target: nodes[newNode-1]});
-                    updateGraph = true
-                };
-            }
-            */
         }
         else {
             console.log("Unknown message received via websocket!");
