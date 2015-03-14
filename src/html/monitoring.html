@@ -114,6 +114,10 @@
             .style("opacity", 1);
         path.exit().remove();
  
+        var icon = svg.SelectAll(".icon")
+        icon.transition()
+            .attr("xlink:href", function(d) { return node_icon(d); });
+
         node = svg.selectAll(".node")
             .data(nodes);
         var nodeEnter = node.enter().append("g")
