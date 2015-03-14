@@ -163,8 +163,7 @@
 
     function newData(json) {
         // get the updated node
-      for(var i = 0; i < json.nodes.length; i++) {
-        var updateNode = json.nodes[i];
+        var updateNode = json.nodes[0];
         var updateGraph = false
         // return the origin node that will be updated
         var nodeToUpdate = nodes.filter(function (d) {
@@ -251,7 +250,6 @@
         }
         if (updateGraph)
             update();
-      }
     }
 
     function updateFromJSONFile() {

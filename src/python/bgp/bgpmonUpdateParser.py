@@ -75,8 +75,9 @@ def parse2JSON(xml):
     if asp is not None:
         for asn in asp.findall('.//{urn:ietf:params:xml:ns:xfb}ASN2'):
             as_path.append(asn.text)
-    if len(as_path) == 0:
-        as_path.append(src_asn)
+
+    #if len(as_path) == 0:
+    #    as_path.append(src_asn)
 
     counter = 0
     json_as_path = ""
@@ -87,9 +88,10 @@ def parse2JSON(xml):
             counter += 1
 
     next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
-    prefix = update.find('{urn:ietf:params:xml:ns:xfb}NLRI').text
-
-    json = "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }"
+    prefixes = update.findall('{urn:ietf:params:xml:ns:xfb}NLRI')
+    json = ""
+    for prefix in prefixes:
+        json += "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\n"
     return json
     
 def parse2XML(xml):
