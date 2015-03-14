@@ -113,8 +113,11 @@
             .transition().duration(3000)
             .style("opacity", 1);
         path.exit().remove();
-        node = svg.selectAll(".node")
-            .attr("xlink:href", function(d) { return node_icon(d); })
+        d3.selectAll('g.node')  //here's how you get all the nodes
+            .each(function(d) {
+                d.attr("xlink:href", function(d) { return node_icon(d); })
+            });
+        node = svg.selectAll("g.node")
             .data(nodes);
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
