@@ -138,18 +138,20 @@
             // enter nodes
             node = svg.selectAll(".node")
                 .data(nodes);
-            node.selectAll("circle").attr("r", function (d) { return node_size(d)});
-            node.selectAll("image").attr("xlink:href", function(d) { return node_icon(d); });
+            node.select("circle").attr("r", function (d) { return node_size(d)});
+            node.select("image").attr("xlink:href", function(d) { return node_icon(d); });
 
             var nodeEnter = node.enter().append("g")
                 .attr("class", "node")            
                 .call(force.drag);
             nodeEnter.append("circle")
+            	.attr("class", "circle")
                 .style("stroke", function (d) { return d.asn ? "#4daf4a" : "#fff"; } )
                 .style("stroke-width", function (d) { return d.asn ? "5px" : "0px"; } )
                 .style("fill", function (d) { return node_color(d) })
                 .attr("r", function (d) { return node_size(d)});
             nodeEnter.append("image")
+            	.attr("class", "icon")
                 .attr("xlink:href", function(d) { return node_icon(d); })
                 .attr("x", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
                 .attr("y", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
