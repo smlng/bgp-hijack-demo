@@ -122,11 +122,13 @@ class MyFileinputReader(threading.Thread):
 	def run(self):
 
 		while True:
-			line = sys.stdin.readline().split("\n")[0]
+			lines = sys.stdin.readline().split("\n")
 
-			global putBool
-			if putBool:
-				MyFileinputReader.queue.put(line)
+			for line in lines:
+				l = line.strip()
+				global putBool
+				if putBool && (len(l) > 0):
+					MyFileinputReader.queue.put(l)
 
 			"""
 			for line in fileinput.input():

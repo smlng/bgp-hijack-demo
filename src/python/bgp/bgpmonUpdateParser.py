@@ -87,8 +87,8 @@ def parse2JSON(xml):
             json_as_path += ", "
             counter += 1
 
-    next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
-    prefixes = update.findall('{urn:ietf:params:xml:ns:xfb}NLRI')
+    #next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
+    prefixes = update.findall('.//{urn:ietf:params:xml:ns:xfb}NLRI')
     json = ""
     for prefix in prefixes:
         json += "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\n"
