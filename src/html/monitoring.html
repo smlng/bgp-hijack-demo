@@ -306,11 +306,9 @@
     function node_icon_size(d) {
         if (d.asn == "65005")
             return 55;
-        if (d.prefix == "160.45.111.0/26")
-            return 15;
         if (d.prefix == "160.45.144.0/26")
             return 20;
-        return 0;
+        return 15;
     }
     // set link length by src-dst node type
     function node_link_distance(d) {
