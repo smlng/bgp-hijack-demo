@@ -127,7 +127,7 @@ class MyFileinputReader(threading.Thread):
 			for line in lines:
 				l = line.strip()
 				global putBool
-				if putBool && (len(l) > 0):
+				if putBool and (len(l) > 0):
 					MyFileinputReader.queue.put(l)
 
 			"""
