@@ -130,10 +130,10 @@
         nodeEnter.append("image")
             .attr("class", "icon")
             .attr("xlink:href", function(d) { return node_icon(d); })
-            .attr("x", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
-            .attr("y", function (d) { return (d.asn == "65005") ? "-55px": "-15px"; })
-            .attr("width", function (d) { return (d.asn == "65005") ? "110px": "30px"; })
-            .attr("height", function (d) { return (d.asn == "65005") ? "110px": "30px"; });
+            .attr("x", function (d) { return ( -1 * node_icon_size(d)) + "px"; })
+            .attr("y", function (d) { return ( -1 * node_icon_size(d)) + "px"; })
+            .attr("width", function (d) { return ( 2 * node_icon_size(d)) + "px"; })
+            .attr("height", function (d) { return ( 2 * node_icon_size(d)) + "px"; });
         node.on("mouseover", function (d) {
                 tooltipDiv.transition()
                     .duration(200)
@@ -297,9 +297,20 @@
             }
         }
         if (d.asn != null)
+            console.log("AS node");
             return d.icon;
-        console.log("some other node");
+        console.log("some other prefix node");
         return "";
+    }
+
+    function node_icon_size(d) {
+        if (d.asn == "65005")
+            return 55;
+        if (d.prefix == "160.45.111.0/26")
+            return 15;
+        if (d.prefix == "160.45.144.0/26")
+            return 20;
+        return 0;
     }
     // set link length by src-dst node type
     function node_link_distance(d) {
