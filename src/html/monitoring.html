@@ -116,7 +116,12 @@
 
         node = svg.selectAll(".node")
             .data(nodes);
-        node.select("image").attr("xlink:href", function(d) { return node_icon(d); });
+        node.select(".icon")
+            .attr("xlink:href", function(d) { return node_icon(d); })
+            .attr("x", function (d) { return ( -1 * node_icon_size(d)) + "px"; })
+            .attr("y", function (d) { return ( -1 * node_icon_size(d)) + "px"; })
+            .attr("width", function (d) { return ( 2 * node_icon_size(d)) + "px"; })
+            .attr("height", function (d) { return ( 2 * node_icon_size(d)) + "px"; });
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")            
