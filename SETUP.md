@@ -23,16 +23,27 @@ The 7 Quagga BGP daemons run on seperate virtual/alias IP interfaces with IPs `1
 
 BGPmon also uses a virtual/alias IP interfaces with IP `10.168.1.100`.  Its configuration is in `etc/bgpmon_config.txt`. Further, BGPmon requires its own AS (`AS65000`) for monitoring of its peers.
 
+
+## preliminaries
+
+The demo setup has depencencies that must be met before running the demo:
+
+1. install quagga bgp, check path to binary in `src/shell/start_bgpd.sh`.
+2. compile (and install) bgpmon, check path to binary in `src/shell/S01demo_init.sh`, and `src/shell/start_bgpmon.sh`.
+3. install snmpd, copy `<path-to-repo>/etc/snmp/snmpd` to `/etc/snmp/snmpd.conf`, edit the file and check path to python scripts.
+
 ## setup
 
-We recommend using multiple terminal/shell sessions to start and monitor the demo, e.g., using `screen` or `tmux`. _Note_: all commands are run from the root directory of the demo repository. For ease of deployment we provide a screen config to start the demo, run:
+We recommend using multiple terminal/shell sessions to start and monitor the demo, e.g., using `screen` or `tmux`. _Note_: all following commands are run from the root directory of the demo repository. You should not run the demo as root user, however sudo rights are necessary. 
+
+For ease of deployment we provide a screen config to start the demo, run:
 
     $ screen -c etc/screenrc
 
 _Note_: navigate through all tabs using `ctrl+a+[0-4]`, i.e., goto the first screen tab with `ctrl+a+1` - sudo requires your password. The following tabs are created:
 
 - 0: htop 
-- 1: bgpmon daemon foreground, creates also taps and start quagga bgpd
+- 1: bgpmon daemon foreground, creates also taps, starts quagga bgpd, and modifies snmpd.conf
 - 2: bgp update parser and websocket broadcaster
 - 3: webserver
 - 4: empty shell/bash
@@ -56,6 +67,11 @@ Third, fire up BGPmon (assuming its installed, otherwise run with absolute path)
 You may also run BGPmon in background, logs are writen to `log/bgpmon`:
 
 	$ sudo ./src/shell/start_bgpmon.sh
+
+Forth, edit `etc/snmp/snmpd.conf` replace `<path-to-repo>` with absolute path to demo repo. Afterwards replace the systems `snmpd.conf` and restart the snmpd service
+
+	$ sudo cp etc/snmp/snmpd.conf /etc/snmp/snmpd.conf
+	$ sudo systemctl restart snmpd.service
 
 Next, start all webservices
 
@@ -86,3 +102,5 @@ $ python server.py -h <IP address> -p <port>
 http://<IP address>:<port>/hijack.html
 http://<IP address>:<port>/monitoring.html
 ```
+
+## RPKI verification demo

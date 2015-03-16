@@ -10,7 +10,7 @@ export DEMOIP=$IPADDR
 [ ! -d "$BASEDIR/src/python/www" ] && { echo "Missing source directory (src/python/www)! Run from repo root!"; exit 1; }
 [ ! -d "$BASEDIR/src/html" ] && { echo "Missing source directory (src/html)! Run from repo root!"; exit 1; }
 echo " - BASEDIR           [ OK ]"
-sed -e "s/ws:\/\/.*:5002/ws:\/\/$DEMOIP:5002/g" -i '' $BASEDIR/src/html/monitoring.html
+sed -e "s/ws:\/\/.*:5002/ws:\/\/$DEMOIP:5002/g" -i'' $BASEDIR/src/html/monitoring.html
 echo " - set websocket IP  [ OK ]"
 sleep 5
 cd $BASEDIR/src/python/www

@@ -22,7 +22,6 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
 
  - libxml2-dev          needed by python for xml parsing and bgpmon
  - openvpn              to create tap tunnel devices
- - nginx                a light webserver to demonstrate rpki verification
  - python-dev           needed to build and install python libraries via pip
  - python-pip           a package manager for python
  - python-virtualenv    run python code in a change-root like environment
@@ -30,12 +29,15 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
  - snmp                 SNMP client stuff
  - snmpd                SNMP server stuff
 
+additional but optional:
+ - nginx                a light webserver to demonstrate RPKI verification
  - screen               terminal/shell multiplexer
  - vim                  the editor
 
 Install shutcut:
 
-    # apt-get install libxml2-dev openvpn nginx python-dev python-pip python-virtualenv quagga snmp snmpd screen vim
+    # apt-get install libxml2-dev openvpn python-dev python-pip python-virtualenv quagga snmp snmpd
+    # apt-get install nginx screen vim
 
 On other Linux Distros search for equivalents in its package-management.
 
