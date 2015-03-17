@@ -28,9 +28,10 @@ BGPmon also uses a virtual/alias IP interfaces with IP `10.168.1.100`.  Its conf
 
 The demo setup has depencencies that must be met before running the demo:
 
-1. install quagga bgp, check path to binary in `src/shell/start_bgpd.sh`.
-2. compile (and install) bgpmon, check path to binary in `src/shell/S01demo_init.sh`, and `src/shell/start_bgpmon.sh`.
-3. install snmpd, copy `<path-to-repo>/etc/snmp/snmpd` to `/etc/snmp/snmpd.conf`, edit the file and check path to python scripts.
+- install quagga bgp, check path to binary in `src/shell/start_bgpd.sh`.
+- compile (and install) bgpmon, check path to binary in `src/shell/S01demo_init.sh`, and `src/shell/start_bgpmon.sh`.
+- _Note_: the demo uses SNMP and will overwrite your system local SNMP daemon configuration (`/etc/snmp/snmpd.conf`). If you have a custom SNMP daemon config, you should either backup this config and/or setup the demo manually.
+- If you want to extend the demo with RPKI verification, read the description in RPKI.md 
 
 ## setup
 
@@ -102,5 +103,3 @@ $ python server.py -h <IP address> -p <port>
 http://<IP address>:<port>/hijack.html
 http://<IP address>:<port>/monitoring.html
 ```
-
-## RPKI verification demo
