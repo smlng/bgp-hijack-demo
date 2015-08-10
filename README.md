@@ -43,7 +43,7 @@ On other Linux Distros search for equivalents in its package-management.
 
 At the moment `bgpmon` cannot be found in standard package repos. So you
 need to compile and install it from scratch. Its source code can be downloaded 
-[here](http://bgpmon.netsec.colostate.edu/download.html).
+[here](http://www.bgpmon.io/download.html).
 
 Compile with `./configure && make`, optional `sudo make install`.
 
