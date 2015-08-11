@@ -2,23 +2,11 @@
 
 ## system requirements
 
-This software is under development and testing on Linux Debian 7 (testing). 
-
-We want to use latest software versions, i.e., of quagga bgpd, so we switched from
-Debian stable to testing. To do so, proceed as follows:
-
-    # cp /etc/apt/sources.list{,.bak}
-    # sed -i -e 's/ \(stable\|wheezy\)/ testing/ig' /etc/apt/sources.list
-    # apt-get update
-    # apt-get --download-only dist-upgrade
-    # apt-get dist-upgrade
-
-see [here](http://unix.stackexchange.com/questions/90389/how-to-upgrade-debian-stable-wheezy-to-testing-jessie)
-for details and the original post. Or install Debian 8 (Jessie, RC1)
+This software is under development and testing on Linux Debian 8 (Jessie).
 
 ## install packages and software
 
-On Debian/Ubuntu the following packages can be installed via apt-get or aptitude:
+On Debian the following packages can be installed via apt-get or aptitude:
 
  - libxml2-dev          needed by python for xml parsing and bgpmon
  - openvpn              to create tap tunnel devices
@@ -29,7 +17,7 @@ On Debian/Ubuntu the following packages can be installed via apt-get or aptitude
  - snmp                 SNMP client stuff
  - snmpd                SNMP server stuff
 
-additional but optional:
+additional, but optional:
  - nginx                a light webserver to demonstrate RPKI verification
  - screen               terminal/shell multiplexer
  - vim                  the editor
@@ -39,16 +27,16 @@ Install shutcut:
     # apt-get install libxml2-dev openvpn python-dev python-pip python-virtualenv quagga snmp snmpd
     # apt-get install nginx screen vim
 
-On other Linux Distros search for equivalents in its package-management.
+On other Linux Distros search for equivalents in their package-management.
 
 At the moment `bgpmon` cannot be found in standard package repos. So you
-need to compile and install it from scratch. Its source code can be downloaded 
+need to compile and install it from scratch. Its source code can be downloaded
 [here](http://www.bgpmon.io/download.html).
 
 Compile with `./configure && make`, optional `sudo make install`.
 
-_Note_: there is bug in bgpmon-7.4 causing segfaults when connecting to multiple bgp peers, but luckily we provide a
-patch for that. Apply the patch as follows:
+_Note_: there is bug in bgpmon-7.4 causing segfaults when connecting to multiple
+bgp peers, but luckily we provide a patch for that. Apply the patch as follows:
 
     $ cd /path/to/bgpmon-7.4-source
     $ patch -p1 < /path/to/bgp-hijack-demo/src/bgpmon/createSessionStruct.patch
@@ -75,10 +63,10 @@ For ease of deployment we provide a `requirements.txt` under `src/python`, run
 
 ## further notes
 
-Using Debian, the quagga daemons are installed to `/usr/lib/quagga`; this directory
-is not in `PATH` environment, so `bgpd` is not found automatically.
+Using Debian, the quagga daemons are installed to `/usr/lib/quagga`; this
+directory is not in `PATH` environment, so `bgpd` is not found automatically.
 
-The binary of BGPmon will be installed to `/usr/local/bin/bgpmon` by default, which
-typically is within the PATH environment variable.
+The binary of BGPmon will be installed to `/usr/local/bin/bgpmon` by default,
+which typically is within the PATH environment variable.
 
 More information and details on the demo setup can be found in the `SETUP.md`.
