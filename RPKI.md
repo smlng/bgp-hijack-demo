@@ -32,6 +32,10 @@ Install the Firefox browser, download [here](http://www.mozilla.org/firefox) and
 afterwards start Firefox and goto menu->AddOns. Install the RPKI plugin manually
 from file using `<path/to/repo>/rpki/firefox-addon/rpki-validator.xpi`.
 
+_Note_: The official and working RPKI Firefox addon can be found [here](https://github.com/rtrlib/firefox-addon).
+For productional usage install it via the Firefox Addon store, search for
+`rpki validator`. The demo addon is modified and might be outdated.
+
 ## Nginx webserver setup
 
 Assuming the Nginx webserver is installed, there should exist a config directory
