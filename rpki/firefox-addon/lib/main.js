@@ -95,7 +95,7 @@ function updateData(tab) {
       var info = new Object();
       info["ip"] = "160.45.111.3";
       info["prefix"] = "160.45.111.0/26";
-      info["asName"] = "Good-AS, Gaertner Datensysteme";
+      info["asname"] = "Good-AS, Gaertner Datensysteme";
       info["asn"] = "65001";
       info["validity"] = { state:"valid" };
       updateButtonIcon(info["validity"]);
@@ -108,7 +108,7 @@ function updateData(tab) {
       var info = new Object();
       info["ip"] = "160.45.111.3";
       info["prefix"] = "160.45.111.0/26";
-      info["asName"] = "Evil-AS, BGP Hijacker";
+      info["asname"] = "Evil-AS, BGP Hijacker";
       info["asn"] = "65005";
       info["validity"] = { state:"invalid" };
       updateButtonIcon(info["validity"]);
