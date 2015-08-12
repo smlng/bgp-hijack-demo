@@ -46,7 +46,7 @@ def parse2JSON(xml):
     if src is None:
         print_warn("Invalid XML: %s." % xml)
         return None
-    
+
     src_addr = src.find('{urn:ietf:params:xml:ns:bgp_monitor}ADDRESS').text
     src_asn = src.find('{urn:ietf:params:xml:ns:bgp_monitor}ASN2').text
 
@@ -74,18 +74,21 @@ def parse2JSON(xml):
     asp = update.find('{urn:ietf:params:xml:ns:xfb}AS_PATH')
     if asp is not None:
         for asn in asp.findall('.//{urn:ietf:params:xml:ns:xfb}ASN2'):
-            as_path.append(asn.text)
+                as_path.append(str(asn.text))
 
     #if len(as_path) == 0:
     #    as_path.append(src_asn)
 
     counter = 0
     json_as_path = ""
+    last_asn = ""
     for asn in as_path:
-        json_as_path += "\""+asn+"\""
-        if counter != (len(as_path)-1):
-            json_as_path += ", "
-            counter += 1
+        if last_asn != asn:
+            if counter > 0:
+                json_as_path += ", "
+            json_as_path += "\""+asn+"\""
+            last_asn = asn
+        counter += 1
 
     #next_hop = update.find('{urn:ietf:params:xml:ns:xfb}NEXT_HOP').text
     prefixes = update.findall('.//{urn:ietf:params:xml:ns:xfb}NLRI')
@@ -93,7 +96,7 @@ def parse2JSON(xml):
     for prefix in prefixes:
         json += "{ \"nodes\": [ { \"asn\": \""+src_asn+"\", \"prefix\": [\""+prefix.text+"\"], \"type\": \"announcement\", \"path\": [ "+json_as_path+" ] } ] }\n"
     return json
-    
+
 def parse2XML(xml):
     try:
         tree = minidom.parseString(xml)
@@ -111,14 +114,14 @@ def main():
     parser.add_argument('-a', '--addr',     help='Address or name of BGPmon host, default: localhost', default='localhost')
     parser.add_argument('-j', '--json',     help='Set output format to JSON, default: XML.', action='store_true')
     args = vars(parser.parse_args())
-    
+
     global verbose
     verbose   = args['verbose']
     global warning
     warning   = args['warning']
     global logging
     logging = args['logging']
-    
+
     # BEGIN
     print_log(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " starting ...")
 
@@ -150,7 +153,7 @@ def main():
             else:
                 output = parse2XML(msg)
             if output:
-            	print(output, file=sys.stdout)
+                print(output.strip(), file=sys.stdout)
                 sys.stdout.flush()
 
     print_log(datetime.now().strftime('%Y-%m-%d %H:%M:%S') +  " done ...")
