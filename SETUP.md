@@ -45,7 +45,7 @@ The demo setup has depencencies that must be met before running the demo:
 configuration (`/etc/snmp/snmpd.conf`). If you have a custom SNMP daemon config,
 you should either backup this config and/or setup the demo manually.
 - If you want to extend the demo with RPKI verification, read the description
-in RPKI.md
+in [RPKI.md](RPKI.md).
 
 ## setup
 
@@ -83,18 +83,18 @@ Second, start the BGP daemons using a helper script:
 
 Third, fire up BGPmon (assuming its installed, otherwise run with absolute path):
 
-  $ sudo bgpmon -c etc/bgpmon_config.txt
+    $ sudo bgpmon -c etc/bgpmon_config.txt
 
 You may also run BGPmon in background, logs are writen to `log/bgpmon`:
 
-  $ sudo ./src/shell/start_bgpmon.sh
+    $ sudo ./src/shell/start_bgpmon.sh
 
 Forth, edit `etc/snmp/snmpd.conf` replace `<path-to-repo>` with absolute path
 to demo repo. Afterwards replace the systems `snmpd.conf` and restart the snmpd
 service
 
-  $ sudo cp etc/snmp/snmpd.conf /etc/snmp/snmpd.conf
-  $ sudo systemctl restart snmpd.service
+    $ sudo cp etc/snmp/snmpd.conf /etc/snmp/snmpd.conf
+    $ sudo systemctl restart snmpd.service
 
 Next, start all webservices
 
@@ -121,7 +121,7 @@ $ python server.py -h <IP address> -p <port>
 ```
 
 * Default IP is `127.0.0.1` (localhost) with port `8000`. _Note_: you must also
-replace `<IP address>` for the websocket in `src/html/monitoring.html`,
+replace `<IP address>` for the websocket in [src/html/monitoring.html](src/html/monitoring.html),
 otherwise the bgp update will not work!
 
 * Check if everything is up and running, go to:
