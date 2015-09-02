@@ -8,19 +8,19 @@ This software is under development and testing on Linux Debian 8 (Jessie).
 
 On Debian the following packages can be installed via apt-get or aptitude:
 
- - libxml2-dev          needed by python for xml parsing and bgpmon
- - openvpn              to create tap tunnel devices
- - python-dev           needed to build and install python libraries via pip
- - python-pip           a package manager for python
- - python-virtualenv    run python code in a change-root like environment
- - quagga               BGP daemon
- - snmp                 SNMP client stuff
- - snmpd                SNMP server stuff
+ - libxml2-dev,         needed by python for xml parsing and bgpmon
+ - openvpn,             to create tap tunnel devices
+ - python-dev,          needed to build and install python libraries via pip
+ - python-pip,          a package manager for python
+ - python-virtualenv,   run python code in a change-root like environment
+ - quagga,              BGP daemon
+ - snmp,                SNMP client stuff
+ - snmpd,               SNMP server stuff
 
 additional, but optional:
- - nginx                a light webserver to demonstrate RPKI verification
- - screen               terminal/shell multiplexer
- - vim                  the editor
+ - nginx,               a light webserver to demonstrate RPKI verification
+ - screen,              terminal/shell multiplexer
+ - vim,                 the editor
 
 Install shutcut:
 
@@ -69,4 +69,4 @@ directory is not in `PATH` environment, so `bgpd` is not found automatically.
 The binary of BGPmon will be installed to `/usr/local/bin/bgpmon` by default,
 which typically is within the PATH environment variable.
 
-More information and details on the demo setup can be found in the `SETUP.md`.
+More information and details on the demo setup can be found in the [SETUP.md](SETUP.md).
